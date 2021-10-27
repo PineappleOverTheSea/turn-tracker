@@ -1,4 +1,5 @@
 interface statTypes {
+    name: string,
     strength: number,
     dexterity: number, 
     constitution: number, 
@@ -6,5 +7,4 @@ interface statTypes {
     wisdom: number, 
     charisma: number
 }
-
 export default statTypes

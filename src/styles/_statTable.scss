@@ -1,4 +1,29 @@
-input[type=number]{
-    -webkit-appearance: none; 
-    margin: 0; 
+.trackedCreatures{
+    table{
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        table-layout: fixed;
+        tr{
+            width: 100%;
+            align-items: stretch;
+        }
+        thead{
+            width: 100%;
+        }
+        tbody{
+            width: 100%;
+            align-items: center;
+            input{
+                width: 100%;
+                text-align: center;
+                font-size: large;
+            }
+        }
+        td{
+            text-align: center;
+            font-size: large;
+            background-color: white;
+        }
+    }
 }
