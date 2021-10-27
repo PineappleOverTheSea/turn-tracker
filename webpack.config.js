@@ -1,3 +1,4 @@
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 let mode = "development";
@@ -25,6 +26,13 @@ module.exports = {
                 }
             },
             {
+                test: /\.tsx?$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: "ts-loader"
+                }
+            },
+            {
                 test: /\.s?css$/i,
                 exclude: /node_modules/,
                 use: [
@@ -34,7 +42,7 @@ module.exports = {
                     },
                     "css-loader",
                     "postcss-loader",
-                    "scss-loader"
+                    "sass-loader"
                 ],
 
             },
@@ -45,9 +53,12 @@ module.exports = {
         ]
     },
     resolve: {
-        extensions: [".js", ".jsx"]
+        extensions: [".js", ".jsx", ".ts", ".tsx"]
     },
     plugins: [
-        new MiniCssExtractPlugin
+        new MiniCssExtractPlugin(),
+        new HtmlWebpackPlugin({
+            template: "./src/index.html"
+        })
     ]
 }
