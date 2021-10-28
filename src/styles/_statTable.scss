@@ -1,13 +1,7 @@
 .trackedCreatures{
     table{
+        border-collapse: collapse;
         width: 100%;
-        display: flex;
-        flex-wrap: wrap;
-        table-layout: fixed;
-        tr{
-            width: 100%;
-            align-items: stretch;
-        }
         thead{
             width: 100%;
         }

@@ -11,7 +11,7 @@ const AddCreatureModal = (props : any) =>{
     const [cha, setCha] = useState(10);
 
     const addCreature = () =>{
-        setTrackedCreatures([...trackedCreatures || [], <Creature
+        setTrackedCreatures([...trackedCreatures, <Creature
             {...{
                 name: name,
                 strength: str,
