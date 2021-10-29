@@ -11,7 +11,7 @@ const StatTable = (props : statTypes) => {
     const [cha, setCha] = useState(props.charisma);
     
     return(
-        <table>
+        <table className="stat-table">
             <thead>
                 <tr>
                     <th>STR</th>
@@ -32,12 +32,12 @@ const StatTable = (props : statTypes) => {
                     <td><input type="number" name="" id="" defaultValue={cha} inputMode="numeric" onChange={e => setCha(parseInt(e.target.value))}/></td>
                 </tr>
                 <tr>
-                    <td>{modifier(str)}</td>
-                    <td>{modifier(dex)}</td>
-                    <td>{modifier(con)}</td>
-                    <td>{modifier(int)}</td>
-                    <td>{modifier(wis)}</td>
-                    <td>{modifier(cha)}</td>
+                    <td><input type="number" name="" id="" value={modifier(str)} disabled/></td>
+                    <td><input type="number" name="" id="" value={modifier(dex)} disabled/></td>
+                    <td><input type="number" name="" id="" value={modifier(con)} disabled/></td>
+                    <td><input type="number" name="" id="" value={modifier(int)} disabled/></td>
+                    <td><input type="number" name="" id="" value={modifier(wis)} disabled/></td>
+                    <td><input type="number" name="" id="" value={modifier(cha)} disabled/></td>
                 </tr>
             </tbody>
         </table>

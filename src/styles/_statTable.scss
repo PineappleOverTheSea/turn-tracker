@@ -1,23 +1,25 @@
-.trackedCreatures{
-    table{
-        border-collapse: collapse;
-        width: 100%;
-        thead{
+.stat-table{
+    // border-collapse: collapse;
+    border: 2px solid black;
+    border-radius: 10px;
+    border-spacing: 5px;
+    table-layout: fixed;
+    tbody{
+        align-items: center;
+        input{
+            background-color: white;
             width: 100%;
-        }
-        tbody{
-            width: 100%;
-            align-items: center;
-            input{
-                width: 100%;
-                text-align: center;
-                font-size: large;
-            }
-        }
-        td{
             text-align: center;
             font-size: large;
-            background-color: white;
+            border: 0;
+            outline: none;
         }
+    }
+    td{
+        border-radius: 10px;
+        padding: 5px;
+        text-align: center;
+        font-size: large;
+        background-color: white;
     }
 }

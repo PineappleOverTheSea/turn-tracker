@@ -11,7 +11,7 @@ const App = () => {
             <section>
                 <h1>Turn Tracker</h1>
             </section>
-            <section className="trackedCreatures">
+            <section className="tracked-creatures">
                 {trackedCreatures}
             </section>
             <AddCreature trackedCreatures={trackedCreatures} setTrackedCreatures={setTrackedCreatures}/>

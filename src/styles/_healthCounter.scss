@@ -1,0 +1,21 @@
+.health-counter{
+    border: 2px solid black;
+    border-radius: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    .main-hp{
+    }
+    .damage{
+    }
+    label{
+        display: block;
+        text-align: center;
+    }
+    input{
+        width: 100%;
+        background-color: white;
+        text-align: center;
+        border: 0;
+        outline: none;
+    }
+}

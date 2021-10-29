@@ -1,5 +1,6 @@
 interface statTypes {
     name: string,
+    hitPoints: number,
     strength: number,
     dexterity: number, 
     constitution: number, 

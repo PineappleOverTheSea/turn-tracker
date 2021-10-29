@@ -2,7 +2,8 @@ import { useState } from "react";
 import Creature from "./Creature"
 
 const AddCreatureModal = (props : any) =>{
-    const [name, setName] = useState("Padaras");
+    const [name, setName] = useState("Creature");
+    const [hp, setHp] = useState(10);
     const [str, setStr] = useState(10);
     const [dex, setDex] = useState(10);
     const [con, setCon] = useState(10);
@@ -14,6 +15,7 @@ const AddCreatureModal = (props : any) =>{
         setTrackedCreatures([...trackedCreatures, <Creature
             {...{
                 name: name,
+                hitPoints: hp,
                 strength: str,
                 dexterity: dex,
                 constitution: con,
@@ -28,9 +30,10 @@ const AddCreatureModal = (props : any) =>{
     const setTrackedCreatures = props.setTrackedCreatures;
 
     return(
-        <div className="addCreature">
+        <div className="add-creature">
             <h3>Pridėti padarą</h3>
             <input type="text" name="creature-name" id="creature-name" defaultValue={name} onChange={e => setName(e.target.value)}/>
+            <input type="number" name="hp" id="str" defaultValue={hp} onChange={e => setStr(parseInt(e.target.value))}/>
             <input type="number" name="strength" id="str" defaultValue={str} onChange={e => setStr(parseInt(e.target.value))}/>
             <input type="number" name="dexterity" id="dex" defaultValue={dex} onChange={e => setDex(parseInt(e.target.value))}/>
             <input type="number" name="constitution" id="con" defaultValue={con} onChange={e => setCon(parseInt(e.target.value))}/>
