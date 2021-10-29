@@ -3,6 +3,7 @@ interface statTypes {
     hitPoints: number,
     hitPointsMax: number,
     hitPointsTemp: number,
+    initiative: number,
     strength: number,
     dexterity: number, 
     constitution: number, 

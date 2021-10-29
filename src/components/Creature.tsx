@@ -8,6 +8,7 @@ const Creature = (props : statTypes) => {
     const [hp, setHp] = useState(props.hitPoints);
     const [hpMax, setHpMax] = useState(props.hitPointsMax);
     const [hpTemp, setHpTemp] = useState(props.hitPointsTemp)
+    const [init, setInit] = useState(props.initiative);
     const [str, setStr] = useState(props.strength);
     const [dex, setDex] = useState(props.dexterity);
     const [con, setCon] = useState(props.constitution);
@@ -22,16 +23,6 @@ const Creature = (props : statTypes) => {
             <StatTable {...props} />
         </div>
     )
-}
-
-Creature.defaultProps = {
-    name: "Padaras",
-    strength: 0,
-    dexterity: 0,
-    constitution: 0,
-    inteligence: 0,
-    wisdom: 0,
-    charisma: 0
 }
 
 export default Creature

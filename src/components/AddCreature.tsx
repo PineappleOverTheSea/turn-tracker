@@ -9,6 +9,7 @@ const AddCreatureModal = (props: any) => {
     const [hp, setHp] = useState(10);
     const [hpMax, setHpMax] = useState(10);
     const [hpTemp, setHpTemp] = useState(0);
+    const [init, setInit] = useState(0);
     const [str, setStr] = useState(10);
     const [dex, setDex] = useState(10);
     const [con, setCon] = useState(10);
@@ -23,6 +24,7 @@ const AddCreatureModal = (props: any) => {
                 hitPoints: hp,
                 hitPointsMax: hpMax,
                 hitPointsTemp: hpTemp,
+                initiative: init,
                 strength: str,
                 dexterity: dex,
                 constitution: con,
@@ -50,15 +52,15 @@ const AddCreatureModal = (props: any) => {
             </div>
             <div className="stat">
                 <label htmlFor="">Hit Point Maximum</label>
-                <input type="number" name="hp-max" id="hp-max" value={hpMax} onChange={e => setHpMaximum(e)} />
+                <input type="number" name="hit-point-maximum" id="hp-max" value={hpMax} onChange={e => setHpMaximum(e)} />
             </div>
             <div className="stat">
                 <label htmlFor="">Hit Points</label>
-                <input type="number" name="hp" id="hp" value={hp} onChange={e => setHpTemp(parseInt(e.target.value))} />
+                <input type="number" name="hit-points" id="hp" value={hp} onChange={e => setHpTemp(parseInt(e.target.value))} />
             </div>
             <div className="stat">
                 <label htmlFor="">Temporary Hit Points</label>
-                <input type="number" name="hp-temp" id="hp-temp" value={hpTemp} onChange={e => setHp(parseInt(e.target.value))} />
+                <input type="number" name="hit-points-temporary" id="hp-temp" value={hpTemp} onChange={e => setHp(parseInt(e.target.value))} />
             </div>
             <div className="stat">
                 <label htmlFor="">Strength</label>
@@ -83,6 +85,10 @@ const AddCreatureModal = (props: any) => {
             <div className="stat">
                 <label htmlFor="">Charisma</label>
                 <input type="number" name="charisma" id="chr" value={cha} onChange={e => setCha(parseInt(e.target.value))} />
+            </div>
+            <div className="stat">
+                <label htmlFor="">Initiative</label>
+                <input type="number" name="initative" id="init" value={init} onChange={e => setInit(parseInt(e.target.value))} />
             </div>
             <button onClick={addCreature}>Add Creature</button>
         </div>
