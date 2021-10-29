@@ -3,9 +3,10 @@ import statTypes from "../interfaces/statTypes";
 import { useState } from "react"
 import HealthCounter from "./HealthCounter";
 
-const Creature = (props : any) => {
+const Creature = (props : statTypes) => {
     const [name, setName] = useState(props.name);
-    const [hp, setHp] = useState(props.health)
+    const [hp, setHp] = useState(props.hitPoints);
+    const [hpMax, setHpMax] = useState(props.hitPointsMax);
     const [str, setStr] = useState(props.strength);
     const [dex, setDex] = useState(props.dexterity);
     const [con, setCon] = useState(props.constitution);
@@ -16,7 +17,7 @@ const Creature = (props : any) => {
     return(
         <div className="creature">
             <div className="creature-name">{name}</div>
-            <HealthCounter {...[hp, setHp]}/>
+            <HealthCounter {...{hp: hp, hpMax: hp}}/>
             <StatTable {...props} />
         </div>
     )
