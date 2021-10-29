@@ -1,22 +1,31 @@
 import { useEffect, useState } from "react";
 
-const HealthCounter = (props : {hp: number, hpMax: number}) => {
+const HealthCounter = (props : {hp: number, hpMax: number, hpTemp: number}) => {
     const [hp, setHp] = useState(props.hp);
     const [hpMax, setHpMax] = useState(props.hpMax);
+    const [hpTemp, setHpTemp] = useState(props.hpTemp)
 
     const setHitpoints = (e : React.KeyboardEvent<HTMLInputElement>, action : string) => {
         if (e.key=== "Enter"){
             const input = e.target as HTMLInputElement;
+            let inputValue = parseInt(input.value);
             switch (action) {
                 case "heal": {
-                    if(hp+parseInt(input.value) > hpMax)
+                    if(hp + inputValue > hpMax)
                         setHp(hpMax);
                     else
-                        setHp(hp+parseInt(input.value));     
+                        setHp(hp + inputValue);     
                 }
                 break;
                 case "hurt": {
-                    setHp(hp-parseInt(input.value));
+                    inputValue -= hpTemp;
+                    if(inputValue >= 0)
+                        setHpTemp(0);
+                    else {
+                        setHpTemp(Math.abs(inputValue));
+                        inputValue = 0;
+                    }
+                    setHp(hp - inputValue);
                 }
                 break;
             }
@@ -28,7 +37,9 @@ const HealthCounter = (props : {hp: number, hpMax: number}) => {
         <div className="health-counter">
             <div className="main-hp">
                 <label htmlFor="">Hit Points</label>
+                <input type="number" value={hpMax} onChange={e => setHpMax(parseInt(e.target.value))}/>
                 <input type="number" value={hp} onChange={e => setHp(parseInt(e.target.value))}/>
+                <input type="number" value={hpTemp} onChange={e => setHpTemp(parseInt(e.target.value))}/>
             </div>
             <div className="damage">
                 <label htmlFor="">Damage</label>

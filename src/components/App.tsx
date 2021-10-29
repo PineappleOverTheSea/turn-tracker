@@ -4,7 +4,7 @@ import Creature from "./Creature"
 import AddCreature from "./AddCreature"
 
 const App = () => {
-    const [trackedCreatures, setTrackedCreatures] = useState([[]]);
+    const [trackedCreatures, setTrackedCreatures] = useState([]);
 
     return(
         <>
@@ -14,7 +14,7 @@ const App = () => {
             <section className="tracked-creatures">
                 {trackedCreatures}
             </section>
-            <AddCreature trackedCreatures={trackedCreatures} setTrackedCreatures={setTrackedCreatures}/>
+            <AddCreature {...{trackedCreatures, setTrackedCreatures}} />
         </>
     )
 }
