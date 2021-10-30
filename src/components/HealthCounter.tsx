@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import { setHealth } from "../interfaces/statSetterTypes";
 import { health } from "../interfaces/statTypes";
 
-const HealthCounter = (health : health, setHealth : setHealth) => {
-    const [hp, setHp] = [health.hitPoints, setHealth.setHitPoints];
-    const [hpMax, setHpMax] = [health.hitPointsMax, setHealth.setHitPointsMax]
-    const [hpTemp, setHpTemp] = [health.hitPointsTemp, setHealth.setHitPointsTemp]
+const HealthCounter = (props : {health : health, setHealth : setHealth}) => {
+    const [hp, setHp] = [props.health.hitPoints, props.setHealth.setHitPoints];
+    const [hpMax, setHpMax] = [props.health.hitPointsMax, props.setHealth.setHitPointsMax]
+    const [hpTemp, setHpTemp] = [props.health.hitPointsTemp, props.setHealth.setHitPointsTemp]
 
     const setHitpoints = (e : React.KeyboardEvent<HTMLInputElement>, action : string) => {
         if (e.key=== "Enter"){

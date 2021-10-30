@@ -1,28 +1,37 @@
 import StatTable from "./StatTable"
 import {stats, health, combatStats} from "../interfaces/statTypes";
-import { setStats, setHealth, setCombatStats } from "../interfaces/statSetterTypes";
 import { useState } from "react"
 import HealthCounter from "./HealthCounter";
 import CombatStatTable from "./CombatStatTable";
+import { setCombatStats, setHealth, setStats } from "../interfaces/statSetterTypes";
 
-const Creature = ({name, stats, health, combatStats} : {name: string, stats: stats, health: health, combatStats: combatStats}) => {
-    const [hp, setHp] = useState(health.hitPoints);
-    const [hpMax, setHpMax] = useState(health.hitPointsMax);
-    const [hpTemp, setHpTemp] = useState(health.hitPointsTemp);
+const Creature = (props : {name: string, stats: stats, health: health, combatStats: combatStats}) => {
+    const [name, setName] = useState(props.name);
 
-    const [init, setInit] = useState(combatStats.initiative);
-    const [ac, setAc] = useState(combatStats.armorClass);
-    const [spd, setSpd] = useState(combatStats.speed);
+    const [hp, setHp] = useState(props.health.hitPoints);
+    const [hpMax, setHpMax] = useState(props.health.hitPointsMax);
+    const [hpTemp, setHpTemp] = useState(props.health.hitPointsTemp);
 
-    const [str, setStr] = useState(stats.strength);
-    const [dex, setDex] = useState(stats.dexterity);
-    const [con, setCon] = useState(stats.constitution);
-    const [int, setInt] = useState(stats.inteligence);
-    const [wis, setWis] = useState(stats.wisdom);
-    const [cha, setCha] = useState(stats.charisma);
+    const [init, setInit] = useState(props.combatStats.initiative);
+    const [ac, setAc] = useState(props.combatStats.armorClass);
+    const [spd, setSpd] = useState(props.combatStats.speed);
 
-    
-    const setStats={
+    const [str, setStr] = useState(props.stats.strength);
+    const [dex, setDex] = useState(props.stats.dexterity);
+    const [con, setCon] = useState(props.stats.constitution);
+    const [int, setInt] = useState(props.stats.inteligence);
+    const [wis, setWis] = useState(props.stats.wisdom);
+    const [cha, setCha] = useState(props.stats.charisma);
+
+    const stats:stats = {
+        strength: str,
+        dexterity: dex,
+        constitution: con,
+        inteligence: int,
+        wisdom: wis,
+        charisma: cha
+    }
+    const setStats:setStats = {
         setStrength: setStr,
         setDexterity: setDex,
         setConstitution: setCon,
@@ -30,12 +39,22 @@ const Creature = ({name, stats, health, combatStats} : {name: string, stats: sta
         setWisdom: setWis,
         setCharisma: setCha
     }
-    const setHealth={
+    const health:health = {
+        hitPoints: hp,
+        hitPointsMax: hpMax,
+        hitPointsTemp: hpTemp
+    }
+    const setHealth:setHealth = {
         setHitPoints: setHp,
         setHitPointsMax: setHpMax,
         setHitPointsTemp: setHpTemp
     }
-    const setCombatStats={
+    const combatStats:combatStats = {
+        armorClass: ac,
+        initiative: init,
+        speed: spd
+    }
+    const setCombatStats:setCombatStats = {
         setInitative: setInit,
         setArmorClass: setAc,
         setSpeed: setSpd
@@ -44,9 +63,9 @@ const Creature = ({name, stats, health, combatStats} : {name: string, stats: sta
     return(
         <div className="creature">
             <div className="creature-name">{name}</div>
-            <HealthCounter {...health} {...setHealth}/>
-            <StatTable {...stats} {...setStats}/>
-            <CombatStatTable {...combatStats} {...setCombatStats}/>
+            <HealthCounter health={health} setHealth={setHealth}/>
+            <StatTable stats={stats} setStats={setStats}/>
+            <CombatStatTable combatStats={combatStats} setCombatStats={setCombatStats}/>
         </div>
     )
 }

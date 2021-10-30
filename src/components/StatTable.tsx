@@ -2,14 +2,13 @@ import { useState } from "react";
 import { setStats } from "../interfaces/statSetterTypes";
 import {stats} from "../interfaces/statTypes";
 
-const StatTable = (stats : stats, setStats: setStats) => {
-
-    const [str, setStr] = [stats.strength, setStats.setStrength];
-    const [dex, setDex] = [stats.dexterity, setStats.setDexterity];
-    const [con, setCon] = [stats.constitution, setStats.setConstitution];
-    const [int, setInt] = [stats.inteligence, setStats.setInteligence];
-    const [wis, setWis] = [stats.wisdom, setStats.setWisdom];
-    const [cha, setCha] = [stats.charisma, setStats.setCharisma];
+const StatTable = (props : {stats : stats, setStats: setStats}) => {
+    const [str, setStr] = [props.stats.strength, props.setStats.setStrength];
+    const [dex, setDex] = [props.stats.dexterity, props.setStats.setDexterity];
+    const [con, setCon] = [props.stats.constitution, props.setStats.setConstitution];
+    const [int, setInt] = [props.stats.inteligence, props.setStats.setInteligence];
+    const [wis, setWis] = [props.stats.wisdom, props.setStats.setWisdom];
+    const [cha, setCha] = [props.stats.charisma, props.setStats.setCharisma];
     
     return(
         <table className="stat-table">
@@ -25,12 +24,12 @@ const StatTable = (stats : stats, setStats: setStats) => {
             </thead>
             <tbody>
                 <tr>
-                    <td><input type="number" name="" id="" defaultValue={str} inputMode="numeric" onChange={e => setStr(parseInt(e.target.value))}/></td>
-                    <td><input type="number" name="" id="" defaultValue={dex} inputMode="numeric" onChange={e => setDex(parseInt(e.target.value))}/></td>
-                    <td><input type="number" name="" id="" defaultValue={con} inputMode="numeric" onChange={e => setCon(parseInt(e.target.value))}/></td>
-                    <td><input type="number" name="" id="" defaultValue={int} inputMode="numeric" onChange={e => setInt(parseInt(e.target.value))}/></td>
-                    <td><input type="number" name="" id="" defaultValue={wis} inputMode="numeric" onChange={e => setWis(parseInt(e.target.value))}/></td>
-                    <td><input type="number" name="" id="" defaultValue={cha} inputMode="numeric" onChange={e => setCha(parseInt(e.target.value))}/></td>
+                    <td><input type="number" name="" id="" value={str} inputMode="numeric" onChange={e => setStr(parseInt(e.target.value))}/></td>
+                    <td><input type="number" name="" id="" value={dex} inputMode="numeric" onChange={e => setDex(parseInt(e.target.value))}/></td>
+                    <td><input type="number" name="" id="" value={con} inputMode="numeric" onChange={e => setCon(parseInt(e.target.value))}/></td>
+                    <td><input type="number" name="" id="" value={int} inputMode="numeric" onChange={e => setInt(parseInt(e.target.value))}/></td>
+                    <td><input type="number" name="" id="" value={wis} inputMode="numeric" onChange={e => setWis(parseInt(e.target.value))}/></td>
+                    <td><input type="number" name="" id="" value={cha} inputMode="numeric" onChange={e => setCha(parseInt(e.target.value))}/></td>
                 </tr>
                 <tr>
                     <td><input type="number" name="" id="" value={modifier(str)} disabled/></td>
