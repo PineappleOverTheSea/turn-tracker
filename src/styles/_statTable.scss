@@ -1,9 +1,9 @@
 .stat-table{
-    // border-collapse: collapse;
     border: 2px solid black;
     border-radius: 10px;
     border-spacing: 5px;
     table-layout: fixed;
+    width: 100%;
     tbody{
         align-items: center;
         input{
@@ -21,5 +21,11 @@
         text-align: center;
         font-size: large;
         background-color: white;
+    }
+    .modifiers > td, input {
+        background-color: rgb(230, 230, 230);
+        input{
+            background-color: rgb(230, 230, 230)
+        }
     }
 }

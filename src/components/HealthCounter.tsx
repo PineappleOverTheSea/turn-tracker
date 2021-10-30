@@ -37,18 +37,24 @@ const HealthCounter = (props : {health : health, setHealth : setHealth}) => {
 
     return(
         <div className="health-counter">
-            <div className="main-hp">
-                <label htmlFor="">Hit Points</label>
-                <input type="number" value={hpMax} onChange={e => setHpMax(parseInt(e.target.value))}/>
-                <input type="number" value={hp} onChange={e => setHp(parseInt(e.target.value))}/>
-                <input type="number" value={hpTemp} onChange={e => setHpTemp(parseInt(e.target.value))}/>
+            <div className="wrap-hp-max">
+                <label htmlFor="hp-max">Max HP</label> 
+                <input type="number" id="hp-max" value={hpMax} onChange={e => setHpMax(parseInt(e.target.value))}/>
             </div>
-            <div className="damage">
-                <label htmlFor="">Damage</label>
+            <div className="wrap-hp-temp">
+                <label htmlFor="hp-temp">Temp HP</label>
+                <input type="number" id="hp-temp" value={hpTemp} onChange={e => setHpTemp(parseInt(e.target.value))}/>
+            </div>
+            <div className="wrap-hp">
+                <label htmlFor="">Current HP</label>
+                <input type="number" id="hp" value={hp} onChange={e => setHp(parseInt(e.target.value))}/>
+            </div>
+            <div className="wrap-hurt">
+                <label htmlFor="">Hurt</label>
                 <input type="number" name="" id="" onKeyPress={e => setHitpoints(e, "hurt")}/>
             </div>
-            <div className="healing">
-                <label htmlFor="">Healing</label>
+            <div className="wrap-heal">
+                <label htmlFor="">Heal</label>
                 <input type="number" name="" id="" onKeyPress={e => setHitpoints(e, "heal")}/>
             </div>
         </div>

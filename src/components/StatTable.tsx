@@ -31,7 +31,7 @@ const StatTable = (props : {stats : stats, setStats: setStats}) => {
                     <td><input type="number" name="" id="" value={wis} inputMode="numeric" onChange={e => setWis(parseInt(e.target.value))}/></td>
                     <td><input type="number" name="" id="" value={cha} inputMode="numeric" onChange={e => setCha(parseInt(e.target.value))}/></td>
                 </tr>
-                <tr>
+                <tr className="modifiers">
                     <td><input type="number" name="" id="" value={modifier(str)} disabled/></td>
                     <td><input type="number" name="" id="" value={modifier(dex)} disabled/></td>
                     <td><input type="number" name="" id="" value={modifier(con)} disabled/></td>
@@ -46,6 +46,6 @@ const StatTable = (props : {stats : stats, setStats: setStats}) => {
 
 const modifier = (value : number) => {
     const modifier = Math.floor((value-10)/2);
-    return modifier;
+    return isNaN(modifier) ? -5 : modifier;
 }
 export default StatTable

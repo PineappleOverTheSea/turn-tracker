@@ -64,8 +64,8 @@ const Creature = (props : {name: string, stats: stats, health: health, combatSta
         <div className="creature">
             <div className="creature-name">{name}</div>
             <HealthCounter health={health} setHealth={setHealth}/>
-            <StatTable stats={stats} setStats={setStats}/>
             <CombatStatTable combatStats={combatStats} setCombatStats={setCombatStats}/>
+            <StatTable stats={stats} setStats={setStats}/>
         </div>
     )
 }
