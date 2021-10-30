@@ -45,7 +45,7 @@ const AddCreatureModal = (props: any) => {
         ]);
     }
     
-    const setHpMaximum = (e : React.ChangeEvent<HTMLInputElement>) => {
+    const onSetHpMaximum = (e : React.ChangeEvent<HTMLInputElement>) => {
         const health = parseInt(e.target.value)
         console.log(health);
         setHpMax(health);
@@ -62,7 +62,7 @@ const AddCreatureModal = (props: any) => {
             </div>
             <div className="stat">
                 <label htmlFor="">Hit Point Maximum</label>
-                <input type="number" name="hit-point-maximum" id="hp-max" value={hpMax} onChange={e => setHpMaximum(e)} />
+                <input type="number" name="hit-point-maximum" id="hp-max" value={hpMax} onChange={e => onSetHpMaximum(e)} />
             </div>
             <div className="stat">
                 <label htmlFor="">Hit Points</label>
@@ -101,11 +101,11 @@ const AddCreatureModal = (props: any) => {
                 <input type="number" name="initative" id="init" value={init} onChange={e => setInit(parseInt(e.target.value))} />
             </div>
             <div className="stat">
-                <label htmlFor=""></label>
+                <label htmlFor="">Armor Class</label>
                 <input type="number" name="armor-class" id="ac" value={ac} onChange={e => setAc(parseInt(e.target.value))}/>
             </div>
             <div className="stat">
-                <label htmlFor=""></label>
+                <label htmlFor="">Speed</label>
                 <input type="number" name="speed" id="spd" value={spd} onChange={e => setSpd(parseInt(e.target.value))}/>
             </div>
             <button onClick={addCreature}>Add Creature</button>
