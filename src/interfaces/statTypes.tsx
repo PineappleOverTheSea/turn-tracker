@@ -1,9 +1,4 @@
-interface statTypes {
-    name: string,
-    hitPoints: number,
-    hitPointsMax: number,
-    hitPointsTemp: number,
-    initiative: number,
+export interface stats {
     strength: number,
     dexterity: number, 
     constitution: number, 
@@ -11,4 +6,13 @@ interface statTypes {
     wisdom: number, 
     charisma: number
 }
-export default statTypes
+export interface health{
+    hitPoints: number,
+    hitPointsMax: number,
+    hitPointsTemp: number
+}
+export interface combatStats{
+    initiative: number,
+    armorClass: number,
+    speed: number
+}

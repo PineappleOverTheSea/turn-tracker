@@ -9,7 +9,11 @@ const AddCreatureModal = (props: any) => {
     const [hp, setHp] = useState(10);
     const [hpMax, setHpMax] = useState(10);
     const [hpTemp, setHpTemp] = useState(0);
+
     const [init, setInit] = useState(0);
+    const [ac, setAc] = useState(10);
+    const [spd, setSpd] = useState(30);
+
     const [str, setStr] = useState(10);
     const [dex, setDex] = useState(10);
     const [con, setCon] = useState(10);
@@ -18,20 +22,26 @@ const AddCreatureModal = (props: any) => {
     const [cha, setCha] = useState(10);
 
     const addCreature = () => {
-        setTrackedCreatures([...trackedCreatures, <Creature key={10}
-            {...{
-                name: name,
-                hitPoints: hp,
-                hitPointsMax: hpMax,
-                hitPointsTemp: hpTemp,
-                initiative: init,
+        setTrackedCreatures([...trackedCreatures, <Creature key={10} name={name} 
+            stats={{
                 strength: str,
                 dexterity: dex,
                 constitution: con,
                 inteligence: int,
                 wisdom: wis,
                 charisma: cha
-            }} />
+            }}
+            health={{
+                hitPoints: hp,
+                hitPointsMax: hpMax,
+                hitPointsTemp: hpTemp
+            }}
+            combatStats={{
+                initiative: init,
+                armorClass: ac,
+                speed: spd
+            }}
+            />
         ]);
     }
     
@@ -89,6 +99,14 @@ const AddCreatureModal = (props: any) => {
             <div className="stat">
                 <label htmlFor="">Initiative</label>
                 <input type="number" name="initative" id="init" value={init} onChange={e => setInit(parseInt(e.target.value))} />
+            </div>
+            <div className="stat">
+                <label htmlFor=""></label>
+                <input type="number" name="armor-class" id="ac" value={ac} onChange={e => setAc(parseInt(e.target.value))}/>
+            </div>
+            <div className="stat">
+                <label htmlFor=""></label>
+                <input type="number" name="speed" id="spd" value={spd} onChange={e => setSpd(parseInt(e.target.value))}/>
             </div>
             <button onClick={addCreature}>Add Creature</button>
         </div>

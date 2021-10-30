@@ -1,14 +1,14 @@
 import { useState } from "react";
-import statTypes from "../interfaces/statTypes";
+import {stats} from "../interfaces/statTypes";
 
-const StatTable = (props : statTypes) => {
+const StatTable = (stats : stats) => {
 
-    const [str, setStr] = useState(props.strength);
-    const [dex, setDex] = useState(props.dexterity);
-    const [con, setCon] = useState(props.constitution);
-    const [int, setInt] = useState(props.inteligence);
-    const [wis, setWis] = useState(props.wisdom);
-    const [cha, setCha] = useState(props.charisma);
+    const [str, setStr] = useState(stats.strength);
+    const [dex, setDex] = useState(stats.dexterity);
+    const [con, setCon] = useState(stats.constitution);
+    const [int, setInt] = useState(stats.inteligence);
+    const [wis, setWis] = useState(stats.wisdom);
+    const [cha, setCha] = useState(stats.charisma);
     
     return(
         <table className="stat-table">
