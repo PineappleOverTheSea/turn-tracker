@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { TrackedCreaturesContext } from "./contexts/TrackedCreaturesContext";
 import Creature from "./Creature"
 
 const AddCreatureModal = (props: any) => {
-    const trackedCreatures = props.trackedCreatures;
-    const setTrackedCreatures = props.setTrackedCreatures;
+    const {trackedCreatures, setTrackedCreatures} = useContext(TrackedCreaturesContext);
 
     const [name, setName] = useState("Creature");
     const [hp, setHp] = useState(10);
@@ -23,7 +23,7 @@ const AddCreatureModal = (props: any) => {
 
     const addCreature = () => {
         setTrackedCreatures([...trackedCreatures, {
-            id: Math.random()*100,
+            id: (Math.random()*100).toString(),
             name: name, 
             stats: {
                 strength: str,

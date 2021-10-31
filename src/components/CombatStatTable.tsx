@@ -1,6 +1,6 @@
 import { useState } from "react"
-import { setCombatStats } from "../interfaces/statSetterTypes"
-import { combatStats } from "../interfaces/statTypes"
+import { setCombatStats } from "../interfaces/IStatSetterTypes"
+import { combatStats } from "../interfaces/IStatTypes"
 
 const CombatStatTable = (props : {combatStats : combatStats, setCombatStats : setCombatStats}) => {
     const [init, setInit] = [props.combatStats.initiative, props.setCombatStats.setInitative]

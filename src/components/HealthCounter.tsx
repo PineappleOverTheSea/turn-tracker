@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { setHealth } from "../interfaces/statSetterTypes";
-import { health } from "../interfaces/statTypes";
+import { setHealth } from "../interfaces/IStatSetterTypes";
+import { health } from "../interfaces/IStatTypes";
 
 const HealthCounter = (props : {health : health, setHealth : setHealth}) => {
     const [hp, setHp] = [props.health.hitPoints, props.setHealth.setHitPoints];
