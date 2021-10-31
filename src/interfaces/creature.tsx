@@ -3,7 +3,7 @@ import { health } from "./statTypes";
 import { combatStats } from "./statTypes";
 
 export interface creature{
-    id: string,
+    id?: string,
     name: string;
     stats: stats;
     health: health;

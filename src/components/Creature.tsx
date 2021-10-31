@@ -4,8 +4,9 @@ import { useState } from "react"
 import HealthCounter from "./HealthCounter";
 import CombatStatTable from "./CombatStatTable";
 import { setCombatStats, setHealth, setStats } from "../interfaces/statSetterTypes";
+import { creature } from "../interfaces/creature";
 
-const Creature = (props : {name: string, stats: stats, health: health, combatStats: combatStats}) => {
+const Creature = (props : creature) => {
     const [name, setName] = useState(props.name);
 
     const [hp, setHp] = useState(props.health.hitPoints);
@@ -59,10 +60,15 @@ const Creature = (props : {name: string, stats: stats, health: health, combatSta
         setArmorClass: setAc,
         setSpeed: setSpd
     }
+
+    const die = () => {
+        return 0;
+    }
     
     return(
         <div className="creature">
             <div className="creature-name">{name}</div>
+            {/* <button onClick={die()}>Kill</button> */}
             <HealthCounter health={health} setHealth={setHealth}/>
             <CombatStatTable combatStats={combatStats} setCombatStats={setCombatStats}/>
             <StatTable stats={stats} setStats={setStats}/>

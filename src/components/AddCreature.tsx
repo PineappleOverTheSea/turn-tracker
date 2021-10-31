@@ -5,8 +5,6 @@ const AddCreatureModal = (props: any) => {
     const trackedCreatures = props.trackedCreatures;
     const setTrackedCreatures = props.setTrackedCreatures;
 
-    console.log(setTrackedCreatures)
-
     const [name, setName] = useState("Creature");
     const [hp, setHp] = useState(10);
     const [hpMax, setHpMax] = useState(10);
@@ -53,16 +51,6 @@ const AddCreatureModal = (props: any) => {
         const health = parseInt(e.target.value);
         setHpMax(health);
         setHp(health);
-    }
-
-    const onSetHp = (e : React.ChangeEvent<HTMLInputElement>) => {
-        const health = parseInt(e.target.value);
-        setHp(health);
-    }
-
-    const onSetTempHp = (e : React.ChangeEvent<HTMLInputElement>) =>{
-        const health = parseInt(e.target.value);
-        setHpTemp(health);
     }
 
     return (
