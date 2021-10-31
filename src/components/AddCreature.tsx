@@ -5,6 +5,8 @@ const AddCreatureModal = (props: any) => {
     const trackedCreatures = props.trackedCreatures;
     const setTrackedCreatures = props.setTrackedCreatures;
 
+    console.log(setTrackedCreatures)
+
     const [name, setName] = useState("Creature");
     const [hp, setHp] = useState(10);
     const [hpMax, setHpMax] = useState(10);
@@ -22,26 +24,28 @@ const AddCreatureModal = (props: any) => {
     const [cha, setCha] = useState(10);
 
     const addCreature = () => {
-        setTrackedCreatures([...trackedCreatures, <Creature name={name} 
-            stats={{
+        setTrackedCreatures([...trackedCreatures, {
+            id: Math.random()*100,
+            name: name, 
+            stats: {
                 strength: str,
                 dexterity: dex,
                 constitution: con,
                 inteligence: int,
                 wisdom: wis,
                 charisma: cha
-            }}
-            health={{
+            },
+            health: {
                 hitPoints: hp,
                 hitPointsMax: hpMax,
                 hitPointsTemp: hpTemp
-            }}
-            combatStats={{
+            },
+            combatStats: {
                 initiative: init,
                 armorClass: ac,
                 speed: spd
-            }}
-            />
+            }
+        }
         ]);
     }
     
