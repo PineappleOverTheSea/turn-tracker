@@ -8,8 +8,7 @@
     display: grid;
     grid-template-rows: repeat(12, 1fr);
     grid-template-columns: repeat(12, 1fr);
-    row-gap: 10px;
-    column-gap: 10px;
+    gap: 10px;
     .creature-name{
         grid-column: 1 / 13;
         grid-row: 1 / 3;
