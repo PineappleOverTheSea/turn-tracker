@@ -22,7 +22,7 @@ const AddCreatureModal = (props: any) => {
     const [cha, setCha] = useState(10);
 
     const addCreature = () => {
-        setTrackedCreatures([...trackedCreatures, <Creature key={10} name={name} 
+        setTrackedCreatures([...trackedCreatures, <Creature name={name} 
             stats={{
                 strength: str,
                 dexterity: dex,
@@ -46,9 +46,19 @@ const AddCreatureModal = (props: any) => {
     }
     
     const onSetHpMaximum = (e : React.ChangeEvent<HTMLInputElement>) => {
-        const health = parseInt(e.target.value)
+        const health = parseInt(e.target.value);
         setHpMax(health);
         setHp(health);
+    }
+
+    const onSetHp = (e : React.ChangeEvent<HTMLInputElement>) => {
+        const health = parseInt(e.target.value);
+        setHp(health);
+    }
+
+    const onSetTempHp = (e : React.ChangeEvent<HTMLInputElement>) =>{
+        const health = parseInt(e.target.value);
+        setHpTemp(health);
     }
 
     return (
@@ -61,15 +71,15 @@ const AddCreatureModal = (props: any) => {
             <div className="add-creature-health">
                 <div className="stat">
                     <label htmlFor="">Maximum HP</label>
-                    <input type="number" name="hit-point-maximum" id="hp-max" value={hpMax} onChange={e => onSetHpMaximum(e)} />
+                    <input type="number" name="hit-point-maximum" id="hp-max" value={hpMax} min={1} onChange={e => onSetHpMaximum(e)} />
                 </div>
                 <div className="stat">
                     <label htmlFor="">Current HP</label>
-                    <input type="number" name="hit-points" id="hp" value={hp} onChange={e => setHpTemp(parseInt(e.target.value))} />
+                    <input type="number" name="hit-points" id="hp" value={hp} min={0} max={hpMax} onChange={e => setHp(parseInt(e.target.value))} />
                 </div>
                 <div className="stat">
                     <label htmlFor="">Temporary HP</label>
-                    <input type="number" name="hit-points-temporary" id="hp-temp" value={hpTemp} onChange={e => setHp(parseInt(e.target.value))} />
+                    <input type="number" name="hit-points-temporary" id="hp-temp" value={hpTemp} min={0} onChange={e => setHpTemp(parseInt(e.target.value))} />
                 </div>
             </div>
             <div className="add-creature-cmbt-stats">
