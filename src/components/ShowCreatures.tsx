@@ -1,6 +1,6 @@
 import { useContext } from "react"
 import { TrackedCreaturesContext } from "./contexts/TrackedCreaturesContext"
-import Creature from "./Creature";
+import Creature from "./Creature/Creature";
 import { ICreature } from "../interfaces/ICreature";
 
 const ShowCreatures = () => {
@@ -8,9 +8,6 @@ const ShowCreatures = () => {
     
     return(
         <>
-            <section>
-                <h1>Turn Tracker</h1>
-            </section>
             <section className="tracked-creatures">
                 {
                     trackedCreatures.map((creature : ICreature) => 

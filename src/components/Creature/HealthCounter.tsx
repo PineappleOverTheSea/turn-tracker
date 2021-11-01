@@ -1,5 +1,5 @@
-import { setHealth } from "../interfaces/IStatSetterTypes";
-import { health } from "../interfaces/IStatTypes";
+import { setHealth } from "../../interfaces/IStatSetterTypes";
+import { health } from "../../interfaces/IStatTypes";
 
 const HealthCounter = (props : {health : health, setHealth : setHealth}) => {
     const [hp, setHp] = [props.health.hitPoints, props.setHealth.setHitPoints];

@@ -1,0 +1,12 @@
+.creature-minified{
+    width: 150px;
+    border: 2px solid black;
+    border-radius: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    &-name{
+        width: 100%;
+        font-size: large;
+        font-weight: bold;
+    }
+}

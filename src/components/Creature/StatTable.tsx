@@ -1,5 +1,5 @@
-import { setStats } from "../interfaces/IStatSetterTypes";
-import {stats} from "../interfaces/IStatTypes";
+import { setStats } from "../../interfaces/IStatSetterTypes";
+import {stats} from "../../interfaces/IStatTypes";
 
 const StatTable = (props : {stats : stats, setStats: setStats}) => {
     const [str, setStr] = [props.stats.strength, props.setStats.setStrength];
