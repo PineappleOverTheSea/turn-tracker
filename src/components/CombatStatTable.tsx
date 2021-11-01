@@ -1,4 +1,3 @@
-import { useState } from "react"
 import { setCombatStats } from "../interfaces/IStatSetterTypes"
 import { combatStats } from "../interfaces/IStatTypes"
 
@@ -6,6 +5,7 @@ const CombatStatTable = (props : {combatStats : combatStats, setCombatStats : se
     const [init, setInit] = [props.combatStats.initiative, props.setCombatStats.setInitative]
     const [ac, setAc] = [props.combatStats.armorClass, props.setCombatStats.setArmorClass]
     const [spd, setSpd] = [props.combatStats.speed, props.setCombatStats.setSpeed]
+    
     return(
         <table className="combat-stat-table">
             <thead>

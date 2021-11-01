@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { setStats } from "../interfaces/IStatSetterTypes";
 import {stats} from "../interfaces/IStatTypes";
 

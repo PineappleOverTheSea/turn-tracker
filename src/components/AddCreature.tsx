@@ -1,6 +1,5 @@
 import { useContext, useState } from "react";
 import { TrackedCreaturesContext } from "./contexts/TrackedCreaturesContext";
-import Creature from "./Creature"
 
 const AddCreatureModal = (props: any) => {
     const {trackedCreatures, setTrackedCreatures} = useContext(TrackedCreaturesContext);

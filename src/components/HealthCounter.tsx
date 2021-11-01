@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { setHealth } from "../interfaces/IStatSetterTypes";
 import { health } from "../interfaces/IStatTypes";
 
@@ -56,7 +55,7 @@ const HealthCounter = (props : {health : health, setHealth : setHealth}) => {
             </div>
             <div className="wrap-hp">
                 <label htmlFor="">Current HP</label>
-                <input type="number" id="hp" value={hp} min={0} onChange={e => setHp(parseInt(e.target.value))}/>
+                <input type="number" id="hp" value={hp} min={0} max={hpMax} onChange={e => setHp(parseInt(e.target.value))}/>
             </div>
             <div className="wrap-hurt">
                 <label htmlFor="">Hurt</label>

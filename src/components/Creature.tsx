@@ -1,11 +1,10 @@
 import StatTable from "./StatTable"
 import {stats, health, combatStats} from "../interfaces/IStatTypes";
-import { useContext, useState } from "react"
+import { useState } from "react"
 import HealthCounter from "./HealthCounter";
 import CombatStatTable from "./CombatStatTable";
 import { setCombatStats, setHealth, setStats } from "../interfaces/IStatSetterTypes";
 import { ICreature } from "../interfaces/ICreature";
-import { TrackedCreaturesContext } from "./contexts/TrackedCreaturesContext";
 
 const Creature = (props : ICreature) => {
     const [name, setName] = useState(props.name);
