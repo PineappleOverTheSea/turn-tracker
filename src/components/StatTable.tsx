@@ -24,12 +24,12 @@ const StatTable = (props : {stats : stats, setStats: setStats}) => {
             </thead>
             <tbody>
                 <tr>
-                    <td><input type="number" name="" id="" value={str} inputMode="numeric" onChange={e => setStr(parseInt(e.target.value))}/></td>
-                    <td><input type="number" name="" id="" value={dex} inputMode="numeric" onChange={e => setDex(parseInt(e.target.value))}/></td>
-                    <td><input type="number" name="" id="" value={con} inputMode="numeric" onChange={e => setCon(parseInt(e.target.value))}/></td>
-                    <td><input type="number" name="" id="" value={int} inputMode="numeric" onChange={e => setInt(parseInt(e.target.value))}/></td>
-                    <td><input type="number" name="" id="" value={wis} inputMode="numeric" onChange={e => setWis(parseInt(e.target.value))}/></td>
-                    <td><input type="number" name="" id="" value={cha} inputMode="numeric" onChange={e => setCha(parseInt(e.target.value))}/></td>
+                    <td><input type="number" name="" id="" value={str} min={1} max={30} inputMode="numeric" onChange={e => setStr(parseInt(e.target.value))}/></td>
+                    <td><input type="number" name="" id="" value={dex} min={1} max={30} inputMode="numeric" onChange={e => setDex(parseInt(e.target.value))}/></td>
+                    <td><input type="number" name="" id="" value={con} min={1} max={30} inputMode="numeric" onChange={e => setCon(parseInt(e.target.value))}/></td>
+                    <td><input type="number" name="" id="" value={int} min={1} max={30} inputMode="numeric" onChange={e => setInt(parseInt(e.target.value))}/></td>
+                    <td><input type="number" name="" id="" value={wis} min={1} max={30} inputMode="numeric" onChange={e => setWis(parseInt(e.target.value))}/></td>
+                    <td><input type="number" name="" id="" value={cha} min={1} max={30} inputMode="numeric" onChange={e => setCha(parseInt(e.target.value))}/></td>
                 </tr>
                 <tr className="modifiers">
                     <td><input type="number" name="" id="" value={modifier(str)} disabled/></td>

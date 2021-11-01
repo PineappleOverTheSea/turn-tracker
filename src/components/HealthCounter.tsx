@@ -7,6 +7,13 @@ const HealthCounter = (props : {health : health, setHealth : setHealth}) => {
     const [hpMax, setHpMax] = [props.health.hitPointsMax, props.setHealth.setHitPointsMax]
     const [hpTemp, setHpTemp] = [props.health.hitPointsTemp, props.setHealth.setHitPointsTemp]
 
+    const onSetHpMaximum = (e : React.ChangeEvent<HTMLInputElement>) => {
+        const health = parseInt(e.target.value);
+        if(health < hp)
+            setHp(health);
+        setHpMax(health);
+    }
+
     const setHitpoints = (e : React.KeyboardEvent<HTMLInputElement>, action : string) => {
         if (e.key=== "Enter"){
             const input = e.target as HTMLInputElement;
@@ -27,7 +34,9 @@ const HealthCounter = (props : {health : health, setHealth : setHealth}) => {
                         setHpTemp(Math.abs(inputValue));
                         inputValue = 0;
                     }
-                    setHp(hp - inputValue);
+                    if(hp - inputValue < 0)
+                        setHp(0);
+                    else setHp(hp - inputValue);
                 }
                 break;
             }
@@ -39,23 +48,23 @@ const HealthCounter = (props : {health : health, setHealth : setHealth}) => {
         <div className="health-counter">
             <div className="wrap-hp-max">
                 <label htmlFor="hp-max">Max HP</label> 
-                <input type="number" id="hp-max" value={hpMax} onChange={e => setHpMax(parseInt(e.target.value))}/>
+                <input type="number" id="hp-max" value={hpMax} min={1} onChange={e => onSetHpMaximum(e)}/>
             </div>
             <div className="wrap-hp-temp">
                 <label htmlFor="hp-temp">Temp HP</label>
-                <input type="number" id="hp-temp" value={hpTemp} onChange={e => setHpTemp(parseInt(e.target.value))}/>
+                <input type="number" id="hp-temp" value={hpTemp} min={0} onChange={e => setHpTemp(parseInt(e.target.value))}/>
             </div>
             <div className="wrap-hp">
                 <label htmlFor="">Current HP</label>
-                <input type="number" id="hp" value={hp} onChange={e => setHp(parseInt(e.target.value))}/>
+                <input type="number" id="hp" value={hp} min={0} onChange={e => setHp(parseInt(e.target.value))}/>
             </div>
             <div className="wrap-hurt">
                 <label htmlFor="">Hurt</label>
-                <input type="number" name="" id="" onKeyPress={e => setHitpoints(e, "hurt")}/>
+                <input type="number" name="" id="" min={0} onKeyPress={e => setHitpoints(e, "hurt")}/>
             </div>
             <div className="wrap-heal">
                 <label htmlFor="">Heal</label>
-                <input type="number" name="" id="" onKeyPress={e => setHitpoints(e, "heal")}/>
+                <input type="number" name="" id="" min={0} onKeyPress={e => setHitpoints(e, "heal")}/>
             </div>
         </div>
     )

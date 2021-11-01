@@ -39,7 +39,7 @@ const AddCreatureModal = (props: any) => {
                 hitPointsTemp: hpTemp
             },
             combatStats: {
-                initiative: init,
+                initiative: init + initMod,
                 armorClass: ac,
                 speed: spd
             }
@@ -52,6 +52,8 @@ const AddCreatureModal = (props: any) => {
         setHpMax(health);
         setHp(health);
     }
+
+    const initMod = Math.floor((dex-10)/2);
 
     return (
         <div className="add-creature">
@@ -78,41 +80,41 @@ const AddCreatureModal = (props: any) => {
                 <div className="stat">
                     <label htmlFor="">Initiative</label>
                     <input type="number" name="initative" id="init" value={init} onChange={e => setInit(parseInt(e.target.value))} />
-                    <div>+ {Math.floor((dex-10)/2)} = {Math.floor((dex-10)/2 + init)}</div> 
+                    <div>{initMod >=0 ? "+" : "-"} {Math.abs(initMod)} = {init +  initMod}</div> 
                 </div>
                 <div className="stat">
                     <label htmlFor="">Armor Class</label>
-                    <input type="number" name="armor-class" id="ac" value={ac} onChange={e => setAc(parseInt(e.target.value))}/>
+                    <input type="number" name="armor-class" id="ac" value={ac} min={0} onChange={e => setAc(parseInt(e.target.value))}/>
                 </div>
                 <div className="stat">
                     <label htmlFor="">Speed</label>
-                    <input type="number" name="speed" id="spd" value={spd} onChange={e => setSpd(parseInt(e.target.value))}/>
+                    <input type="number" name="speed" id="spd" value={spd} min={0} step={5} onChange={e => setSpd(parseInt(e.target.value))}/>
                 </div>
             </div>
             <div className="add-creature-stats">
                 <div className="stat">
                     <label htmlFor="">Strength</label>
-                    <input type="number" name="strength" id="str" value={str} onChange={e => setStr(parseInt(e.target.value))} />
+                    <input type="number" name="strength" id="str" value={str} min={1} max={30} onChange={e => setStr(parseInt(e.target.value))} />
                 </div>
                 <div className="stat">
                     <label htmlFor="">Dexterity</label>
-                    <input type="number" name="dexterity" id="dex" value={dex} onChange={e => setDex(parseInt(e.target.value))} />
+                    <input type="number" name="dexterity" id="dex" value={dex} min={1} max={30} onChange={e => setDex(parseInt(e.target.value))} />
                 </div>
                 <div className="stat">
                     <label htmlFor="">Constitution</label>
-                    <input type="number" name="constitution" id="con" value={con} onChange={e => setCon(parseInt(e.target.value))} />
+                    <input type="number" name="constitution" id="con" value={con} min={1} max={30} onChange={e => setCon(parseInt(e.target.value))} />
                 </div>
                 <div className="stat">
                     <label htmlFor="">Inteligence</label>
-                    <input type="number" name="inteligence" id="int" value={int} onChange={e => setInt(parseInt(e.target.value))} />
+                    <input type="number" name="inteligence" id="int" value={int} min={1} max={30} onChange={e => setInt(parseInt(e.target.value))} />
                 </div>
                 <div className="stat">
                     <label htmlFor="">Wisdom</label>
-                    <input type="number" name="wisdom" id="wis" value={wis} onChange={e => setWis(parseInt(e.target.value))} />
+                    <input type="number" name="wisdom" id="wis" value={wis} min={1} max={30} onChange={e => setWis(parseInt(e.target.value))} />
                 </div>
                 <div className="stat">
                     <label htmlFor="">Charisma</label>
-                    <input type="number" name="charisma" id="chr" value={cha} onChange={e => setCha(parseInt(e.target.value))} />
+                    <input type="number" name="charisma" id="chr" value={cha} min={1} max={30} onChange={e => setCha(parseInt(e.target.value))} />
                 </div>
             </div>
             <button onClick={addCreature}>Add Creature</button>

@@ -18,8 +18,8 @@ const CombatStatTable = (props : {combatStats : combatStats, setCombatStats : se
             <tbody>
                 <tr>
                     <td><input type="number" name="" id="" value={init} onChange={e => setInit(parseInt(e.target.value))}/></td>
-                    <td><input type="number" name="" id="" value={ac} onChange={e => setAc(parseInt(e.target.value))}/></td>
-                    <td><input type="number" name="" id="" value={spd} onChange={e => setSpd(parseInt(e.target.value))}/></td>
+                    <td><input type="number" name="" id="" value={ac} min={0} onChange={e => setAc(parseInt(e.target.value))}/></td>
+                    <td><input type="number" name="" id="" value={spd} min={0} step={5} onChange={e => setSpd(parseInt(e.target.value))}/></td>
                 </tr>
             </tbody>
         </table>
