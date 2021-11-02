@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useState } from "react";
 import { ICreature } from "../../interfaces/ICreature";
 import { ITrackedCreaturesContext } from "../../interfaces/ITrackedCreaturesContext";
 

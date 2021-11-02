@@ -66,7 +66,7 @@ const Creature = (props : ICreature) => {
     }
     
     return(
-        <div className="creature">
+        <div className={`creature ${hp === 0 && "dead"}`}>
             <div className="creature-name">{name}</div>
             {/* <button onClick={die()}>Kill</button> */}
             <HealthCounter health={health} setHealth={setHealth}/>
