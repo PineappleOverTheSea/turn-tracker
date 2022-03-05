@@ -2,9 +2,9 @@ import { setCombatStats } from "../../interfaces/IStatSetterTypes"
 import { combatStats } from "../../interfaces/IStatTypes"
 
 const CombatStatTable = (props : {combatStats : combatStats, setCombatStats : setCombatStats}) => {
-    const [init, setInit] = [props.combatStats.initiative, props.setCombatStats.setInitative]
-    const [ac, setAc] = [props.combatStats.armorClass, props.setCombatStats.setArmorClass]
-    const [spd, setSpd] = [props.combatStats.speed, props.setCombatStats.setSpeed]
+    const [init, setInit] = [props.combatStats.initiative, props.setCombatStats.setInit]
+    const [ac, setAc] = [props.combatStats.armorClass, props.setCombatStats.setAC]
+    const [spd, setSpd] = [props.combatStats.speed, props.setCombatStats.setSpd]
     
     return(
         <table className="combat-stat-table">

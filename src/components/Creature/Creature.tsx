@@ -5,7 +5,7 @@ import HealthCounter from "./HealthCounter";
 import CombatStatTable from "./CombatStatTable";
 import { setCombatStats, setHealth, setStats } from "../../interfaces/IStatSetterTypes";
 import { ICreature } from "../../interfaces/ICreature";
-
+import { TrackedCreaturesContext } from "../contexts/TrackedCreaturesContext";
 const Creature = (props : ICreature) => {
     const [name, setName] = useState(props.name);
 
@@ -33,12 +33,12 @@ const Creature = (props : ICreature) => {
         charisma: cha
     }
     const setStats:setStats = {
-        setStrength: setStr,
-        setDexterity: setDex,
-        setConstitution: setCon,
-        setInteligence: setInt,
-        setWisdom: setWis,
-        setCharisma: setCha
+        setStr: setStr,
+        setDex: setDex,
+        setCon: setCon,
+        setInt: setInt,
+        setWis: setWis,
+        setCha: setCha
     }
     const health:health = {
         hitPoints: hp,
@@ -46,9 +46,9 @@ const Creature = (props : ICreature) => {
         hitPointsTemp: hpTemp
     }
     const setHealth:setHealth = {
-        setHitPoints: setHp,
-        setHitPointsMax: setHpMax,
-        setHitPointsTemp: setHpTemp
+        setHp: setHp,
+        setHpMax: setHpMax,
+        setHpTemp: setHpTemp
     }
     const combatStats:combatStats = {
         armorClass: ac,
@@ -56,9 +56,9 @@ const Creature = (props : ICreature) => {
         speed: spd
     }
     const setCombatStats:setCombatStats = {
-        setInitative: setInit,
-        setArmorClass: setAc,
-        setSpeed: setSpd
+        setInit: setInit,
+        setAC: setAc,
+        setSpd: setSpd
     }
 
     const die = () => {
@@ -69,7 +69,7 @@ const Creature = (props : ICreature) => {
         <div className={`creature ${hp === 0 && "dead"}`}>
             <div className="creature-name">{name}</div>
             {/* <button onClick={die()}>Kill</button> */}
-            <HealthCounter health={health} setHealth={setHealth}/>
+            <HealthCounter health={health} setHealth={setHealth} id={props.id}/>
             <CombatStatTable combatStats={combatStats} setCombatStats={setCombatStats}/>
             <StatTable stats={stats} setStats={setStats}/>
         </div>

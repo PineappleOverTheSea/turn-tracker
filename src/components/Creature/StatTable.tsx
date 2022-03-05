@@ -2,12 +2,12 @@ import { setStats } from "../../interfaces/IStatSetterTypes";
 import {stats} from "../../interfaces/IStatTypes";
 
 const StatTable = (props : {stats : stats, setStats: setStats}) => {
-    const [str, setStr] = [props.stats.strength, props.setStats.setStrength];
-    const [dex, setDex] = [props.stats.dexterity, props.setStats.setDexterity];
-    const [con, setCon] = [props.stats.constitution, props.setStats.setConstitution];
-    const [int, setInt] = [props.stats.inteligence, props.setStats.setInteligence];
-    const [wis, setWis] = [props.stats.wisdom, props.setStats.setWisdom];
-    const [cha, setCha] = [props.stats.charisma, props.setStats.setCharisma];
+    const [str, setStr] = [props.stats.strength, props.setStats.setStr];
+    const [dex, setDex] = [props.stats.dexterity, props.setStats.setDex];
+    const [con, setCon] = [props.stats.constitution, props.setStats.setCon];
+    const [int, setInt] = [props.stats.inteligence, props.setStats.setInt];
+    const [wis, setWis] = [props.stats.wisdom, props.setStats.setWis];
+    const [cha, setCha] = [props.stats.charisma, props.setStats.setCha];
     
     return(
         <table className="stat-table">

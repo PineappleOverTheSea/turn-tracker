@@ -9,11 +9,9 @@ const App = () => {
     return(
         <>
             <TrackedCreaturesProvider>
-                <CreatureProvider>
-                    <TurnTimeline />
-                    <ShowCreatures />
-                    <AddCreature />
-                </CreatureProvider>
+                <TurnTimeline />
+                <ShowCreatures />
+                <AddCreature />
             </TrackedCreaturesProvider>
         </>
     )

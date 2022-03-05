@@ -35,12 +35,12 @@ export const CreatureProvider = ({children} : any) => {
         charisma: cha
     }
     const setStats:setStats = {
-        setStrength: setStr,
-        setDexterity: setDex,
-        setConstitution: setCon,
-        setInteligence: setInt,
-        setWisdom: setWis,
-        setCharisma: setCha
+        setStr: setStr,
+        setDex: setDex,
+        setCon: setCon,
+        setInt: setInt,
+        setWis: setWis,
+        setCha: setCha
     }
     const health:health = {
         hitPoints: hp,
@@ -48,9 +48,9 @@ export const CreatureProvider = ({children} : any) => {
         hitPointsTemp: hpTemp
     }
     const setHealth:setHealth = {
-        setHitPoints: setHp,
-        setHitPointsMax: setHpMax,
-        setHitPointsTemp: setHpTemp
+        setHp: setHp,
+        setHpMax: setHpMax,
+        setHpTemp: setHpTemp
     }
     const combatStats:combatStats = {
         armorClass: ac,
@@ -58,9 +58,9 @@ export const CreatureProvider = ({children} : any) => {
         speed: spd
     }
     const setCombatStats:setCombatStats = {
-        setInitative: setInit,
-        setArmorClass: setAc,
-        setSpeed: setSpd
+        setInit: setInit,
+        setAC: setAc,
+        setSpd: setSpd
     }
     
     return(
