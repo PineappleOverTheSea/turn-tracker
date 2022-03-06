@@ -16,7 +16,7 @@ export const CreatureProvider = ({children} : any) => {
     const [hpTemp, setHpTemp] = useState(0);
 
     const [init, setInit] = useState(0);
-    const [ac, setAc] = useState(10);
+    const [ac, setAC] = useState(10);
     const [spd, setSpd] = useState(30);
 
     const [str, setStr] = useState(10);
@@ -59,7 +59,7 @@ export const CreatureProvider = ({children} : any) => {
     }
     const setCombatStats:setCombatStats = {
         setInit: setInit,
-        setAC: setAc,
+        setAC: setAC,
         setSpd: setSpd
     }
     
