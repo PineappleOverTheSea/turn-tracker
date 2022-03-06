@@ -22,6 +22,19 @@ const HealthCounter = (props : {health : health, setHealth : setHealth, id : any
         setTrackedCreatures([...trackedCreatures]);
     }
 
+    const onSetHp = (e : React.ChangeEvent<HTMLInputElement>) => {
+        const newHp = Number.parseInt(e.target.value);
+        setHp(newHp);
+        thisCreature.health.hitPoints = newHp;
+        setTrackedCreatures([...trackedCreatures]);
+    }
+
+    const onSetHpTemp = (e : React.ChangeEvent<HTMLInputElement>) => {
+        const newHpTemp = Number.parseInt(e.target.value);
+        setHpTemp(newHpTemp);
+        thisCreature.health.hitPointsTemp = newHpTemp;
+    }
+
     const calculateHitpoints = (e : React.KeyboardEvent<HTMLInputElement>, action : string) => {
         if (e.key === "Enter"){
             const input = e.target as HTMLInputElement;
@@ -76,20 +89,11 @@ const HealthCounter = (props : {health : health, setHealth : setHealth, id : any
             </div>
             <div className="wrap-hp-temp">
                 <label htmlFor="hp-temp">Temp HP</label>
-                <input type="number" id="hp-temp" value={hpTemp} min={0} onChange={e => {
-                        const newHpTemp = Number.parseInt(e.target.value);
-                        setHpTemp(newHpTemp);
-                        thisCreature.health.hitPointsTemp = newHpTemp;
-                    }}/>
+                <input type="number" id="hp-temp" value={hpTemp} min={0} onChange={e => onSetHpTemp(e)}/>
             </div>
             <div className="wrap-hp">
                 <label htmlFor="">Current HP</label>
-                <input type="number" id="hp" value={hp} min={0} max={hpMax} onChange={e => {
-                    const newHp = Number.parseInt(e.target.value);
-                    setHp(newHp);
-                    thisCreature.health.hitPoints = newHp;
-                    setTrackedCreatures([...trackedCreatures]);
-                }}/>
+                <input type="number" id="hp" value={hp} min={0} max={hpMax} onChange={e => onSetHp(e)}/>
             </div>
             <div className="wrap-hurt">
                 <label htmlFor="">Hurt</label>
