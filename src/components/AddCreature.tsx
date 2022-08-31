@@ -29,9 +29,17 @@ const AddCreatureModal = (props: any) => {
     }
     
     const onSetHpMaximum = (e : React.ChangeEvent<HTMLInputElement>) => {
-        const health = parseInt(e.target.value);
-        dispatchCreatureAction({type: NEW_CREATURE_ACTIONS.SET_HP, value: health});
-        dispatchCreatureAction({type: NEW_CREATURE_ACTIONS.SET_HP_MAX, value: health});
+        const value = parseInt(e.target.value);
+        dispatchCreatureAction({type: NEW_CREATURE_ACTIONS.SET_HP, value: value});
+        dispatchCreatureAction({type: NEW_CREATURE_ACTIONS.SET_HP_MAX, value: value});
+    }
+    const onSetHp = (e : React.ChangeEvent<HTMLInputElement>) => {
+        const value = parseInt(e.target.value);
+        if(value > newCreature.health.hitPointsMax){
+            dispatchCreatureAction({type: NEW_CREATURE_ACTIONS.SET_HP, value: value});
+            dispatchCreatureAction({type: NEW_CREATURE_ACTIONS.SET_HP_MAX, value: value});
+        }
+        else dispatchCreatureAction({type: NEW_CREATURE_ACTIONS.SET_HP, value: value});
     }
     const onSetStringValue = (e : React.ChangeEvent<HTMLInputElement>, actionType : String) => {
         const value = e.target.value;
@@ -56,7 +64,7 @@ const AddCreatureModal = (props: any) => {
                 </div>
                 <div className="stat">
                     <label htmlFor="">Current HP</label>
-                    <input type="number" name="hit-points" id="hp" value={newCreature.health.hitPoints} min={0} max={newCreature.health.hitPointsMax} onChange={e => onSetNumberValue(e, NEW_CREATURE_ACTIONS.SET_HP)} />
+                    <input type="number" name="hit-points" id="hp" value={newCreature.health.hitPoints} min={0} max={newCreature.health.hitPointsMax} onChange={e => onSetHp(e)} />
                 </div>
                 <div className="stat">
                     <label htmlFor="">Temporary HP</label>
