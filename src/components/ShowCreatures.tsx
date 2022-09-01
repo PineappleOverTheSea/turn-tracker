@@ -5,6 +5,7 @@ import { ICreature } from "../interfaces/ICreature";
 
 const ShowCreatures = () => {
     const {trackedCreatures, setTrackedCreatures} = useContext(TrackedCreaturesContext);
+
     return(
         <>
             <section className="tracked-creatures">

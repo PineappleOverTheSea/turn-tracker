@@ -13,12 +13,12 @@ export const TrackedCreaturesProvider = ({ children } : any) => {
 
     const updateCreature = (updatedCreature : ICreature) =>{
         const creatureIndex = trackedCreatures.findIndex(creature => creature.id === updatedCreature.id)
-        debugger
         if(creatureIndex === -1)
             throw Error("No creature by that ID in TrackedCreatures!")
-        const updatedCreatures = trackedCreatures
+        const updatedCreatures = [...trackedCreatures]
         updatedCreatures[creatureIndex] = updatedCreature
         setTrackedCreatures(updatedCreatures)
+        debugger
     }
 
     return(

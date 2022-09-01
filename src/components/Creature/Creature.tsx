@@ -1,11 +1,13 @@
 import StatTable from "./StatTable"
-import { useReducer } from "react"
+import { useContext, useReducer } from "react"
 import HealthCounter from "./HealthCounter";
 import CombatStatTable from "./CombatStatTable";
 import { ICreature } from "../../interfaces/ICreature";
 import { creatureReducer } from "../actions/CreatureReducer";
+import { TrackedCreaturesContext } from "../contexts/TrackedCreaturesContext";
 
 const Creature = (props : ICreature) => {
+
     const [creature, dispatchCreatureAction] = useReducer(creatureReducer, props)
 
     const die = () => {
@@ -18,9 +20,9 @@ const Creature = (props : ICreature) => {
         <div className={`creature ${creature.health.hitPoints === 0 && "dead"}`}>
             <div className="creature-name">{creature.name}</div>
             {/* <button onClick={die()}>Kill</button> */}
-            <HealthCounter health={creature.health} dispatch={dispatchCreatureAction}/>
+            <HealthCounter creature={creature} dispatch={dispatchCreatureAction}/>
             <CombatStatTable combatStats={creature.combatStats} dispatch={dispatchCreatureAction}/>
-            <StatTable stats={creature.stats} dispatch={dispatchCreatureAction}/>
+            <StatTable creature={creature} dispatch={dispatchCreatureAction}/>
         </div>
     )
 }

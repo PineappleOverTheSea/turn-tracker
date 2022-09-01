@@ -1,10 +1,15 @@
+import { useContext, useEffect } from "react";
+import { ICreature } from "../../interfaces/ICreature";
 import { ICreatureDispatch } from "../../interfaces/ICreatureDispatch";
 import {stats} from "../../interfaces/IStatTypes";
 import { CREATURE_ACTIONS } from "../actions/CreatureReducer";
+import { TrackedCreaturesContext } from "../contexts/TrackedCreaturesContext";
 
-const StatTable = (props : {stats : stats, dispatch : React.Dispatch<ICreatureDispatch>}) => {
+const StatTable = (props : {creature : ICreature, dispatch : React.Dispatch<ICreatureDispatch>}) => {
 
-    const stats = props.stats;
+    const {trackedCreatures, setTrackedCreatures, updateCreature} = useContext(TrackedCreaturesContext)
+
+    const stats = props.creature.stats;
     const dispatchCreatureAction = props.dispatch;
 
     const onSetNumber = (e : React.ChangeEvent<HTMLInputElement>, actionType : string) => {

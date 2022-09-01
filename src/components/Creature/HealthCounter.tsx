@@ -1,11 +1,16 @@
+import { useContext } from "react";
+import { ICreature } from "../../interfaces/ICreature";
 import { ICreatureDispatch } from "../../interfaces/ICreatureDispatch";
 import { health } from "../../interfaces/IStatTypes";
 import { CREATURE_ACTIONS } from "../actions/CreatureReducer";
+import { TrackedCreaturesContext } from "../contexts/TrackedCreaturesContext";
 
-const HealthCounter = (props : {health : health, dispatch : React.Dispatch<ICreatureDispatch>}) => {
+const HealthCounter = (props : {creature : ICreature, dispatch : React.Dispatch<ICreatureDispatch>}) => {
 
-    const health = props.health;
+    const health = props.creature.health;
     const dispatchCreatureAction = props.dispatch;
+
+    const {trackedCreatures, setTrackedCreatures, updateCreature} = useContext(TrackedCreaturesContext)
 
     const onSetNumber = (e : React.ChangeEvent<HTMLInputElement>, actionType : string) => {
         const value = parseInt(e.target.value);
@@ -48,7 +53,14 @@ const HealthCounter = (props : {health : health, dispatch : React.Dispatch<ICrea
                 break;
             }
             input.value = "";
+            //padaryti noramlų async veikimą, gal dispatchinimą perkelt į contextą
+            const updatedCreature = props.creature
+        const thisCreature = trackedCreatures.find(c => c.id === props.creature.id)
+        if(thisCreature && thisCreature.health.hitPoints !== props.creature.health.hitPoints){
+            updateCreature(updatedCreature)
         }
+        }
+        
     }
 
     return(
@@ -64,7 +76,6 @@ const HealthCounter = (props : {health : health, dispatch : React.Dispatch<ICrea
             <div className="wrap-hp">
                 <label htmlFor="">Current HP</label>
                 <input type="number" id="hp" value={health.hitPoints} min={0} max={health.hitPointsTemp} onChange={e => onSetNumber(e, CREATURE_ACTIONS.SET_HP)}/>
-                <input type="number" id="hp-temp" value={health.hitPointsTemp} min={0} onChange={e => onSetNumber(e, CREATURE_ACTIONS.SET_HP_TEMP)}/>
             </div>
             <div className="wrap-hurt">
                 <label htmlFor="">Hurt</label>

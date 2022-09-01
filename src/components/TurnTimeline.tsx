@@ -5,7 +5,7 @@ import CreatureMinified from "./CreatureMinified";
 
 const TurnTimeline = () => {
     const {trackedCreatures, setTrackedCreatures} = useContext(TrackedCreaturesContext);
-    
+
     return(
         <div className="turn-timeline">
             {trackedCreatures.map((creature : ICreature) =>
