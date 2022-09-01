@@ -2,7 +2,7 @@ import { useContext, useEffect } from "react";
 import { ICreature } from "../../interfaces/ICreature";
 import { ICreatureDispatch } from "../../interfaces/ICreatureDispatch";
 import {stats} from "../../interfaces/IStatTypes";
-import { CREATURE_ACTIONS } from "../actions/CreatureReducer";
+import { CREATURE_ACTIONS } from "../reducers/CreatureReducer";
 import { TrackedCreaturesContext } from "../contexts/TrackedCreaturesContext";
 
 const StatTable = (props : {creature : ICreature, dispatch : React.Dispatch<ICreatureDispatch>}) => {

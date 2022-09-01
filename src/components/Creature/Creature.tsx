@@ -3,8 +3,7 @@ import { useContext, useReducer } from "react"
 import HealthCounter from "./HealthCounter";
 import CombatStatTable from "./CombatStatTable";
 import { ICreature } from "../../interfaces/ICreature";
-import { creatureReducer } from "../actions/CreatureReducer";
-import { TrackedCreaturesContext } from "../contexts/TrackedCreaturesContext";
+import { creatureReducer } from "../reducers/CreatureReducer";
 
 const Creature = (props : ICreature) => {
 

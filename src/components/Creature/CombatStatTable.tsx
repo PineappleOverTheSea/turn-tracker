@@ -1,6 +1,6 @@
 import { ICreatureDispatch } from "../../interfaces/ICreatureDispatch";
 import { combatStats } from "../../interfaces/IStatTypes"
-import { CREATURE_ACTIONS } from "../actions/CreatureReducer";
+import { CREATURE_ACTIONS } from "../reducers/CreatureReducer";
 
 const CombatStatTable = (props : {combatStats : combatStats, dispatch : React.Dispatch<ICreatureDispatch>}) => {
     const combatStats = props.combatStats;

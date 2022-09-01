@@ -1,5 +1,5 @@
 import { useContext, useReducer, useState } from "react";
-import { creatureReducer, CREATURE_ACTIONS, INITIAL_STATE } from "./actions/CreatureReducer";
+import { creatureReducer, CREATURE_ACTIONS, INITIAL_STATE } from "./reducers/CreatureReducer";
 import { TrackedCreaturesContext } from "./contexts/TrackedCreaturesContext";
 
 
