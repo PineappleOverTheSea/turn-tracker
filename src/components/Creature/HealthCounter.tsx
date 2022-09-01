@@ -1,8 +1,6 @@
-import { useContext } from "react";
 import { ICreatureDispatch } from "../../interfaces/ICreatureDispatch";
 import { health } from "../../interfaces/IStatTypes";
 import { CREATURE_ACTIONS } from "../actions/CreatureReducer";
-import { TrackedCreaturesContext } from "../contexts/TrackedCreaturesContext";
 
 const HealthCounter = (props : {health : health, dispatch : React.Dispatch<ICreatureDispatch>}) => {
 
@@ -23,7 +21,7 @@ const HealthCounter = (props : {health : health, dispatch : React.Dispatch<ICrea
     }
 
     const setHitpoints = (e : React.KeyboardEvent<HTMLInputElement>, action : string) => {
-        if (e.key=== "Enter"){
+        if (e.key === "Enter"){
             const input = e.target as HTMLInputElement;
             let inputValue = parseInt(input.value);
             switch (action) {
@@ -66,6 +64,7 @@ const HealthCounter = (props : {health : health, dispatch : React.Dispatch<ICrea
             <div className="wrap-hp">
                 <label htmlFor="">Current HP</label>
                 <input type="number" id="hp" value={health.hitPoints} min={0} max={health.hitPointsTemp} onChange={e => onSetNumber(e, CREATURE_ACTIONS.SET_HP)}/>
+                <input type="number" id="hp-temp" value={health.hitPointsTemp} min={0} onChange={e => onSetNumber(e, CREATURE_ACTIONS.SET_HP_TEMP)}/>
             </div>
             <div className="wrap-hurt">
                 <label htmlFor="">Hurt</label>
