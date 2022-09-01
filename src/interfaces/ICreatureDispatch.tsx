@@ -1,4 +1,4 @@
 export interface ICreatureDispatch{
-    type: String,
-    value: Number | String
+    type: string,
+    value: number | string
 }

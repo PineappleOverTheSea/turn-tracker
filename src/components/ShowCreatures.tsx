@@ -13,6 +13,7 @@ const ShowCreatures = () => {
                     trackedCreatures.map((creature : ICreature) => 
                         <Creature 
                             key={creature.id}
+                            id={creature.id}
                             name={creature.name}
                             stats={creature.stats}
                             health={creature.health}

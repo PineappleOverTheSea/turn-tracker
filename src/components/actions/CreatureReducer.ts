@@ -1,5 +1,6 @@
 import React, { ReactHTMLElement, ReactInstance, ReducerAction, ReducerState } from "react";
 import { ICreature } from "../../interfaces/ICreature";
+import { ICreatureDispatch } from "../../interfaces/ICreatureDispatch";
 
 const defaultName = "Creature";
 const defaultHp = 10;
@@ -16,28 +17,28 @@ const defaultWis = 10;
 const defaultCha = 10;
 
 export const INITIAL_STATE: ICreature = {
-    name: String(defaultName),
+    name: defaultName,
     stats: {
-        strength: Number(defaultStr),
-        dexterity: Number(defaultDex),
-        constitution: Number(defaultCon),
-        inteligence: Number(defaultInt),
-        wisdom: Number(defaultWis),
-        charisma: Number(defaultCha)
+        strength: defaultStr,
+        dexterity: defaultDex,
+        constitution: defaultCon,
+        inteligence: defaultInt,
+        wisdom: defaultWis,
+        charisma: defaultCha
     },
     health: {
-        hitPoints: Number(defaultHp),
-        hitPointsMax: Number(defaultHpMax),
-        hitPointsTemp: Number(defaultHpMax)
+        hitPoints: defaultHp,
+        hitPointsMax: defaultHpMax,
+        hitPointsTemp: defaultHpTemp
     },
     combatStats: {
-        initiative: Number(defaultInit),
-        armorClass: Number(defaultAc),
-        speed: Number(defaultSpd)
+        initiative: defaultInit,
+        armorClass: defaultAc,
+        speed: defaultSpd
     }
 }
 
-export const NEW_CREATURE_ACTIONS = {
+export const CREATURE_ACTIONS = {
     SET_NAME: "SET_NAME",
     SET_HP: "SET_HP",
     SET_HP_MAX: "SET_HP_MAX",
@@ -53,130 +54,130 @@ export const NEW_CREATURE_ACTIONS = {
     SET_CHA: "SET_CHA"
 }
 
-export const newCreatureReducer: React.Reducer<ICreature, any> = (state: ICreature, action) => {
+export const creatureReducer : React.Reducer<ICreature, ICreatureDispatch> = (state, action) : ICreature => {
     switch (action.type) {
-        case NEW_CREATURE_ACTIONS.SET_NAME: {
+        case CREATURE_ACTIONS.SET_NAME: {
             return {
                 ...state,
-                name: action.value
+                name: action.value as string
             }
         }
-        case NEW_CREATURE_ACTIONS.SET_HP: {
+        case CREATURE_ACTIONS.SET_HP: {
             return {
                 ...state,
                 health: {
                     ...state.health,
-                    hitPoints: action.value
+                    hitPoints: action.value as number
                 }
             }
 
         }
-        case NEW_CREATURE_ACTIONS.SET_HP_MAX: {
+        case CREATURE_ACTIONS.SET_HP_MAX: {
             return {
                 ...state,
                 health: {
                     ...state.health,
-                    hitPointsMax: action.value
+                    hitPointsMax: action.value as number
                 }
             }
 
         }
-        case NEW_CREATURE_ACTIONS.SET_HP_TEMP: {
+        case CREATURE_ACTIONS.SET_HP_TEMP: {
             return {
                 ...state,
                 health: {
                     ...state.health,
-                    hitPointsTemp: action.value
+                    hitPointsTemp: action.value as number
                 }
             }
 
         }
-        case NEW_CREATURE_ACTIONS.SET_INIT: {
+        case CREATURE_ACTIONS.SET_INIT: {
             return {
                 ...state,
                 combatStats:{
                     ...state.combatStats,
-                    initiative: action.value
+                    initiative: action.value as number
                 }
             }
 
         }
-        case NEW_CREATURE_ACTIONS.SET_AC: {
+        case CREATURE_ACTIONS.SET_AC: {
             return {
                 ...state,
                 combatStats:{
                     ...state.combatStats,
-                    initiative: action.value
+                    initiative: action.value as number
                 }
             }
 
         }
-        case NEW_CREATURE_ACTIONS.SET_SPD: {
+        case CREATURE_ACTIONS.SET_SPD: {
             return {
                 ...state,
                 combatStats:{
                     ...state.combatStats,
-                    initiative: action.value
+                    initiative: action.value as number
                 }
             }
 
         }
-        case NEW_CREATURE_ACTIONS.SET_STR: {
+        case CREATURE_ACTIONS.SET_STR: {
             return {
                 ...state,
                 stats:{
                     ...state.stats,
-                    strength: action.value
+                    strength: action.value as number
                 }
             }
 
         }
-        case NEW_CREATURE_ACTIONS.SET_DEX: {
+        case CREATURE_ACTIONS.SET_DEX: {
             return {
                 ...state,
                 stats:{
                     ...state.stats,
-                    dexterity: action.value
+                    dexterity: action.value as number
                 }
             }
 
         }
-        case NEW_CREATURE_ACTIONS.SET_CON: {
+        case CREATURE_ACTIONS.SET_CON: {
             return {
                 ...state,
                 stats:{
                     ...state.stats,
-                    constitution: action.value
+                    constitution: action.value as number
                 }
             }
 
         }
-        case NEW_CREATURE_ACTIONS.SET_INT: {
+        case CREATURE_ACTIONS.SET_INT: {
             return {
                 ...state,
                 stats:{
                     ...state.stats,
-                    inteligence: action.value
+                    inteligence: action.value as number
                 }
             }
 
         }
-        case NEW_CREATURE_ACTIONS.SET_WIS: {
+        case CREATURE_ACTIONS.SET_WIS: {
             return {
                 ...state,
                 stats:{
                     ...state.stats,
-                    wisdom: action.value
+                    wisdom: action.value as number
                 }
             }
 
         }
-        case NEW_CREATURE_ACTIONS.SET_CHA: {
+        case CREATURE_ACTIONS.SET_CHA: {
             return {
                 ...state,
                 stats:{
                     ...state.stats,
-                    charisma: action.value
+                    charisma: action.value as number
                 }
             }
 
