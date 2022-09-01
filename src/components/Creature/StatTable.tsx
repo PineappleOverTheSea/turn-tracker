@@ -1,14 +1,22 @@
-import { setStats } from "../../interfaces/IStatSetterTypes";
+import { useContext, useEffect } from "react";
+import { ICreature } from "../../interfaces/ICreature";
+import { ICreatureDispatch } from "../../interfaces/ICreatureDispatch";
 import {stats} from "../../interfaces/IStatTypes";
+import { CREATURE_ACTIONS } from "../actions/CreatureReducer";
+import { TrackedCreaturesContext } from "../contexts/TrackedCreaturesContext";
 
-const StatTable = (props : {stats : stats, setStats: setStats}) => {
-    const [str, setStr] = [props.stats.strength, props.setStats.setStr];
-    const [dex, setDex] = [props.stats.dexterity, props.setStats.setDex];
-    const [con, setCon] = [props.stats.constitution, props.setStats.setCon];
-    const [int, setInt] = [props.stats.inteligence, props.setStats.setInt];
-    const [wis, setWis] = [props.stats.wisdom, props.setStats.setWis];
-    const [cha, setCha] = [props.stats.charisma, props.setStats.setCha];
-    
+const StatTable = (props : {creature : ICreature, dispatch : React.Dispatch<ICreatureDispatch>}) => {
+
+    const {trackedCreatures, setTrackedCreatures, updateCreature} = useContext(TrackedCreaturesContext)
+
+    const stats = props.creature.stats;
+    const dispatchCreatureAction = props.dispatch;
+
+    const onSetNumber = (e : React.ChangeEvent<HTMLInputElement>, actionType : string) => {
+        const value = parseInt(e.target.value);
+        dispatchCreatureAction({type: actionType, value: value});
+    }
+
     return(
         <table className="stat-table">
             <thead>
@@ -23,20 +31,20 @@ const StatTable = (props : {stats : stats, setStats: setStats}) => {
             </thead>
             <tbody>
                 <tr>
-                    <td><input type="number" name="" id="" value={str} min={1} max={30} inputMode="numeric" onChange={e => setStr(parseInt(e.target.value))}/></td>
-                    <td><input type="number" name="" id="" value={dex} min={1} max={30} inputMode="numeric" onChange={e => setDex(parseInt(e.target.value))}/></td>
-                    <td><input type="number" name="" id="" value={con} min={1} max={30} inputMode="numeric" onChange={e => setCon(parseInt(e.target.value))}/></td>
-                    <td><input type="number" name="" id="" value={int} min={1} max={30} inputMode="numeric" onChange={e => setInt(parseInt(e.target.value))}/></td>
-                    <td><input type="number" name="" id="" value={wis} min={1} max={30} inputMode="numeric" onChange={e => setWis(parseInt(e.target.value))}/></td>
-                    <td><input type="number" name="" id="" value={cha} min={1} max={30} inputMode="numeric" onChange={e => setCha(parseInt(e.target.value))}/></td>
+                    <td><input type="number" name="" id="" value={stats.strength} min={1} max={30} inputMode="numeric" onChange={e => onSetNumber(e, CREATURE_ACTIONS.SET_STR)}/></td>
+                    <td><input type="number" name="" id="" value={stats.dexterity} min={1} max={30} inputMode="numeric" onChange={e => onSetNumber(e, CREATURE_ACTIONS.SET_DEX)}/></td>
+                    <td><input type="number" name="" id="" value={stats.constitution} min={1} max={30} inputMode="numeric" onChange={e => onSetNumber(e, CREATURE_ACTIONS.SET_CON)}/></td>
+                    <td><input type="number" name="" id="" value={stats.inteligence} min={1} max={30} inputMode="numeric" onChange={e => onSetNumber(e, CREATURE_ACTIONS.SET_INT)}/></td>
+                    <td><input type="number" name="" id="" value={stats.wisdom} min={1} max={30} inputMode="numeric" onChange={e => onSetNumber(e, CREATURE_ACTIONS.SET_WIS)}/></td>
+                    <td><input type="number" name="" id="" value={stats.charisma} min={1} max={30} inputMode="numeric" onChange={e => onSetNumber(e, CREATURE_ACTIONS.SET_CHA)}/></td>
                 </tr>
                 <tr className="modifiers">
-                    <td><input type="number" name="" id="" value={modifier(str)} disabled/></td>
-                    <td><input type="number" name="" id="" value={modifier(dex)} disabled/></td>
-                    <td><input type="number" name="" id="" value={modifier(con)} disabled/></td>
-                    <td><input type="number" name="" id="" value={modifier(int)} disabled/></td>
-                    <td><input type="number" name="" id="" value={modifier(wis)} disabled/></td>
-                    <td><input type="number" name="" id="" value={modifier(cha)} disabled/></td>
+                    <td><input type="number" name="" id="" value={modifier(stats.strength)} disabled/></td>
+                    <td><input type="number" name="" id="" value={modifier(stats.dexterity)} disabled/></td>
+                    <td><input type="number" name="" id="" value={modifier(stats.constitution)} disabled/></td>
+                    <td><input type="number" name="" id="" value={modifier(stats.inteligence)} disabled/></td>
+                    <td><input type="number" name="" id="" value={modifier(stats.wisdom)} disabled/></td>
+                    <td><input type="number" name="" id="" value={modifier(stats.charisma)} disabled/></td>
                 </tr>
             </tbody>
         </table>

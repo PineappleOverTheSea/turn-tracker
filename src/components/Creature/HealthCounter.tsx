@@ -1,99 +1,83 @@
-import { setHealth } from "../../interfaces/IStatSetterTypes";
-import { health } from "../../interfaces/IStatTypes";
-import { TrackedCreaturesContext } from "../contexts/TrackedCreaturesContext";
 import { useContext } from "react";
+import { ICreature } from "../../interfaces/ICreature";
+import { ICreatureDispatch } from "../../interfaces/ICreatureDispatch";
+import { health } from "../../interfaces/IStatTypes";
+import { CREATURE_ACTIONS } from "../actions/CreatureReducer";
+import { TrackedCreaturesContext } from "../contexts/TrackedCreaturesContext";
 
-const HealthCounter = (props : {health : health, setHealth : setHealth, id : any}) => {
-    const {trackedCreatures, setTrackedCreatures} = useContext(TrackedCreaturesContext);
-    const thisCreature = trackedCreatures.filter(creature => creature.id === props.id)[0];
+const HealthCounter = (props : {creature : ICreature, dispatch : React.Dispatch<ICreatureDispatch>}) => {
 
-    const [hp, setHp] = [props.health.hitPoints, props.setHealth.setHp];
-    const [hpMax, setHpMax] = [props.health.hitPointsMax, props.setHealth.setHpMax]
-    const [hpTemp, setHpTemp] = [props.health.hitPointsTemp, props.setHealth.setHpTemp]
+    const health = props.creature.health;
+    const dispatchCreatureAction = props.dispatch;
+
+    const {trackedCreatures, setTrackedCreatures, updateCreature} = useContext(TrackedCreaturesContext)
+
+    const onSetNumber = (e : React.ChangeEvent<HTMLInputElement>, actionType : string) => {
+        const value = parseInt(e.target.value);
+        dispatchCreatureAction({type: actionType, value: value});
+    }
 
     const onSetHpMaximum = (e : React.ChangeEvent<HTMLInputElement>) => {
-        const newHpMax = parseInt(e.target.value);
-        if(newHpMax < hp){
-            setHp(newHpMax);
-            thisCreature.health.hitPoints = newHpMax;
+        const value = parseInt(e.target.value);
+        if(value < health.hitPoints){
+            dispatchCreatureAction({type: CREATURE_ACTIONS.SET_HP, value: value});
         }
-        setHpMax(newHpMax);
-        thisCreature.health.hitPointsMax = newHpMax;
-        setTrackedCreatures([...trackedCreatures]);
+        dispatchCreatureAction({type: CREATURE_ACTIONS.SET_HP_MAX, value: value});
     }
 
-    const onSetHp = (e : React.ChangeEvent<HTMLInputElement>) => {
-        const newHp = Number.parseInt(e.target.value);
-        setHp(newHp);
-        thisCreature.health.hitPoints = newHp;
-        setTrackedCreatures([...trackedCreatures]);
-    }
-
-    const onSetHpTemp = (e : React.ChangeEvent<HTMLInputElement>) => {
-        const newHpTemp = Number.parseInt(e.target.value);
-        setHpTemp(newHpTemp);
-        thisCreature.health.hitPointsTemp = newHpTemp;
-    }
-
-    const calculateHitpoints = (e : React.KeyboardEvent<HTMLInputElement>, action : string) => {
+    const setHitpoints = (e : React.KeyboardEvent<HTMLInputElement>, action : string) => {
         if (e.key === "Enter"){
             const input = e.target as HTMLInputElement;
             let inputValue = Number.parseInt(input.value);
             switch (action) {
                 case "heal": {
-                    if(hp + inputValue > hpMax){
-                        setHp(hpMax);
-                        thisCreature.health.hitPoints = hpMax;
-                    }
-                    else{
-                        const newHp = hp + inputValue
-                        setHp(newHp);
-                        thisCreature.health.hitPoints = newHp;
-                    }     
+                    if(health.hitPoints + inputValue > health.hitPointsMax)
+                        dispatchCreatureAction({type: CREATURE_ACTIONS.SET_HP, value: health.hitPointsMax});
+                    else
+                        dispatchCreatureAction({type: CREATURE_ACTIONS.SET_HP, value: health.hitPoints + inputValue});
                 }
                 break;
                 case "hurt": {
-                    inputValue -= hpTemp;
+                    inputValue -= health.hitPointsTemp;
                     if(inputValue >= 0){
-                        setHpTemp(0);
+                        dispatchCreatureAction({type: CREATURE_ACTIONS.SET_HP_TEMP, value: 0});
                         thisCreature.health.hitPointsTemp = 0;
                     }
                     else {
-                        const newHpTemp = Math.abs(inputValue);
-                        setHpTemp(newHpTemp);
-                        thisCreature.health.hitPointsTemp = newHpTemp;
+                        dispatchCreatureAction({type: CREATURE_ACTIONS.SET_HP_TEMP, value: Math.abs(inputValue)});
                         inputValue = 0;
                     }
-                    if(hp - inputValue < 0){
-                        setHp(0);
-                        thisCreature.health.hitPoints = 0;
-                    }
-                    else {
-                        const newHp = hp - inputValue;
-                        setHp(newHp);
-                        thisCreature.health.hitPoints = newHp;
-                    }
+                    if(health.hitPoints - inputValue < 0)
+                        dispatchCreatureAction({type: CREATURE_ACTIONS.SET_HP, value: 0});
+                    else 
+                        dispatchCreatureAction({type: CREATURE_ACTIONS.SET_HP, value: health.hitPoints - inputValue});
                 }
                 break;
             }
             input.value = "";
+            //padaryti noramlų async veikimą, gal dispatchinimą perkelt į contextą
+            const updatedCreature = props.creature
+        const thisCreature = trackedCreatures.find(c => c.id === props.creature.id)
+        if(thisCreature && thisCreature.health.hitPoints !== props.creature.health.hitPoints){
+            updateCreature(updatedCreature)
         }
-        setTrackedCreatures([...trackedCreatures]);
+        }
+        
     }
 
     return(
         <div className="health-counter">
             <div className="wrap-hp-max">
                 <label htmlFor="hp-max">Max HP</label> 
-                <input type="number" id="hp-max" value={hpMax} min={1} onChange={e => onSetHpMaximum(e)}/>
+                <input type="number" id="hp-max" value={health.hitPointsMax} min={1} onChange={e => onSetHpMaximum(e)}/>
             </div>
             <div className="wrap-hp-temp">
                 <label htmlFor="hp-temp">Temp HP</label>
-                <input type="number" id="hp-temp" value={hpTemp} min={0} onChange={e => onSetHpTemp(e)}/>
+                <input type="number" id="hp-temp" value={health.hitPointsTemp} min={0} onChange={e => onSetNumber(e, CREATURE_ACTIONS.SET_HP_TEMP)}/>
             </div>
             <div className="wrap-hp">
                 <label htmlFor="">Current HP</label>
-                <input type="number" id="hp" value={hp} min={0} max={hpMax} onChange={e => onSetHp(e)}/>
+                <input type="number" id="hp" value={health.hitPoints} min={0} max={health.hitPointsTemp} onChange={e => onSetNumber(e, CREATURE_ACTIONS.SET_HP)}/>
             </div>
             <div className="wrap-hurt">
                 <label htmlFor="">Hurt</label>
