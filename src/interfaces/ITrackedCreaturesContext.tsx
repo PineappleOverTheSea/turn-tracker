@@ -1,8 +1,7 @@
 import { ICreature } from "./ICreature";
+import { ITrackedCreaturesContextDispatch } from "./ITrackedCreaturesContextDispatch";
 
 export interface ITrackedCreaturesContext{
     trackedCreatures: ICreature[],
-    setTrackedCreatures: React.Dispatch<React.SetStateAction<ICreature[]>>,
-    addCreature: any,
-    updateCreature: any
+    dispatchTrackedCreaturesAction: React.Dispatch<ITrackedCreaturesContextDispatch>
 }

@@ -4,7 +4,7 @@ import Creature from "./Creature/Creature";
 import { ICreature } from "../interfaces/ICreature";
 
 const ShowCreatures = () => {
-    const {trackedCreatures, setTrackedCreatures} = useContext(TrackedCreaturesContext);
+    const {trackedCreatures} = useContext(TrackedCreaturesContext);
 
     return(
         <>

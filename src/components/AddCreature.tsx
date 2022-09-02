@@ -1,27 +1,28 @@
 import { useContext, useReducer, useState } from "react";
 import { creatureReducer, CREATURE_ACTIONS, INITIAL_STATE } from "./reducers/CreatureReducer";
 import { TrackedCreaturesContext } from "./contexts/TrackedCreaturesContext";
+import { TRACKED_CREATURES_CONTEXT_ACTIONS } from "./reducers/TrackedCreaturesContextReducer";
 
 
 
 
 const AddCreatureModal = (props: any) => {
-    const {trackedCreatures, setTrackedCreatures} = useContext(TrackedCreaturesContext);
+    const {trackedCreatures, dispatchTrackedCreaturesAction} = useContext(TrackedCreaturesContext);
 
     const [newCreature, dispatchCreatureAction] = useReducer(creatureReducer, INITIAL_STATE)
 
     const initMod = Math.floor((newCreature.stats.dexterity-10)/2);
 
     const addCreature = () => {
-        setTrackedCreatures([...trackedCreatures, {
-            ...newCreature,
-            id: (Math.floor(Math.random()*100)), //sukurti normalią ID implementaciją
-            combatStats: {
-                ...newCreature.combatStats,
-                initiative: newCreature.combatStats.initiative + initMod
+        dispatchTrackedCreaturesAction({type: TRACKED_CREATURES_CONTEXT_ACTIONS.ADD_CREATURE, creature: {
+                ...newCreature,
+                id: (Math.floor(Math.random()*100)), //sukurti normalią ID implementaciją
+                combatStats: {
+                    ...newCreature.combatStats,
+                    initiative: newCreature.combatStats.initiative + initMod
+                }
             }
-        }
-        ]);
+        })
     }
     
     const onSetHpMaximum = (e : React.ChangeEvent<HTMLInputElement>) => {

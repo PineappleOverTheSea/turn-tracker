@@ -20,7 +20,7 @@ const Creature = (props : ICreature) => {
             <div className="creature-name">{creature.name}</div>
             {/* <button onClick={die()}>Kill</button> */}
             <HealthCounter creature={creature} dispatch={dispatchCreatureAction}/>
-            <CombatStatTable combatStats={creature.combatStats} dispatch={dispatchCreatureAction}/>
+            <CombatStatTable creature={creature} dispatch={dispatchCreatureAction}/>
             <StatTable creature={creature} dispatch={dispatchCreatureAction}/>
         </div>
     )

@@ -1,9 +1,11 @@
+import { ICreature } from "../../interfaces/ICreature";
 import { ICreatureDispatch } from "../../interfaces/ICreatureDispatch";
 import { combatStats } from "../../interfaces/IStatTypes"
+import { ITrackedCreaturesContextDispatch } from "../../interfaces/ITrackedCreaturesContextDispatch";
 import { CREATURE_ACTIONS } from "../reducers/CreatureReducer";
 
-const CombatStatTable = (props : {combatStats : combatStats, dispatch : React.Dispatch<ICreatureDispatch>}) => {
-    const combatStats = props.combatStats;
+const CombatStatTable = (props : {creature : ICreature, dispatch : React.Dispatch<ICreatureDispatch>}) => {
+    const combatStats = props.creature.combatStats;
     const dispatchCreatureAction = props.dispatch;
 
     const onSetNumber = (e : React.ChangeEvent<HTMLInputElement>, actionType : string) => {

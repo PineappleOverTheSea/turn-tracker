@@ -7,7 +7,7 @@ import { TrackedCreaturesContext } from "../contexts/TrackedCreaturesContext";
 
 const StatTable = (props : {creature : ICreature, dispatch : React.Dispatch<ICreatureDispatch>}) => {
 
-    const {trackedCreatures, setTrackedCreatures, updateCreature} = useContext(TrackedCreaturesContext)
+    const {dispatchTrackedCreaturesAction} = useContext(TrackedCreaturesContext)
 
     const stats = props.creature.stats;
     const dispatchCreatureAction = props.dispatch;

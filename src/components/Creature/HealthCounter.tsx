@@ -9,7 +9,7 @@ const HealthCounter = (props : {creature : ICreature, dispatch : React.Dispatch<
     const health = props.creature.health;
     const dispatchCreatureAction = props.dispatch;
 
-    const {trackedCreatures, updateCreature} = useContext(TrackedCreaturesContext)
+    const {dispatchTrackedCreaturesAction} = useContext(TrackedCreaturesContext)
 
     const onSetNumber = (e : React.ChangeEvent<HTMLInputElement>, actionType : string) => {
         const value = parseInt(e.target.value);
@@ -53,12 +53,6 @@ const HealthCounter = (props : {creature : ICreature, dispatch : React.Dispatch<
                 break;
             }
             input.value = "";
-            //padaryti noramlų async veikimą, gal dispatchinimą perkelt į contextą
-            const updatedCreature = props.creature
-        const thisCreature = trackedCreatures.find(c => c.id === props.creature.id)
-        if(thisCreature && thisCreature.health.hitPoints !== props.creature.health.hitPoints){
-            updateCreature(updatedCreature)
-        }
         }
         
     }
