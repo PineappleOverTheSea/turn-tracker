@@ -107,7 +107,7 @@ export const creatureReducer : React.Reducer<ICreature, ICreatureDispatch> = (st
                 ...state,
                 combatStats:{
                     ...state.combatStats,
-                    initiative: action.value as number
+                    armorClass: action.value as number
                 }
             }
 
@@ -117,7 +117,7 @@ export const creatureReducer : React.Reducer<ICreature, ICreatureDispatch> = (st
                 ...state,
                 combatStats:{
                     ...state.combatStats,
-                    initiative: action.value as number
+                    speed: action.value as number
                 }
             }
 
