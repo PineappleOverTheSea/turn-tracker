@@ -11,15 +11,14 @@ const HealthCounter = (props : {creature : ICreature, updateCreature : (valueTyp
     const updateCreature = props.updateCreature
 
     const onValueChanged = (valueType : string, e : React.ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.valueAsNumber === NaN ? "" : e.target.valueAsNumber
-        console.log(e.target.value)
+        const value = isNaN(e.target.valueAsNumber) ? "" : e.target.valueAsNumber
 
         const updatedCreature = updateCreature(valueType, value)
         dispatchTrackedCreaturesAction({type: TRACKED_CREATURES_CONTEXT_ACTIONS.UPDATE_CREATURE, creature: updatedCreature});
     }
 
     const onSetHpMaximum = (e : React.ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.valueAsNumber === NaN ? "" : e.target.valueAsNumber
+        const value = isNaN(e.target.valueAsNumber) ? "" : e.target.valueAsNumber
 
         if(value < health.hitPoints){
             updateCreature(CREATURE_ACTIONS.SET_HP, value);

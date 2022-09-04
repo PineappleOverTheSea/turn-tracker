@@ -12,7 +12,8 @@ const StatTable = (props : {creature : ICreature, updateCreature : (valueType: s
     const updateCreature = props.updateCreature
 
     const onValueChanged = (e : React.ChangeEvent<HTMLInputElement>, valueType : string) => {
-        const value = e.target.valueAsNumber
+        const value = isNaN(e.target.valueAsNumber) ? "" : e.target.valueAsNumber
+
         const updatedCreature = updateCreature(valueType, value)
         dispatchTrackedCreaturesAction({type: TRACKED_CREATURES_CONTEXT_ACTIONS.UPDATE_CREATURE, creature: updatedCreature});
     }
