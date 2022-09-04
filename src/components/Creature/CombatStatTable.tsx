@@ -13,7 +13,7 @@ const CombatStatTable = (props : {creature : ICreature, updateCreature : (valueT
 
     const onValueChanged = (valueType : string, e : React.ChangeEvent<HTMLInputElement>) => {
         const value = isNaN(e.target.valueAsNumber) ? "" : e.target.valueAsNumber
-        
+
         const updatedCreature = updateCreature(valueType, value)
         dispatchTrackedCreaturesAction({type: TRACKED_CREATURES_CONTEXT_ACTIONS.UPDATE_CREATURE, creature: updatedCreature});
     }

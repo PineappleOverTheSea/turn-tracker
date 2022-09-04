@@ -1,5 +1,4 @@
 import StatTable from "./StatTable"
-import { useContext, useReducer } from "react"
 import HealthCounter from "./HealthCounter";
 import CombatStatTable from "./CombatStatTable";
 import { ICreature } from "../../interfaces/ICreature";
@@ -147,7 +146,6 @@ const Creature = (props : ICreature) => {
     return(
         <div className={`creature ${creature.health.hitPoints === 0 && "dead"}`}>
             <div className="creature-name">{creature.name}</div>
-            {/* <button onClick={die()}>Kill</button> */}
             <HealthCounter creature={creature} updateCreature={updateCreature}/>
             <CombatStatTable creature={creature} updateCreature={updateCreature} />
             <StatTable creature={creature} updateCreature={updateCreature}/>
