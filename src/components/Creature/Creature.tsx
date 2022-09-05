@@ -144,8 +144,9 @@ const Creature = (props : ICreature) => {
     }
     
     return(
-        <div className={`creature ${creature.health.hitPoints === 0 && "dead"}`}>
+        <div className={`creature ${creature.health.hitPoints === 0 ? "dead" : ""}`}>
             <div className="creature-name">{creature.name}</div>
+            <button className="kill-creature">Kill</button>
             <HealthCounter creature={creature} updateCreature={updateCreature}/>
             <CombatStatTable creature={creature} updateCreature={updateCreature} />
             <StatTable creature={creature} updateCreature={updateCreature}/>
