@@ -56,7 +56,7 @@ const AddCreatureModal = () => {
 
     return (
         <div className="add-creature">
-            <div className="add-creature-info">
+            <div className="add-creature-name">
                 <div className="stat">
                     <input type="text" name="creature-name" id="creature-name" value={newCreature.name} onChange={e => onSetStringValue(CREATURE_ACTIONS.SET_NAME, e)} />
                 </div>
