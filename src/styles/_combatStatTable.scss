@@ -6,11 +6,8 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 10px;
-    font-family: "Breathe Fire";
     text-align: center;
-    input{
-        font-family: "Breathe Fire";
-    }
+    
     div{
         display: grid;
         grid-template-rows: auto 1fr;

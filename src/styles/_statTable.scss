@@ -7,7 +7,7 @@
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     gap: 10px;
-    font-family: "Breathe Fire";
+
     div{
         display: grid;
         grid-template-rows: auto 1fr 1fr;
@@ -17,7 +17,6 @@
         }
         input{
             width: 100%;
-            font-family: "Breathe Fire";
             background-color: white;
             text-align: center;
             font-size: 1.25rem;
