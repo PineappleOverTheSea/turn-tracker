@@ -19,20 +19,20 @@ const CombatStatTable = (props : {creature : ICreature, updateCreature : (valueT
     }
     
     return(
-        <div className="combat-stat-table">
-            <div>
+        <ul className="combat-stat-table">
+            <li>
                 <label htmlFor="">Initiative</label>
                 <input type="number" name="" id="" value={combatStats.initiative} min={9999} max={9999} onChange={e => onValueChanged(CREATURE_ACTIONS.SET_INIT, e)}/>
-            </div>
-            <div>
+            </li>
+            <li>
                 <label htmlFor="">Armor Class</label>
                 <input type="number" name="" id="" value={combatStats.armorClass} min={0} max={9999} onChange={e => onValueChanged(CREATURE_ACTIONS.SET_AC, e)}/>
-            </div>
-            <div>
+            </li>
+            <li>
                 <label htmlFor="">Speed</label>
                 <input type="number" name="" id="" value={combatStats.speed} min={0} max={9999} step={5} onChange={e => onValueChanged(CREATURE_ACTIONS.SET_SPD, e)}/>
-            </div>
-        </div>
+            </li>
+        </ul>
     )
 }
 

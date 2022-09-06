@@ -1,12 +1,26 @@
 .creature-minified{
-    width: 150px;
+    max-width: max-content;
     border: 2px solid black;
     border-radius: 10px;
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    text-align: center;
+
+    font-family: "Breathe Fire";
+
     &-name{
         width: 100%;
-        font-size: large;
-        font-weight: bold;
+        font-size: 1.5rem;
+        font-family: "Enchanted land";
+    }
+    ul{
+        padding: 10px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        li{
+            display: grid;
+            grid-template-rows: auto 1fr;
+            gap: 5px;
+        }
     }
 }

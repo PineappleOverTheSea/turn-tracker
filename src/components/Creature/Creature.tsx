@@ -3,12 +3,17 @@ import HealthCounter from "./HealthCounter";
 import CombatStatTable from "./CombatStatTable";
 import { ICreature } from "../../interfaces/ICreature";
 import { CREATURE_ACTIONS } from "../reducers/CreatureReducer";
+import { useContext } from "react";
+import { TrackedCreaturesContext } from "../contexts/TrackedCreaturesContext";
+import { TRACKED_CREATURES_CONTEXT_ACTIONS } from "../reducers/TrackedCreaturesContextReducer";
 
 const Creature = (props : ICreature) => {
     let creature = {...props}
 
+    const {dispatchTrackedCreaturesAction} = useContext(TrackedCreaturesContext)
+
     const die = () => {
-        return 0;
+        dispatchTrackedCreaturesAction({type: TRACKED_CREATURES_CONTEXT_ACTIONS.REMOVE_CREATURE, creature: creature})
     }
 
     const updateCreature = (valueType : string, value : string | number) : ICreature => {
@@ -146,7 +151,7 @@ const Creature = (props : ICreature) => {
     return(
         <div className={`creature ${creature.health.hitPoints === 0 ? "dead" : ""}`}>
             <div className="creature-name">{creature.name}</div>
-            <button className="kill-creature">Kill</button>
+            <button className="kill-creature" onClick={die}>Kill</button>
             <HealthCounter creature={creature} updateCreature={updateCreature}/>
             <CombatStatTable creature={creature} updateCreature={updateCreature} />
             <StatTable creature={creature} updateCreature={updateCreature}/>
