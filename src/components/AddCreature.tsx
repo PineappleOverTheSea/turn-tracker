@@ -64,7 +64,8 @@ const AddCreatureModal = () => {
             <div className="add-creature-health">
                 <div className="stat">
                     <label htmlFor="">Maximum HP</label>
-                    <input type="number" name="hit-point-maximum" id="hp-max" value={newCreature.health.hitPointsMax} min={1} onChange={e => onSetHpMaximum(e)} />
+                    
+                    <input type="number" name="hit-point-maximum" id="hp-max" value={newCreature.health.hitPointsMax} min={1} max={9999} onChange={e => onSetHpMaximum(e)} />
                 </div>
                 <div className="stat">
                     <label htmlFor="">Current HP</label>
@@ -72,22 +73,23 @@ const AddCreatureModal = () => {
                 </div>
                 <div className="stat">
                     <label htmlFor="">Temporary HP</label>
-                    <input type="number" name="hit-points-temporary" id="hp-temp" value={newCreature.health.hitPointsTemp} min={0} onChange={e => onSetNumberValue(CREATURE_ACTIONS.SET_HP_TEMP, e)} />
+                    
+                    <input type="number" name="hit-points-temporary" id="hp-temp" value={newCreature.health.hitPointsTemp} min={0} max={9999} onChange={e => onSetNumberValue(CREATURE_ACTIONS.SET_HP_TEMP, e)} />
                 </div>
             </div>
             <div className="add-creature-cmbt-stats">
                 <div className="stat">
                     <label htmlFor="">Initiative</label>
-                    <input type="number" name="initative" id="init" value={newCreature.combatStats.initiative} onChange={e => onSetNumberValue(CREATURE_ACTIONS.SET_INIT, e)} />
+                    <input type="number" name="initative" id="init" value={newCreature.combatStats.initiative} min={-9999} max={9999} onChange={e => onSetNumberValue(CREATURE_ACTIONS.SET_INIT, e)} />
                     <div>{initMod >=0 ? "+" : "-"} {Math.abs(initMod)} = {newCreature.combatStats.initiative + initMod}</div> 
                 </div>
                 <div className="stat">
                     <label htmlFor="">Armor Class</label>
-                    <input type="number" name="armor-class" id="ac" value={newCreature.combatStats.armorClass} min={0} onChange={e => onSetNumberValue(CREATURE_ACTIONS.SET_AC, e)}/>
+                    <input type="number" name="armor-class" id="ac" value={newCreature.combatStats.armorClass} min={0} max={9999} onChange={e => onSetNumberValue(CREATURE_ACTIONS.SET_AC, e)}/>
                 </div>
                 <div className="stat">
                     <label htmlFor="">Speed</label>
-                    <input type="number" name="speed" id="spd" value={newCreature.combatStats.speed} min={0} step={5} onChange={e => onSetNumberValue(CREATURE_ACTIONS.SET_SPD, e)}/>
+                    <input type="number" name="speed" id="spd" value={newCreature.combatStats.speed} min={0} step={5} max={9999} onChange={e => onSetNumberValue(CREATURE_ACTIONS.SET_SPD, e)}/>
                 </div>
             </div>
             <div className="add-creature-stats">
