@@ -1,24 +1,31 @@
 .combat-stat-table{
+    width: max-content;
+    padding: 10px;
     border: 2px solid black;
     border-radius: 10px;
-    border-spacing: 10px;
-    table-layout: fixed;
-    // width: max-content;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
     font-family: "Breathe Fire";
-
+    text-align: center;
     input{
         font-family: "Breathe Fire";
     }
-    td{
-        background-color: white;
-        border-radius: 10px;
+    div{
+        display: grid;
+        grid-template-rows: auto 1fr;
+        gap: 5px;
+        label{
+            font-size: 1.25rem;
+        }
         input{
             background-color: white;
             width: 100%;
             text-align: center;
-            font-size: xx-large;
+            font-size: 1.25rem;
             border: 0;
             outline: none;
+            border-radius: 10px;
         }
     }
     

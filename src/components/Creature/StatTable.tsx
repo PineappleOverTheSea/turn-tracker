@@ -19,36 +19,44 @@ const StatTable = (props : {creature : ICreature, updateCreature : (valueType: s
     }
 
     return(
-        <table className="stat-table">
-            <thead>
-                <tr>
-                    <th>STR</th>
-                    <th>DEX</th>
-                    <th>CON</th>
-                    <th>INT</th>
-                    <th>WIS</th>
-                    <th>CHA</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><input type="number" name="" id="" value={stats.strength} min={1} max={30} inputMode="numeric" onChange={e => onValueChanged(e, CREATURE_ACTIONS.SET_STR)}/></td>
-                    <td><input type="number" name="" id="" value={stats.dexterity} min={1} max={30} inputMode="numeric" onChange={e => onValueChanged(e, CREATURE_ACTIONS.SET_DEX)}/></td>
-                    <td><input type="number" name="" id="" value={stats.constitution} min={1} max={30} inputMode="numeric" onChange={e => onValueChanged(e, CREATURE_ACTIONS.SET_CON)}/></td>
-                    <td><input type="number" name="" id="" value={stats.inteligence} min={1} max={30} inputMode="numeric" onChange={e => onValueChanged(e, CREATURE_ACTIONS.SET_INT)}/></td>
-                    <td><input type="number" name="" id="" value={stats.wisdom} min={1} max={30} inputMode="numeric" onChange={e => onValueChanged(e, CREATURE_ACTIONS.SET_WIS)}/></td>
-                    <td><input type="number" name="" id="" value={stats.charisma} min={1} max={30} inputMode="numeric" onChange={e => onValueChanged(e, CREATURE_ACTIONS.SET_CHA)}/></td>
-                </tr>
-                <tr className="modifiers">
-                    <td><input type="number" name="" id="" value={modifier(stats.strength)} min={-5} max={10} disabled/></td>
-                    <td><input type="number" name="" id="" value={modifier(stats.dexterity)} min={-5} max={10} disabled/></td>
-                    <td><input type="number" name="" id="" value={modifier(stats.constitution)} min={-5} max={10} disabled/></td>
-                    <td><input type="number" name="" id="" value={modifier(stats.inteligence)} min={-5} max={10} disabled/></td>
-                    <td><input type="number" name="" id="" value={modifier(stats.wisdom)} min={-5} max={10} disabled/></td>
-                    <td><input type="number" name="" id="" value={modifier(stats.charisma)} min={-5} max={10} disabled/></td>
-                </tr>
-            </tbody>
-        </table>
+        <div className="stat-table">
+            <div>
+                <label htmlFor="">STR</label>
+                <input type="number" name="" id="" value={stats.strength} min={1} max={30} inputMode="numeric" onChange={e => onValueChanged(e, CREATURE_ACTIONS.SET_STR)}/>
+                <input type="number" name="" id="" value={modifier(stats.strength)} min={-5} max={10} disabled/>
+                
+            </div>
+            <div>
+                <label htmlFor="">DEX</label>
+                <input type="number" name="" id="" value={stats.dexterity} min={1} max={30} inputMode="numeric" onChange={e => onValueChanged(e, CREATURE_ACTIONS.SET_DEX)}/>
+                <input type="number" name="" id="" value={modifier(stats.dexterity)} min={-5} max={10} disabled/>
+
+            </div>
+            <div>
+                <label htmlFor="">CON</label>
+                <input type="number" name="" id="" value={stats.constitution} min={1} max={30} inputMode="numeric" onChange={e => onValueChanged(e, CREATURE_ACTIONS.SET_CON)}/>
+                <input type="number" name="" id="" value={modifier(stats.constitution)} min={-5} max={10} disabled/>
+
+            </div>
+            <div>
+                <label htmlFor="">INT</label>
+                <input type="number" name="" id="" value={stats.inteligence} min={1} max={30} inputMode="numeric" onChange={e => onValueChanged(e, CREATURE_ACTIONS.SET_INT)}/>
+                <input type="number" name="" id="" value={modifier(stats.inteligence)} min={-5} max={10} disabled/>
+
+            </div>
+            <div>
+                <label htmlFor="">WIS</label>
+                <input type="number" name="" id="" value={stats.wisdom} min={1} max={30} inputMode="numeric" onChange={e => onValueChanged(e, CREATURE_ACTIONS.SET_WIS)}/>
+                <input type="number" name="" id="" value={modifier(stats.wisdom)} min={-5} max={10} disabled/>
+
+            </div>
+            <div>
+                <label htmlFor="">CHA</label>
+                <input type="number" name="" id="" value={stats.charisma} min={1} max={30} inputMode="numeric" onChange={e => onValueChanged(e, CREATURE_ACTIONS.SET_CHA)}/>
+                <input type="number" name="" id="" value={modifier(stats.charisma)} min={-5} max={10} disabled/>
+
+            </div>
+        </div>
     )
 }
 

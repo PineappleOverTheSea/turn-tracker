@@ -1,35 +1,33 @@
 .stat-table{
+    padding: 10px;
     border: 2px solid black;
     border-radius: 10px;
     border-spacing: 5px;
-    table-layout: fixed;
-    width: max-content;
+    text-align: center;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 10px;
     font-family: "Breathe Fire";
-
-    input{
-        font-family: "Breathe Fire";
-    }
-    tbody{
-        align-items: center;
+    div{
+        display: grid;
+        grid-template-rows: auto 1fr 1fr;
+        gap: 5px;
+        label{
+            font-size: 1.25rem;
+        }
         input{
+            width: 100%;
+            font-family: "Breathe Fire";
             background-color: white;
             text-align: center;
-            font-size: large;
+            font-size: 1.25rem;
             border: 0;
             outline: none;
+            border-radius: 10px;
+        }
+        input:disabled{
+            background-color: rgb(230, 230, 230);
         }
     }
-    td{
-        border-radius: 10px;
-        padding: 5px;
-        text-align: center;
-        font-size: large;
-        background-color: white;
-    }
-    .modifiers > td, input {
-        background-color: rgb(230, 230, 230);
-        input{
-            background-color: rgb(230, 230, 230)
-        }
-    }
+    
 }

@@ -19,22 +19,20 @@ const CombatStatTable = (props : {creature : ICreature, updateCreature : (valueT
     }
     
     return(
-        <table className="combat-stat-table">
-            <thead>
-                <tr>
-                    <th>Initiative</th>
-                    <th>Armor Class</th>
-                    <th>Speed</th>    
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><input type="number" name="" id="" value={combatStats.initiative} min={9999} max={9999} onChange={e => onValueChanged(CREATURE_ACTIONS.SET_INIT, e)}/></td>
-                    <td><input type="number" name="" id="" value={combatStats.armorClass} min={0} max={9999} onChange={e => onValueChanged(CREATURE_ACTIONS.SET_AC, e)}/></td>
-                    <td><input type="number" name="" id="" value={combatStats.speed} min={0} max={9999} step={5} onChange={e => onValueChanged(CREATURE_ACTIONS.SET_SPD, e)}/></td>
-                </tr>
-            </tbody>
-        </table>
+        <div className="combat-stat-table">
+            <div>
+                <label htmlFor="">Initiative</label>
+                <input type="number" name="" id="" value={combatStats.initiative} min={9999} max={9999} onChange={e => onValueChanged(CREATURE_ACTIONS.SET_INIT, e)}/>
+            </div>
+            <div>
+                <label htmlFor="">Armor Class</label>
+                <input type="number" name="" id="" value={combatStats.armorClass} min={0} max={9999} onChange={e => onValueChanged(CREATURE_ACTIONS.SET_AC, e)}/>
+            </div>
+            <div>
+                <label htmlFor="">Speed</label>
+                <input type="number" name="" id="" value={combatStats.speed} min={0} max={9999} step={5} onChange={e => onValueChanged(CREATURE_ACTIONS.SET_SPD, e)}/>
+            </div>
+        </div>
     )
 }
 
