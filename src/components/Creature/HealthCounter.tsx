@@ -68,11 +68,11 @@ const HealthCounter = (props : {creature : ICreature, updateCreature : (valueTyp
         <div className="health-counter">
             <div className="wrap-hp-max">
                 <label htmlFor="hp-max">Max HP</label> 
-                <input type="number" id="hp-max" value={health.hitPointsMax} min={1} onChange={e => onSetHpMaximum(e)}/>
+                <input type="number" id="hp-max" value={health.hitPointsMax} min={1} max={9999} onChange={e => onSetHpMaximum(e)}/>
             </div>
             <div className="wrap-hp-temp">
                 <label htmlFor="hp-temp">Temp HP</label>
-                <input type="number" id="hp-temp" value={health.hitPointsTemp} min={0} onChange={e => onValueChanged(CREATURE_ACTIONS.SET_HP_TEMP, e)}/>
+                <input type="number" id="hp-temp" value={health.hitPointsTemp} min={0} max={9999} onChange={e => onValueChanged(CREATURE_ACTIONS.SET_HP_TEMP, e)}/>
             </div>
             <div className="wrap-hp-current">
                 <label htmlFor="">Current HP</label>
@@ -80,11 +80,11 @@ const HealthCounter = (props : {creature : ICreature, updateCreature : (valueTyp
             </div>
             <div className="wrap-hurt">
                 <label htmlFor="">Hurt</label>
-                <input type="number" name="" id="" min={0} onKeyPress={e => setHitpoints("hurt", e)}/>
+                <input type="number" name="" id="" min={0} max={9999} onKeyPress={e => setHitpoints("hurt", e)}/>
             </div>
             <div className="wrap-heal">
                 <label htmlFor="">Heal</label>
-                <input type="number" name="" id="" min={0} onKeyPress={e => setHitpoints("heal", e)}/>
+                <input type="number" name="" id="" min={0} max={9999} onKeyPress={e => setHitpoints("heal", e)}/>
             </div>
         </div>
     )

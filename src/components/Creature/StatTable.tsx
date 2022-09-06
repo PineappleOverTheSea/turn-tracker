@@ -40,12 +40,12 @@ const StatTable = (props : {creature : ICreature, updateCreature : (valueType: s
                     <td><input type="number" name="" id="" value={stats.charisma} min={1} max={30} inputMode="numeric" onChange={e => onValueChanged(e, CREATURE_ACTIONS.SET_CHA)}/></td>
                 </tr>
                 <tr className="modifiers">
-                    <td><input type="number" name="" id="" value={modifier(stats.strength)} disabled/></td>
-                    <td><input type="number" name="" id="" value={modifier(stats.dexterity)} disabled/></td>
-                    <td><input type="number" name="" id="" value={modifier(stats.constitution)} disabled/></td>
-                    <td><input type="number" name="" id="" value={modifier(stats.inteligence)} disabled/></td>
-                    <td><input type="number" name="" id="" value={modifier(stats.wisdom)} disabled/></td>
-                    <td><input type="number" name="" id="" value={modifier(stats.charisma)} disabled/></td>
+                    <td><input type="number" name="" id="" value={modifier(stats.strength)} min={-5} max={10} disabled/></td>
+                    <td><input type="number" name="" id="" value={modifier(stats.dexterity)} min={-5} max={10} disabled/></td>
+                    <td><input type="number" name="" id="" value={modifier(stats.constitution)} min={-5} max={10} disabled/></td>
+                    <td><input type="number" name="" id="" value={modifier(stats.inteligence)} min={-5} max={10} disabled/></td>
+                    <td><input type="number" name="" id="" value={modifier(stats.wisdom)} min={-5} max={10} disabled/></td>
+                    <td><input type="number" name="" id="" value={modifier(stats.charisma)} min={-5} max={10} disabled/></td>
                 </tr>
             </tbody>
         </table>
