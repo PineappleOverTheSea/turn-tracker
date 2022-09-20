@@ -13,9 +13,7 @@ const App = () => {
             <TrackedCreaturesProvider>
                 <main>
                     <TurnTimeline />
-                    <div className="title-add-creature">Add new creature:</div>
                     <AddCreature />   
-                    <div className="title-edit-creature">Edit existing creature:</div>                   
                     <EditCreature />
                 </main>
                 <Sidebar />

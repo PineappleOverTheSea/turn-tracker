@@ -9,6 +9,7 @@ const EditCreature = () =>{
     
     return(
         <div className="edit-creature">
+            <div className="title-edit-creature">Edit existing creature:</div>                   
             {trackedCreatures.length ? <Creature 
                 key={creature.id}
                 id={creature.id}

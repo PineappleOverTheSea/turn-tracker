@@ -4,9 +4,13 @@
     grid-auto-rows: auto auto 1fr;
     gap: var(--gap-medium);
     .title-active-creature{
+        font-family: "Ringbearer";
+        font-size: 2rem;
         grid-row: 1;
     }
     .title-timeline{
+        font-family: "Ringbearer";
+        font-size: 2rem;
         grid-row: 1;
     }
     .creature{

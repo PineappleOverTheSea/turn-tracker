@@ -1,0 +1,10 @@
+.edit-creature{
+    display: grid;
+    grid-template-rows: auto 1fr;
+    gap: var(--gap-medium);
+    .title-edit-creature{
+        font-size: 2rem;
+        font-family: "Ringbearer";
+    }
+
+}

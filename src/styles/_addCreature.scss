@@ -1,92 +1,100 @@
 .add-creature{
-    width: max-content;
-    padding: 10px;
-    border: 2px solid black;
-    border-radius: var(--round-corners);
-    background-color: rgb(235, 235, 235);
     display: grid;
-    grid-template-columns: 1fr auto;
-    grid-template-rows: 0.75fr 2fr 1.5fr 0.75fr;
     gap: var(--gap-medium);
-
-    *{
-        font-family: "Breathe Fire";
-        text-align: center;
+    .title-add-creature{
+        font-size: 2rem;
+        font-family: "Ringbearer";
     }
-    label{
-        font-size: 1.25rem;
-        font-weight: 500;
-    }
-    input{
-        background-color: white;
-        border: 0;
-        outline: none;
-        font-size: 1.5rem;
-        border-radius: var(--round-corners);
-    }
-    button{
-        border: none;
-        border-radius: var(--round-corners);
-        grid-column: 1 / -1;
-        background-color: rgb(173, 173, 173);
-        font-size: 2.25rem;
-        font-family: "Enchanted Land";
-    }
-    .stat{
-        display: grid;
-        grid-template-rows: auto 1fr;
-        gap: var(--gap-small);
-    }
-
-    &-name{
-        grid-column: 1 / -1;
+    .panel-add-creature{
+        width: max-content;
+        padding: 10px;
         border: 2px solid black;
         border-radius: var(--round-corners);
-        .stat {
-            height: 100%; // neveiks su min height, bugas iš naršyklės pusės, vaikinis elementas nepaveldįs aukščio
-            grid-template-rows: auto;
-            input{
-                font-family: "Enchanted Land";
-                font-size: 2rem;
-                text-align: left;
-            }
+        background-color: rgb(235, 235, 235);
+        display: grid;
+        grid-template-columns: 1fr auto;
+        grid-template-rows: 0.75fr 2fr 1.5fr 0.75fr;
+        gap: var(--gap-medium);
+    
+        *{
+            font-family: "Breathe Fire";
+            text-align: center;
         }
-    }
-    &-health{
-        padding: 10px;
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);        
-        gap: var(--gap-medium);
-        border: 2px solid black;
-        border-radius: var(--round-corners);
-    }
-    &-cmbt-stats{       
-        padding: 10px;
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: var(--gap-medium);
-        border: 2px solid black;
-        border-radius: var(--round-corners);
-        
-        .stat:first-of-type{
+        label{
+            font-size: 1.25rem;
+            font-weight: 500;
+        }
+        input{
+            background-color: white;
+            border: 0;
+            outline: none;
+            font-size: 1.5rem;
+            border-radius: var(--round-corners);
+        }
+        button{
+            border: none;
+            border-radius: var(--round-corners);
             grid-column: 1 / -1;
+            background-color: rgb(173, 173, 173);
+            font-size: 2.25rem;
+            font-family: "Enchanted Land";
+        }
+        .stat{
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            label{
-                grid-column: 1 / -1;
-            }
-            div{
-                font-size: 1.5rem;
+            grid-template-rows: auto 1fr;
+            gap: var(--gap-small);
+        }
+    
+        &-name{
+            grid-column: 1 / -1;
+            border: 2px solid black;
+            border-radius: var(--round-corners);
+            .stat {
+                height: 100%; // neveiks su min height, bugas iš naršyklės pusės, vaikinis elementas nepaveldįs aukščio
+                grid-template-rows: auto;
+                input{
+                    font-family: "Enchanted Land";
+                    font-size: 2rem;
+                    text-align: left;
+                }
             }
         }
-    }
-    &-stats{
-        padding: 10px;
-        display: grid;
-        grid-template-columns: repeat(6, 1fr);
-        grid-column: 1 / -1;
-        gap: var(--gap-medium);
-        border: 2px solid black;
-        border-radius: var(--round-corners);
+        &-health{
+            padding: 10px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);        
+            gap: var(--gap-medium);
+            border: 2px solid black;
+            border-radius: var(--round-corners);
+        }
+        &-cmbt-stats{       
+            padding: 10px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--gap-medium);
+            border: 2px solid black;
+            border-radius: var(--round-corners);
+            
+            .stat:first-of-type{
+                grid-column: 1 / -1;
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                label{
+                    grid-column: 1 / -1;
+                }
+                div{
+                    font-size: 1.5rem;
+                }
+            }
+        }
+        &-stats{
+            padding: 10px;
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            grid-column: 1 / -1;
+            gap: var(--gap-medium);
+            border: 2px solid black;
+            border-radius: var(--round-corners);
+        }
     }
 }
