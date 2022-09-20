@@ -1,0 +1,21 @@
+.turn-timeline-controls{
+    border: 2px solid black;
+    border-radius: var(--round-corners);
+    button{
+        border-radius: 50%;
+    }
+    .change-turn{
+        height: 100%;
+        .previousTurn{
+            background-color: rgb(255, 255, 123);
+            min-height: 25%;
+            aspect-ratio: 1;
+        }
+        .nextTurn{
+            background-color: rgb(54, 201, 54);
+            min-height: 50%;
+            aspect-ratio: 1;
+        }
+    }
+    
+}

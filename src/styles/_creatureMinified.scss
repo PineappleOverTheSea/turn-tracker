@@ -1,11 +1,12 @@
 .creature-minified{
-    max-width: max-content;
+    height: max-content;
+    min-width: max-content;
     border: 2px solid black;
-    border-radius: 10px;
+    border-radius: var(--round-corners);
     display: grid;
     text-align: center;
-
     font-family: "Breathe Fire";
+    cursor: pointer;
 
     &-name{
         width: 100%;
@@ -16,11 +17,11 @@
         padding: 10px;
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        gap: 10px;
+        gap: var(--gap-medium);
         li{
             display: grid;
             grid-template-rows: auto 1fr;
-            gap: 5px;
+            gap: var(--gap-small);
         }
     }
 }

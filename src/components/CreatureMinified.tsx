@@ -2,7 +2,7 @@ import { ICreature } from "../interfaces/ICreature";
 
 const CreatureMinified = (props : ICreature) => {
     return(
-        <div className={`creature-minified ${props.health.hitPoints === 0 && "dead"}`}>
+        <div className={`creature-minified ${props.health.hitPoints === 0 ? "dead" : ""}`}>
             <div className="creature-minified-name">{props.name}</div>
             <ul>
                 <li>

@@ -11,7 +11,7 @@
     li{
         display: grid;
         grid-template-rows: auto 1fr 1fr;
-        gap: 5px;
+        gap: var(--gap-small);
         label{
             font-size: 1.25rem;
         }

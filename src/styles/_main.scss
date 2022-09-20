@@ -1,0 +1,10 @@
+main{
+    max-width: fit-content;
+    padding: 1rem;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: var(--gap-medium);
+    .turn-timeline{
+        grid-column: 1 / -1;
+    }
+}

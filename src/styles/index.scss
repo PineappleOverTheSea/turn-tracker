@@ -1,5 +1,8 @@
 @use "_fonts";
+@use "_variables";
 @use "_global";
+@use "_root";
+@use "_main";
 @use "_statTable";
 @use "_addCreature";
 @use "_creature";
@@ -7,3 +10,4 @@
 @use "_combatStatTable";
 @use "_turnTimeline";
 @use "_creatureMinified";
+@use "_turnTimelineControls";
