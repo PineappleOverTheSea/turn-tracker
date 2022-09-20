@@ -149,7 +149,7 @@ const Creature = (props : ICreature) => {
     }
     
     return(
-        <div className={`creature ${creature.health.hitPoints === 0 ? "dead" : ""}`}>
+        <div className={`creature ${creature.placeholder === true ? "placeholder" : ""} ${creature.health.hitPoints === 0 ? "dead" : ""}`}>
             <div className="creature-name">{creature.name}</div>
             <button className="kill-creature" onClick={die}>Kill</button>
             <HealthCounter creature={creature} updateCreature={updateCreature}/>
@@ -157,6 +157,30 @@ const Creature = (props : ICreature) => {
             <StatTable creature={creature} updateCreature={updateCreature}/>
         </div>
     )
+}
+
+//naudojami tam kad placeholder padarą būtų paprasta pridėti
+
+Creature.defaultProps = {
+    name: "Placeholder",
+    stats: {
+        strength: 0,
+        dexterity: 0, 
+        constitution: 0, 
+        inteligence: 0,
+        wisdom: 0, 
+        charisma: 0
+    },
+    health: {
+        hitPoints: 0,
+        hitPointsMax: 0,
+        hitPointsTemp: 0
+    },
+    combatStats:{
+        initiative: 0,
+        armorClass: 0,
+        speed: 0
+    }
 }
 
 export default Creature

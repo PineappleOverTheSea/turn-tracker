@@ -3,7 +3,6 @@ import AddCreature from "./AddCreature"
 import { TrackedCreaturesProvider } from "./contexts/TrackedCreaturesContext"
 import Creature from "./Creature/Creature"
 import EditCreature from "./EditCreature"
-import ShowCreatures from "./ShowCreatures"
 import Sidebar from "./Sidebar/Sidebar"
 import TurnTimeline from "./TurnTimeline"
 

@@ -17,7 +17,7 @@ const EditCreature = () =>{
                 stats={creature.stats}
                 health={creature.health}
                 combatStats={creature.combatStats}
-            /> : "" }
+            /> : <Creature placeholder={true} /> }
         </div>
     );
 }

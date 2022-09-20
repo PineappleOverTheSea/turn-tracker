@@ -14,6 +14,10 @@ const AddCreatureModal = () => {
     const initMod = Math.floor((newCreature.stats.dexterity - 10) / 2);
 
     const addCreature = () => {
+        if(newCreature.name === ""){
+            onEmptyName()
+            return
+        }
         dispatchTrackedCreaturesAction({type: TRACKED_CREATURES_CONTEXT_ACTIONS.ADD_CREATURE, creature: {
                 ...newCreature,
                 id: (Math.floor(Math.random() * 100)), //sukurti normalią ID implementaciją
@@ -54,13 +58,17 @@ const AddCreatureModal = () => {
         dispatchCreatureAction({type: actionType, value: value});
     }
 
+    const onEmptyName = () => {
+        
+    }
+
     return (
         <div className="add-creature">
             <div className="title-add-creature">Add new creature:</div>
             <div className="panel-add-creature">
                 <div className="panel-add-creature-name">
                     <div className="stat">
-                        <input type="text" name="creature-name" id="creature-name" value={newCreature.name} onChange={e => onSetStringValue(CREATURE_ACTIONS.SET_NAME, e)} />
+                        <input type="text" name="creature-name" id="creature-name" value={newCreature.name} onChange={e => onSetStringValue(CREATURE_ACTIONS.SET_NAME, e)}/>
                     </div>
                 </div>
                 <ul className="panel-add-creature-health">

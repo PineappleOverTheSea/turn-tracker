@@ -6,7 +6,7 @@
     border-radius: var(--round-corners);
     display: grid;
     gap: var(--gap-small);
-    grid-template-columns: auto auto;
+    grid-template-columns: 1fr auto;
     text-align: center;
     font-family: "Breathe Fire";
     cursor: pointer;
@@ -32,4 +32,7 @@
             gap: var(--gap-small);
         }
     }
+}
+.creature-minified.placeholder{
+    visibility: hidden;
 }
