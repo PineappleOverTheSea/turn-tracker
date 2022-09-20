@@ -7,4 +7,10 @@ main{
     .turn-timeline{
         grid-column: 1 / -1;
     }
+    .add-creature{
+        grid-row: 3;
+    }
+    .edit-creature{
+        grid-row: 3;
+    }
 }

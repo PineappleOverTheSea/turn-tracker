@@ -8,15 +8,15 @@ const EditCreature = () =>{
     const creature = trackedCreatures[0];
     
     return(
-        <div>
+        <div className="edit-creature">
             {trackedCreatures.length ? <Creature 
-                        key={creature.id}
-                        id={creature.id}
-                        name={creature.name}
-                        stats={creature.stats}
-                        health={creature.health}
-                        combatStats={creature.combatStats}
-                    /> : "" }
+                key={creature.id}
+                id={creature.id}
+                name={creature.name}
+                stats={creature.stats}
+                health={creature.health}
+                combatStats={creature.combatStats}
+            /> : "" }
         </div>
     );
 }

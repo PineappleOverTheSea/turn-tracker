@@ -9,6 +9,7 @@ const TurnTimeline = () => {
     const creature = trackedCreatures[0];
     return(
         <div className="turn-timeline">
+            <div className="title-active-creature">Currently active:</div>
             {trackedCreatures.length ? <Creature 
                 key={creature.id}
                 id={creature.id}
@@ -17,6 +18,7 @@ const TurnTimeline = () => {
                 health={creature.health}
                 combatStats={creature.combatStats}
             /> : "" }
+            <div className="title-timeline">Coming up:</div>
             <div className="minified-creatures">
                 {trackedCreatures.map((creature : ICreature) =>
                     <CreatureMinified
@@ -30,8 +32,8 @@ const TurnTimeline = () => {
             </div>
             <div className="turn-timeline-controls">
                 <div className="change-turn">
-                    <button className="previousTurn">{'<'}</button>
-                    <button className="nextTurn">{'>'}</button>
+                    <button className="nextTurn">Next<br/>Turn</button>
+                    <button className="previousTurn">Previous<br/>Turn</button>
                 </div>
             </div>
         </div>

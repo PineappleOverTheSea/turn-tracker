@@ -1,9 +1,12 @@
 .creature-minified{
+    padding: 10px;
     height: max-content;
     min-width: max-content;
     border: 2px solid black;
     border-radius: var(--round-corners);
     display: grid;
+    gap: var(--gap-small);
+    grid-template-columns: auto auto;
     text-align: center;
     font-family: "Breathe Fire";
     cursor: pointer;
@@ -13,8 +16,13 @@
         font-size: 1.5rem;
         font-family: "Enchanted land";
     }
+    button{
+        font-family: "Breathe Fire";
+        border-radius: 5px;
+        border: 1px solid black;
+    }
     ul{
-        padding: 10px;
+        grid-column: 1 / -1;
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: var(--gap-medium);

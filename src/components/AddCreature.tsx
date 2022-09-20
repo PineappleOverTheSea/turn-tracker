@@ -119,6 +119,7 @@ const AddCreatureModal = () => {
             </ul>
             <button onClick={addCreature}>Add Creature</button>
         </div>
+        
     )
 }
 

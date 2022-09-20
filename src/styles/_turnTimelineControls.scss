@@ -1,20 +1,27 @@
 .turn-timeline-controls{
+    padding: 10px;
     border: 2px solid black;
     border-radius: var(--round-corners);
+    display: grid;
+    gap: var(--gap-medium);
     button{
-        border-radius: 50%;
+        width: 100%;
+        height: 100%;
+        word-wrap: break-word;
+        border-radius: var(--round-corners);
+        font-family: "Breathe Fire";
+        font-size: 2rem;
     }
     .change-turn{
         height: 100%;
+        display: grid;
+        gap: var(--gap-medium);
+        grid-template-columns: 1fr 1fr;
         .previousTurn{
-            background-color: rgb(255, 255, 123);
-            min-height: 25%;
-            aspect-ratio: 1;
+            // aspect-ratio: 1;
         }
         .nextTurn{
-            background-color: rgb(54, 201, 54);
-            min-height: 50%;
-            aspect-ratio: 1;
+            // aspect-ratio: 1;
         }
     }
     
