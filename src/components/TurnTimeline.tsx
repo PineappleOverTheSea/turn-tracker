@@ -23,13 +23,15 @@ const TurnTimeline = () => {
             </div>
             <div className="title-timeline">Coming up:</div>
             <div className="minified-creatures">
-                {trackedCreatures.length ? trackedCreatures.map((creature : ICreature) =>
+                {trackedCreatures.length > 1 ? trackedCreatures.slice(1).map((creature : ICreature) =>
                     <CreatureMinified
                         key={creature.id}
+                        id={creature.id}
+                        classList={creature.classList}
                         name={creature.name}
                         stats={creature.stats}
                         health={creature.health}
-                        combatStats={creature.combatStats} 
+                        combatStats={creature.combatStats}
                     />
                 ) : <CreatureMinified placeholder={true} />}
             </div>

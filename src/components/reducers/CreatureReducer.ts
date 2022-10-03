@@ -51,7 +51,9 @@ export const CREATURE_ACTIONS = {
     SET_CON: "SET_CON",
     SET_INT: "SET_INT",
     SET_WIS: "SET_WIS",
-    SET_CHA: "SET_CHA"
+    SET_CHA: "SET_CHA",
+
+    SET_CLASSLIST: "SET_CLASSLIST"
 }
 
 export const creatureReducer : React.Reducer<ICreature, ICreatureDispatch> = (state, action) : ICreature => {
@@ -181,6 +183,16 @@ export const creatureReducer : React.Reducer<ICreature, ICreatureDispatch> = (st
                 }
             }
 
+        }
+
+        case CREATURE_ACTIONS.SET_CLASSLIST: {
+            return{
+                ...state,
+                classList: [
+                    // state.classList ? ...state.classList : "",
+                    
+                ]
+            }
         }
         default: throw Error("Invalid action!");
     }

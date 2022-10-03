@@ -59,7 +59,7 @@ const AddCreatureModal = () => {
     }
 
     const onEmptyName = () => {
-        
+        //todo disallow empty name?
     }
 
     return (

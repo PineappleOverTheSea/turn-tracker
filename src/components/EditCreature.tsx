@@ -5,18 +5,24 @@ import Creature from "./Creature/Creature";
 
 const EditCreature = () =>{
     const {trackedCreatures} = useContext(TrackedCreaturesContext);
-    const creature = trackedCreatures[0];
-    
+    let creatureToDisplay;
+
+    const selectedCreature = trackedCreatures.find(creature => creature.classList?.includes("selected"))
+
+    if(selectedCreature)
+        creatureToDisplay = trackedCreatures[trackedCreatures.indexOf(selectedCreature)];
+
     return(
         <div className="edit-creature">
             <div className="title-edit-creature">Edit existing creature:</div>                   
-            {trackedCreatures.length ? <Creature 
-                key={creature.id}
-                id={creature.id}
-                name={creature.name}
-                stats={creature.stats}
-                health={creature.health}
-                combatStats={creature.combatStats}
+            {creatureToDisplay ? <Creature 
+                key={creatureToDisplay.id}
+                id={creatureToDisplay.id}
+                classList={creatureToDisplay.classList}
+                name={creatureToDisplay.name}
+                stats={creatureToDisplay.stats}
+                health={creatureToDisplay.health}
+                combatStats={creatureToDisplay.combatStats}
             /> : <Creature placeholder={true} /> }
         </div>
     );

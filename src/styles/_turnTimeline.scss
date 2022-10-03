@@ -15,12 +15,30 @@
     }
     .active-creature-holder{
         grid-row: 2 / 4;
+        position: relative;
+    }
+    .placeholder::before{
+        content: "No creatures added";
+        display: grid;
+        place-content: center;
+        font-size: 1.75rem;
+        font-family: "Breathe Fire";
+        position: absolute;
+        inset: 0;
+        background-color: rgb(209, 212, 243);
+        border-radius: var(--round-corners);
+        visibility: visible;
+    }
+    .minified-creatures>.placeholder::before{
+        content: "No creatures waiting";
     }
     .minified-creatures{
         display: flex;
         align-items: flex-start;
         gap: var(--gap-medium);
         overflow-x: scroll;
+
+        position: relative;
         .creature-minfied{
             max-height: fit-content;
         }

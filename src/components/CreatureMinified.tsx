@@ -1,4 +1,4 @@
-import { useContext, useReducer } from "react";
+import React, { useContext, useReducer } from "react";
 import { ICreature } from "../interfaces/ICreature";
 import { TrackedCreaturesContext } from "./contexts/TrackedCreaturesContext";
 import { TRACKED_CREATURES_CONTEXT_ACTIONS } from "./reducers/TrackedCreaturesContextReducer";
@@ -11,8 +11,24 @@ const CreatureMinified = (props : ICreature) => {
     const die = () => {
         dispatchTrackedCreaturesAction({type: TRACKED_CREATURES_CONTEXT_ACTIONS.REMOVE_CREATURE, creature: creature})
     }
+
+    const select = (e : React.MouseEvent) => {
+        if(!(e.target instanceof HTMLButtonElement))
+            dispatchTrackedCreaturesAction({type: TRACKED_CREATURES_CONTEXT_ACTIONS.SELECT_CREATURE, creature: creature})
+    }
+
+    const setClassNames = () => {
+        const names = creature.classList
+        let nameString = "";
+        if(names)
+            for(const cname of names){
+                nameString += ` ${cname}`;
+            }
+        return nameString
+    }
+
     return(
-        <div className={`creature-minified ${creature.placeholder === true ? "placeholder" : ""} ${props.health.hitPoints === 0 ? "dead" : ""}`}>
+        <div className={`creature-minified${creature.placeholder === true ? " placeholder" : ""}${creature.health.hitPoints === 0 ? " dead" : ""}${setClassNames()}`} onClick={e => select(e)}>
             <div className="creature-minified-name">{props.name}</div>
             <button onClick={die}>Kill</button>
             <ul>
