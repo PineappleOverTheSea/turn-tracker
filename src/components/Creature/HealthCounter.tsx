@@ -31,8 +31,12 @@ const HealthCounter = (props : {creature : ICreature, updateCreature : (valueTyp
     const setHitpoints = (valueType : string, e : React.KeyboardEvent<HTMLInputElement>,) => {
         if (e.key === "Enter"){
             const input = e.target as HTMLInputElement;
-            let inputValue = input.valueAsNumber;
+            let inputValue = Number.parseInt(input.value);
             let updatedCreature;
+
+            if(Number.isNaN(inputValue))
+                return 0
+
             switch (valueType) {
                 case "heal": {
                     if(health.hitPoints + inputValue > health.hitPointsMax)
