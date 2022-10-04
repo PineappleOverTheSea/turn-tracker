@@ -76,7 +76,7 @@ const HealthCounter = (props : {creature : ICreature, updateCreature : (valueTyp
             </li>
             <li className="wrap-hp-current">
                 <label htmlFor="">Current HP</label>
-                <input type="number" id="hp" value={health.hitPoints} min={0} max={health.hitPointsTemp} onChange={e => onValueChanged(CREATURE_ACTIONS.SET_HP, e)}/>
+                <input type="number" id="hp" value={health.hitPoints} min={0} max={health.hitPointsMax} onChange={e => onValueChanged(CREATURE_ACTIONS.SET_HP, e)}/>
             </li>
             <li className="wrap-hurt">
                 <label htmlFor="">Hurt</label>
