@@ -15,7 +15,7 @@ const StatTable = (props : {creature : ICreature, updateCreature : (valueType: s
         const value = isNaN(e.target.valueAsNumber) ? "" : e.target.valueAsNumber
 
         const updatedCreature = updateCreature(valueType, value)
-        dispatchTrackedCreaturesAction({type: TRACKED_CREATURES_CONTEXT_ACTIONS.UPDATE_CREATURE, creature: updatedCreature});
+        dispatchTrackedCreaturesAction({type: TRACKED_CREATURES_CONTEXT_ACTIONS.UPDATE_CREATURE, creatureAction: true, creature: updatedCreature});
     }
 
     return(

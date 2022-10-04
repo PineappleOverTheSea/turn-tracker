@@ -2,5 +2,6 @@ import { ICreature } from "./ICreature";
 
 export interface ITrackedCreaturesContextDispatch{
     type: string,
-    creature: ICreature
+    creatureAction : boolean,
+    creature?: ICreature
 }

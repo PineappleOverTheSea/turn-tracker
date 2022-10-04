@@ -14,7 +14,7 @@ const HealthCounter = (props : {creature : ICreature, updateCreature : (valueTyp
         const value = isNaN(e.target.valueAsNumber) ? "" : e.target.valueAsNumber
 
         const updatedCreature = updateCreature(valueType, value)
-        dispatchTrackedCreaturesAction({type: TRACKED_CREATURES_CONTEXT_ACTIONS.UPDATE_CREATURE, creature: updatedCreature});
+        dispatchTrackedCreaturesAction({type: TRACKED_CREATURES_CONTEXT_ACTIONS.UPDATE_CREATURE, creatureAction: true, creature: updatedCreature});
     }
 
     const onSetHpMaximum = (e : React.ChangeEvent<HTMLInputElement>) => {
@@ -25,7 +25,7 @@ const HealthCounter = (props : {creature : ICreature, updateCreature : (valueTyp
         }
         const updatedCreature = updateCreature(CREATURE_ACTIONS.SET_HP_MAX, value);
 
-        dispatchTrackedCreaturesAction({type: TRACKED_CREATURES_CONTEXT_ACTIONS.UPDATE_CREATURE, creature: updatedCreature});
+        dispatchTrackedCreaturesAction({type: TRACKED_CREATURES_CONTEXT_ACTIONS.UPDATE_CREATURE, creatureAction: true, creature: updatedCreature});
     }
 
     const setHitpoints = (valueType : string, e : React.KeyboardEvent<HTMLInputElement>,) => {
@@ -58,7 +58,7 @@ const HealthCounter = (props : {creature : ICreature, updateCreature : (valueTyp
                 break;
                 default: throw Error("Invalid change to hitpoints");
             }
-            dispatchTrackedCreaturesAction({type: TRACKED_CREATURES_CONTEXT_ACTIONS.UPDATE_CREATURE, creature: updatedCreature});
+            dispatchTrackedCreaturesAction({type: TRACKED_CREATURES_CONTEXT_ACTIONS.UPDATE_CREATURE, creatureAction: true, creature: updatedCreature});
             input.value = "";
         }
         

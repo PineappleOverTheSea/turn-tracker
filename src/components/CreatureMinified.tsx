@@ -9,12 +9,12 @@ const CreatureMinified = (props : ICreature) => {
     const {dispatchTrackedCreaturesAction} = useContext(TrackedCreaturesContext);
 
     const die = () => {
-        dispatchTrackedCreaturesAction({type: TRACKED_CREATURES_CONTEXT_ACTIONS.REMOVE_CREATURE, creature: creature})
+        dispatchTrackedCreaturesAction({type: TRACKED_CREATURES_CONTEXT_ACTIONS.REMOVE_CREATURE, creatureAction: true, creature: creature})
     }
 
     const select = (e : React.MouseEvent) => {
         if(!(e.target instanceof HTMLButtonElement))
-            dispatchTrackedCreaturesAction({type: TRACKED_CREATURES_CONTEXT_ACTIONS.SELECT_CREATURE, creature: creature})
+            dispatchTrackedCreaturesAction({type: TRACKED_CREATURES_CONTEXT_ACTIONS.SELECT_CREATURE, creatureAction: true, creature: creature})
     }
 
     const setClassNames = () => {

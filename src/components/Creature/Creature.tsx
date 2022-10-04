@@ -13,7 +13,7 @@ const Creature = (props : ICreature) => {
     const {dispatchTrackedCreaturesAction} = useContext(TrackedCreaturesContext)
 
     const die = () => {
-        dispatchTrackedCreaturesAction({type: TRACKED_CREATURES_CONTEXT_ACTIONS.REMOVE_CREATURE, creature: creature})
+        dispatchTrackedCreaturesAction({type: TRACKED_CREATURES_CONTEXT_ACTIONS.REMOVE_CREATURE, creatureAction: true, creature: creature})
     }
 
     const updateCreature = (valueType : string, value : string | number) : ICreature => {

@@ -18,9 +18,9 @@ const AddCreatureModal = () => {
             onEmptyName()
             return
         }
-        dispatchTrackedCreaturesAction({type: TRACKED_CREATURES_CONTEXT_ACTIONS.ADD_CREATURE, creature: {
+        dispatchTrackedCreaturesAction({type: TRACKED_CREATURES_CONTEXT_ACTIONS.ADD_CREATURE, creatureAction: true, creature: {
                 ...newCreature,
-                id: (Math.floor(Math.random() * 100)), //sukurti normalią ID implementaciją
+                id: generateRandomId(),
                 combatStats: {
                     ...newCreature.combatStats,
                     initiative: newCreature.combatStats.initiative + initMod
@@ -60,6 +60,11 @@ const AddCreatureModal = () => {
 
     const onEmptyName = () => {
         //todo disallow empty name?
+    }
+
+    const generateRandomId = () : number => {
+        let id = Date.now().toString().slice(6) + Math.random().toPrecision(8).slice(2)
+        return Number(id)
     }
 
     return (

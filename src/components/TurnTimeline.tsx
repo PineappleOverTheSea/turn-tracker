@@ -3,6 +3,7 @@ import { ICreature } from "../interfaces/ICreature";
 import { TrackedCreaturesContext } from "./contexts/TrackedCreaturesContext"
 import Creature from "./Creature/Creature";
 import CreatureMinified from "./CreatureMinified";
+import TurnTimelineControlls from "./TurnTimelineControlls";
 
 const TurnTimeline = () => {
     const {trackedCreatures} = useContext(TrackedCreaturesContext);
@@ -35,12 +36,7 @@ const TurnTimeline = () => {
                     />
                 ) : <CreatureMinified placeholder={true} />}
             </div>
-            <div className="turn-timeline-controls">
-                <div className="change-turn">
-                    <button className="nextTurn">Next<br/>Turn</button>
-                    <button className="previousTurn">Previous<br/>Turn</button>
-                </div>
-            </div>
+            <TurnTimelineControlls />
         </div>
     );
 }
