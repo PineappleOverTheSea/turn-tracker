@@ -29,8 +29,10 @@ const CreatureMinified = (props : ICreature) => {
 
     return(
         <div className={`creature-minified${creature.placeholder === true ? " placeholder" : ""}${creature.health.hitPoints === 0 ? " dead" : ""}${setClassNames()}`} onClick={e => select(e)}>
-            <div className="creature-minified-name">{props.name}</div>
-            <button onClick={die}>Kill</button>
+            <div className="creature-nameline">
+                <div className="creature-minified-name">{props.name}</div>
+                <button onClick={die}>Kill</button>
+            </div>
             <ul>
                 <li>
                     <div>Init</div>

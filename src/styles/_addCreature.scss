@@ -37,7 +37,6 @@
             grid-column: 1 / -1;
             background-color: rgb(173, 173, 173);
             font-size: 2.25rem;
-            font-family: "Enchanted Land";
         }
         .stat{
             display: grid;
@@ -53,8 +52,7 @@
                 height: 100%; // neveiks su min height, bugas iš naršyklės pusės, vaikinis elementas nepaveldįs aukščio
                 grid-template-rows: auto;
                 input{
-                    font-family: "Enchanted Land";
-                    font-size: 2rem;
+                    font-size: 1.75rem;
                     text-align: left;
                 }
             }

@@ -10,6 +10,7 @@
         grid-template-rows: auto 1fr;
         gap: var(--gap-small);
         label{
+            min-width: max-content;
             text-align: center;
             font-size: 1.25rem;
             font-weight: 500;

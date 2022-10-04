@@ -1,5 +1,5 @@
 .creature{
-    width: max-content;
+    width: min-content;
     height: fit-content;
     padding: 10px;
     border-radius: 15px;
@@ -17,21 +17,28 @@
         font-family: "Breathe Fire";
     }
 
-    .creature-name{
-        grid-column: 1;
+    .creature-nameline{
+        grid-column: 1 / -1;
         width: 100%;
-        font-size: 2rem;
-        font-family: "Enchanted Land";
+        font-size: 1.75em;
+        display: flex;
+        justify-content: space-between;
+        gap: var(--gap-medium);
+        .creature-name{
+            overflow-x: hidden;
+            text-overflow: ellipsis;
+        }
+        button{
+            width: fit-content;
+            place-self: right;
+            border: 2px solid black;
+            border-radius: 10px;
+            font-family: "Breathe Fire";
+            font-size: 1.5rem;
+            outline: none;
+        }
     }
-    button{
-        width: fit-content;
-        place-self: right;
-        border: 2px solid black;
-        border-radius: 10px;
-        font-family: "Breathe Fire";
-        font-size: 1.5rem;
-        outline: none;
-    }
+    
     .health-counter{
         grid-column: 1;
         grid-row: 2 / -1;

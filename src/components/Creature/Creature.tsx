@@ -150,8 +150,10 @@ const Creature = (props : ICreature) => {
     
     return(
         <div className={`creature${creature.placeholder === true ? " placeholder" : ""}${creature.health.hitPoints === 0 ? " dead" : ""}`}>
-            <div className="creature-name">{creature.name}</div>
-            <button className="kill-creature" onClick={die}>Kill</button>
+            <div className="creature-nameline">
+                <div className="creature-name">{creature.name}</div>
+                <button className="kill-creature" onClick={die}>Kill</button>
+            </div>
             <HealthCounter creature={creature} updateCreature={updateCreature}/>
             <CombatStatTable creature={creature} updateCreature={updateCreature} />
             <StatTable creature={creature} updateCreature={updateCreature}/>
