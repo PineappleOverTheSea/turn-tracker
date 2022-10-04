@@ -22,7 +22,7 @@ const CombatStatTable = (props : {creature : ICreature, updateCreature : (valueT
         <ul className="combat-stat-table">
             <li>
                 <label htmlFor="">Initiative</label>
-                <input type="number" name="" id="" value={combatStats.initiative} min={9999} max={9999} onChange={e => onValueChanged(CREATURE_ACTIONS.SET_INIT, e)}/>
+                <input type="number" name="" id="" value={combatStats.initiative} min={0} max={9999} onChange={e => onValueChanged(CREATURE_ACTIONS.SET_INIT, e)}/>
             </li>
             <li>
                 <label htmlFor="">Armor Class</label>
