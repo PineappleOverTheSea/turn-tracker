@@ -39,10 +39,6 @@ const TurnTimeline = () => {
     const adjustMinifiedElements = () =>{
         if(trackedCreatures.length > 2){
             fillMinifiedElements()
-            //Išsiaiškinti kaip tinkamai slicint kad nebūtų bugo
-            if(isRoundFlag(minifiedElements[0].props)){
-                minifiedElements.push(minifiedElements.splice(0, 1)[0])
-            }
         }
         else if(trackedCreatures.length > 1){
             fillMinifiedElements()

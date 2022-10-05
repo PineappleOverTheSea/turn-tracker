@@ -80,16 +80,30 @@ export const TrackedCreaturesContextReducer : React.Reducer<(ICreature | IRoundC
         switch(action.type){
             case TRACKED_CREATURES_CONTEXT_ACTIONS.TURN_FORWARD:{
                 const updatedState = [...state]
-                const creature = updatedState.shift()
-                if(creature)
-                    updatedState.push(creature)
+                const element = updatedState.shift() 
+
+                if(isRoundFlag(updatedState[0])){
+                    const flag = updatedState.shift()
+                    if(element && flag)
+                        updatedState.push(element, flag)
+                }
+                else if(element)
+                    updatedState.push(element)
+                
                 return updatedState
             }
             case TRACKED_CREATURES_CONTEXT_ACTIONS.TURN_BACKWARD:{
                 const updatedState = [...state]
-                const creature = updatedState.pop()
-                if(creature)
-                    updatedState.unshift(creature)
+                const element = updatedState.pop()
+
+                if(isRoundFlag(element)){
+                    const creature = updatedState.pop()
+                    if(element && creature)
+                        updatedState.unshift(creature, element)
+                }
+                else if(element)
+                    updatedState.unshift(element)
+
                 return updatedState
             }
             default: throw Error("Invadlid creatureless action type!")
