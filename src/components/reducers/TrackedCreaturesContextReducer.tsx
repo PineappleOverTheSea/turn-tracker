@@ -84,6 +84,8 @@ export const TrackedCreaturesContextReducer : React.Reducer<(ICreature | IRoundC
 
                 if(isRoundFlag(updatedState[0])){
                     const flag = updatedState.shift()
+                    if(isRoundFlag(flag))
+                        flag.roundCount++
                     if(element && flag)
                         updatedState.push(element, flag)
                 }
@@ -97,6 +99,10 @@ export const TrackedCreaturesContextReducer : React.Reducer<(ICreature | IRoundC
                 const element = updatedState.pop()
 
                 if(isRoundFlag(element)){
+                    if(element.roundCount === 2){
+                        return state
+                    }
+                    element.roundCount--
                     const creature = updatedState.pop()
                     if(element && creature)
                         updatedState.unshift(creature, element)

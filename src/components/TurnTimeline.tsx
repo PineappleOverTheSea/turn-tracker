@@ -57,7 +57,7 @@ const TurnTimeline = () => {
             </div>
             <div className="title-timeline">Coming up:</div>
             <div className="minified-creatures">
-                {minifiedElements.slice(1)}
+                {minifiedElements.length > 1 ? minifiedElements.slice(1) : minifiedElements}
             </div>
             <TurnTimelineControlls />
         </div>

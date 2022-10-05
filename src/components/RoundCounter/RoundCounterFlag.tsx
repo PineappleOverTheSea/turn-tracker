@@ -15,13 +15,9 @@ const RoundCounterFlag = (props : IRoundCounterFlag) =>{
         default: suffix = "th"
     }
 
-    const renderer = () : string => {
-        return `${roundCount}${suffix} round`
-    }
-
     return(
         <div className="round-counter-flag">
-            {renderer()}
+            {`${roundCount}${suffix} round`}
         </div>
     )
 }
