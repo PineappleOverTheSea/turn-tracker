@@ -5,7 +5,7 @@ import { combatStats } from "./IStatTypes";
 export interface ICreature{
     id?: number,
     placeholder?: boolean,
-    classList? : Array<string>
+    classList : Array<string>
     name: string,
     stats: stats,
     health: health,

@@ -54,24 +54,25 @@ const CreatureMinified = (props : ICreature) => {
 //naudojami tam kad placeholder padarą būtų paprasta pridėti
 
 CreatureMinified.defaultProps = {
-    name: "Placeholder",
+    classList: [],
+    name: "Creature",
     stats: {
-        strength: 0,
-        dexterity: 0, 
-        constitution: 0, 
-        inteligence: 0,
-        wisdom: 0, 
-        charisma: 0
+        strength: 10,
+        dexterity: 10, 
+        constitution: 10, 
+        inteligence: 10,
+        wisdom: 10, 
+        charisma: 10
     },
     health: {
-        hitPoints: 0,
-        hitPointsMax: 0,
+        hitPoints: 10,
+        hitPointsMax: 10,
         hitPointsTemp: 0
     },
     combatStats:{
         initiative: 0,
-        armorClass: 0,
-        speed: 0
+        armorClass: 10,
+        speed: 30
     }
 }
 

@@ -28,13 +28,14 @@
         background-color: rgb(209, 212, 243);
         border-radius: var(--round-corners);
         visibility: visible;
+        z-index: -1;
     }
     .minified-creatures>.placeholder::before{
         content: "No creatures waiting";
     }
     .minified-creatures{
         display: flex;
-        align-items: flex-start;
+        align-items: center;
         gap: var(--gap-medium);
         overflow-x: scroll;
 

@@ -2,9 +2,12 @@ main{
     max-width: min-content;
     padding: 1rem;
     display: grid;
-    grid-template-columns: 1fr auto;
+    grid-template-columns: 1fr auto auto;
     gap: 40px var(--gap-medium);
     .turn-timeline{
-        grid-column: 1 / -1;
+        grid-column: 1 / 3;
+    }
+    .round-counter{
+        grid-column: 3 / 4;
     }
 }

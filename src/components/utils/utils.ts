@@ -1,0 +1,4 @@
+export const generateRandomId = () : number => {
+    let id = Date.now().toString().slice(6) + Math.random().toPrecision(8).slice(2)
+    return Number(id)
+}

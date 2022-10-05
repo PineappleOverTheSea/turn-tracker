@@ -1,15 +1,14 @@
 import { useContext, useReducer, useState } from "react";
-import { creatureReducer, CREATURE_ACTIONS, INITIAL_STATE } from "./reducers/CreatureReducer";
+import { creatureReducer, CREATURE_ACTIONS } from "./reducers/CreatureReducer";
 import { TrackedCreaturesContext } from "./contexts/TrackedCreaturesContext";
 import { TRACKED_CREATURES_CONTEXT_ACTIONS } from "./reducers/TrackedCreaturesContextReducer";
-
-
-
+import Creature from "./Creature/Creature";
+import { generateRandomId } from "./utils/utils";
 
 const AddCreatureModal = () => {
     const {dispatchTrackedCreaturesAction} = useContext(TrackedCreaturesContext);
 
-    const [newCreature, dispatchCreatureAction] = useReducer(creatureReducer, INITIAL_STATE)
+    const [newCreature, dispatchCreatureAction] = useReducer(creatureReducer, Creature.defaultProps)
 
     const initMod = Math.floor((newCreature.stats.dexterity - 10) / 2);
 
@@ -60,11 +59,6 @@ const AddCreatureModal = () => {
 
     const onEmptyName = () => {
         //todo disallow empty name?
-    }
-
-    const generateRandomId = () : number => {
-        let id = Date.now().toString().slice(6) + Math.random().toPrecision(8).slice(2)
-        return Number(id)
     }
 
     return (

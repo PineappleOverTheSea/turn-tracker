@@ -1,40 +1,67 @@
 import { useContext } from "react"
 import { ICreature } from "../interfaces/ICreature";
+import {isCreature, isRoundFlag} from "./utils/typeCheckers"
 import { TrackedCreaturesContext } from "./contexts/TrackedCreaturesContext"
 import Creature from "./Creature/Creature";
 import CreatureMinified from "./CreatureMinified";
+import RoundCounterFlag from "./RoundCounter/RoundCounterFlag";
 import TurnTimelineControlls from "./TurnTimelineControlls";
+import { generateRandomId } from "./utils/utils";
+import { IRoundCounterFlag } from "../interfaces/IRoundCounterFlag";
 
 const TurnTimeline = () => {
     const {trackedCreatures} = useContext(TrackedCreaturesContext);
-    const creature = trackedCreatures[0];
+    const minifiedElements : (JSX.Element)[] = []
+
+    const fillMinifiedElements = () =>{
+        for(const element of trackedCreatures){
+            if(isCreature(element)){
+                minifiedElements.push(
+                    <CreatureMinified
+                        key={element.id}
+                        id={element.id}
+                        classList={element.classList}
+                        name={element.name}
+                        stats={element.stats}
+                        health={element.health}
+                        combatStats={element.combatStats}
+                    />
+                )
+            }
+            else if(isRoundFlag(element)){
+                minifiedElements.push(
+                    <RoundCounterFlag key={element.id} roundCount={element.roundCount} />
+                )
+            }
+        }
+    }
+
+    const adjustMinifiedElements = () =>{
+        if(trackedCreatures.length > 2){
+            fillMinifiedElements()
+            //Išsiaiškinti kaip tinkamai slicint kad nebūtų bugo
+            if(isRoundFlag(minifiedElements[0].props)){
+                minifiedElements.push(minifiedElements.splice(0, 1)[0])
+            }
+        }
+        else if(trackedCreatures.length > 1){
+            fillMinifiedElements()
+            minifiedElements.push(<CreatureMinified id={-1} placeholder={true} />)
+        }
+        else minifiedElements.push(<CreatureMinified id={-1} placeholder={true} />)
+    }
+
+    adjustMinifiedElements()
 
     return(
         <div className="turn-timeline">
             <div className="title-active-creature">Currently active:</div>
             <div className="active-creature-holder">
-                {trackedCreatures.length ? <Creature 
-                    key={creature.id}
-                    id={creature.id}
-                    name={creature.name}
-                    stats={creature.stats}
-                    health={creature.health}
-                    combatStats={creature.combatStats}
-                /> : <Creature placeholder={true} /> }
+                {trackedCreatures.length ? <Creature {...minifiedElements[0].props} /> : <Creature placeholder={true} /> }
             </div>
             <div className="title-timeline">Coming up:</div>
             <div className="minified-creatures">
-                {trackedCreatures.length > 1 ? trackedCreatures.slice(1).map((creature : ICreature) =>
-                    <CreatureMinified
-                        key={creature.id}
-                        id={creature.id}
-                        classList={creature.classList}
-                        name={creature.name}
-                        stats={creature.stats}
-                        health={creature.health}
-                        combatStats={creature.combatStats}
-                    />
-                ) : <CreatureMinified placeholder={true} />}
+                {minifiedElements.slice(1)}
             </div>
             <TurnTimelineControlls />
         </div>

@@ -1,42 +1,5 @@
-import React, { ReactHTMLElement, ReactInstance, ReducerAction, ReducerState } from "react";
 import { ICreature } from "../../interfaces/ICreature";
 import { ICreatureDispatch } from "../../interfaces/ICreatureDispatch";
-
-const defaultName = "Creature";
-const defaultHp = 10;
-const defaultHpMax = 10;
-const defaultHpTemp = 0;
-const defaultInit = 0;
-const defaultAc = 10;
-const defaultSpd = 30;
-const defaultStr = 10;
-const defaultDex = 10;
-const defaultCon = 10;
-const defaultInt = 10;
-const defaultWis = 10;
-const defaultCha = 10;
-
-export const INITIAL_STATE: ICreature = {
-    name: defaultName,
-    stats: {
-        strength: defaultStr,
-        dexterity: defaultDex,
-        constitution: defaultCon,
-        inteligence: defaultInt,
-        wisdom: defaultWis,
-        charisma: defaultCha
-    },
-    health: {
-        hitPoints: defaultHp,
-        hitPointsMax: defaultHpMax,
-        hitPointsTemp: defaultHpTemp
-    },
-    combatStats: {
-        initiative: defaultInit,
-        armorClass: defaultAc,
-        speed: defaultSpd
-    }
-}
 
 export const CREATURE_ACTIONS = {
     SET_NAME: "SET_NAME",
@@ -189,8 +152,8 @@ export const creatureReducer : React.Reducer<ICreature, ICreatureDispatch> = (st
             return{
                 ...state,
                 classList: [
-                    // state.classList ? ...state.classList : "",
-                    
+                    ...state.classList,
+                    action.value as string
                 ]
             }
         }
