@@ -42,9 +42,9 @@ const TurnTimeline = () => {
         }
         else if(trackedCreatures.length > 1){
             fillMinifiedElements()
-            minifiedElements.push(<CreatureMinified id={-1} placeholder={true} />)
+            minifiedElements.push(<CreatureMinified key={-1} id={-1} placeholder={true} />)
         }
-        else minifiedElements.push(<CreatureMinified id={-1} placeholder={true} />)
+        else minifiedElements.push(<CreatureMinified key={-1} id={-1} placeholder={true} />)
     }
 
     adjustMinifiedElements()

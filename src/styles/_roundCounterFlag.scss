@@ -1,5 +1,14 @@
 .round-counter-flag{
-    height: 50%;
-    background-color: red;
+    min-height: 50%;
+    width: min-content;
+    padding: 0.25rem;
+    border: 2px solid black;
     border-radius: var(--round-corners);
+    font-size: 1.25rem;
+    font-family: "Ringbearer";
+    display: grid;
+    place-content: center;
+    text-align: center;
+    background-color: black;
+    color: white;
 }

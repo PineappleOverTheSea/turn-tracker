@@ -11,7 +11,7 @@ const RoundCounter = (props : any) =>{
             <div>
                 Current round:
             </div>
-            <div>
+            <div className="round-number">
                 {roundFlag?.roundCount - 1 || 1}
             </div>
         </div>

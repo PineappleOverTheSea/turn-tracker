@@ -1,3 +1,16 @@
 .round-counter{
+    width: max-content;
+    font-family: "Ringbearer";
+    font-size: 2rem;
+    text-align: center;
+
     display: grid;
+    grid-template-rows: auto 1fr;
+    gap: var(--gap-medium);
+    .round-number{
+        height: fit-content;
+        font-size: 4rem;
+        border: 2px solid black;
+        border-radius: var(--round-corners);
+    }
 }

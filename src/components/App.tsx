@@ -9,7 +9,7 @@ import TurnTimeline from "./TurnTimeline"
 
 const App = () => {    
     return(
-        <StrictMode>
+        // <StrictMode>
             <TrackedCreaturesProvider>
                 <main>
                     <TurnTimeline />
@@ -19,7 +19,7 @@ const App = () => {
                 </main>
                 <Sidebar />
             </TrackedCreaturesProvider>
-        </StrictMode>
+        // </StrictMode>
     )
 }
 

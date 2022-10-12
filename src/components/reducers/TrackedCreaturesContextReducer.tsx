@@ -14,6 +14,8 @@ export const TRACKED_CREATURES_CONTEXT_ACTIONS = {
     TURN_BACKWARD: "TURN_BACKWARD"
 }
 
+const creatureMap = new Map()
+
 const findIndex = (state : (ICreature | IRoundCounterFlag)[], action : ITrackedCreaturesContextDispatch) : number => {
     return state.findIndex(creature => {
         if(isCreature(creature))
@@ -27,24 +29,65 @@ const sort = (updatedState : (ICreature | IRoundCounterFlag)[]) =>{
     updatedState.sort((c1, c2) => {
         if(isRoundFlag(c1) || isRoundFlag(c2)) 
             return 0
-        else return c2.combatStats.initiative - c1.combatStats.initiative
+        else {
+            const diff = c2.combatStats.initiative - c1.combatStats.initiative
+            if(diff !== 0)
+                return diff
+            const nameDiff = c2.name.localeCompare(c1.name)
+            return nameDiff
+        }
     })
+}
+//sugalvoti kaip daryt žymėjimą. 
+export const markDuplicates = (name : string) => {
+    if(creatureMap.has(name)){
+            creatureMap.set(name, creatureMap.get(name) + 1)
+            name += creatureMap.get(name)
+            console.log(name)
+        }
+    else creatureMap.set(name, 0)
+    return name
 }
 
 export const TrackedCreaturesContextReducer : React.Reducer<(ICreature | IRoundCounterFlag)[], ITrackedCreaturesContextDispatch> = (state, action) : (ICreature | IRoundCounterFlag)[] => {
     if(action.creatureAction && action.creature){
         switch(action.type){
             case TRACKED_CREATURES_CONTEXT_ACTIONS.ADD_CREATURE:{
-                const updatedState = [...state, action.creature]
+                let updatedState = [...state]
+                let newCreature = action.creature
+                
+                //jei naujo padaro iniciatyva yra didesne nei dabartinio aktyvaus jis dedamas i sekanti raunda
+                // if(isCreature(updatedState[0]) && !updatedState[0].classList.includes("placeholder")){
+                //     if(action.creature.combatStats.initiative < updatedState[0].combatStats.initiative){
+                //         updatedState.unshift(action.creature)
+                //     }
+                //     else{
+                //         updatedState.push(action.creature)
+                //     }
+                // }
+                // else 
+
+                // updatedState.push(action.creature)
+
+                newCreature.name = markDuplicates(newCreature.name)
+
+                updatedState.push(newCreature)
+
+
+                //jei pirmas raundas veliava bus nustumiama i gala
                 const roundFlagIndex = updatedState.findIndex(el => isRoundFlag(el))
-                sort(updatedState)
-                if(roundFlagIndex !== -1 && (updatedState[roundFlagIndex] as IRoundCounterFlag).roundCount === 2){
-                    updatedState.splice(roundFlagIndex, 1)
-                    updatedState.push({id: generateRandomId(), roundCount: 2})
+                if(roundFlagIndex !== -1){
+                    if((updatedState[roundFlagIndex] as IRoundCounterFlag).roundCount === 2){
+                        const oldFlag = updatedState.splice(roundFlagIndex, 1)[0]
+                        updatedState.push({id: oldFlag.id, roundCount: 2})
+                    }
                 }
+                //jei veliavos nera ji sukuriama
                 else if(roundFlagIndex === -1){
                     updatedState.push({id: generateRandomId(), roundCount: 2})
                 }
+                sort(updatedState)
+                
                 return updatedState
             }
             case TRACKED_CREATURES_CONTEXT_ACTIONS.REMOVE_CREATURE:{
@@ -77,11 +120,11 @@ export const TrackedCreaturesContextReducer : React.Reducer<(ICreature | IRoundC
         }
     }
     else{
+        //roundcount keičiasi po du skaičius su strict mode.
         switch(action.type){
             case TRACKED_CREATURES_CONTEXT_ACTIONS.TURN_FORWARD:{
                 const updatedState = [...state]
                 const element = updatedState.shift() 
-
                 if(isRoundFlag(updatedState[0])){
                     const flag = updatedState.shift()
                     if(isRoundFlag(flag))
