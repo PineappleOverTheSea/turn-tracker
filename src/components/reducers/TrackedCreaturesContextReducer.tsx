@@ -38,13 +38,27 @@ const sort = (updatedState : (ICreature | IRoundCounterFlag)[]) =>{
         }
     })
 }
-//sugalvoti kaip daryt žymėjimą. 
-export const markDuplicates = (name : string) => {
+
+const markDuplicates = (name : string, updatedState : (ICreature | IRoundCounterFlag)[]) => {
     if(creatureMap.has(name)){
+        const creatureExists = updatedState.some(elem => {
+                if(isCreature(elem)){
+                    if(elem.name === name)
+                        return true
+                    return false
+                }
+                return false
+            })
+        if(creatureExists){
             creatureMap.set(name, creatureMap.get(name) + 1)
             name += creatureMap.get(name)
         }
-    else creatureMap.set(name, 0)
+        else{
+            creatureMap.set(name, 0)
+        }
+        
+    }
+    else {creatureMap.set(name, 0)}
     return name
 }
 
@@ -64,14 +78,10 @@ export const TrackedCreaturesContextReducer : React.Reducer<(ICreature | IRoundC
                 //         updatedState.push(action.creature)
                 //     }
                 // }
-                // else 
+                // else
 
-                // updatedState.push(action.creature)
-
-                newCreature.name = markDuplicates(newCreature.name)
-
+                newCreature.name = markDuplicates(newCreature.name, updatedState)
                 updatedState.push(newCreature)
-
 
                 //jei pirmas raundas veliava bus nustumiama i gala
                 const roundFlagIndex = updatedState.findIndex(el => isRoundFlag(el))
