@@ -43,7 +43,6 @@ export const markDuplicates = (name : string) => {
     if(creatureMap.has(name)){
             creatureMap.set(name, creatureMap.get(name) + 1)
             name += creatureMap.get(name)
-            console.log(name)
         }
     else creatureMap.set(name, 0)
     return name
