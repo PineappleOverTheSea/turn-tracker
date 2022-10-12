@@ -2,7 +2,7 @@
 A handy tool to help you organize your battles.  
 Tested on chromium only. 
 ## How to start:
-Make sure your NPM installation is up to date. Open a terminal in the project folder and type in `npm start`, then follow the given local host address.
+Make sure your NPM installation is up to date. Open a terminal in the project folder and type in `npm run prod`, then follow the given local host address.
 ## Basic features:  
 * Add creatures by inputting desired attributes and pressing the "Add creature" button. Creatures are automatically sorted by their initiative.
 * "Kill" button removes the creature.

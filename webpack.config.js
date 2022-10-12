@@ -17,6 +17,10 @@ module.exports = {
         assetModuleFilename: "images/[hash][ext][query]",
         clean: true
     },
+    performance:{
+        maxEntrypointSize: 512000,
+        maxAssetSize: 512000
+    },
     module: {
         rules: [
             {
