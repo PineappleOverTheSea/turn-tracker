@@ -17,11 +17,11 @@ const AddCreatureModal = () => {
             onEmptyName()
             return
         }
-        dispatchTrackedCreaturesAction({type: TRACKED_CREATURES_CONTEXT_ACTIONS.ADD_CREATURE, elementAction: true, element: {
+        dispatchTrackedCreaturesAction({type: TRACKED_CREATURES_CONTEXT_ACTIONS.ADD_CREATURE, elements: [{
                 ...newCreature,
                 id: generateRandomId(),
                 initiative: newCreature.initiative + initMod
-            }
+            }]
         })
     }
     

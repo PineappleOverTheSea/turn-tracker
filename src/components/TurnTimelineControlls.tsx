@@ -7,16 +7,28 @@ const TurnTimelineControlls = () => {
     const {trackedElements, dispatchTrackedElementsAction, roundCount, setRoundCount} = useContext(TrackedElementsContext)
 
     const nextTurn = () => {
-        dispatchTrackedElementsAction({type: TRACKED_CREATURES_CONTEXT_ACTIONS.TURN_FORWARD, elementAction: false})
+        const updatedState = [...trackedElements]
+        const element = updatedState.shift() 
+        if(element)
+            updatedState.push(element)
+
+        dispatchTrackedElementsAction({type: TRACKED_CREATURES_CONTEXT_ACTIONS.SET_ELEMENTS, elements: updatedState})
         if(trackedElements[0].initiative < trackedElements[1].initiative)
             setRoundCount(roundCount+1)
     }
 
     const previousTurn = () => {
-        dispatchTrackedElementsAction({type: TRACKED_CREATURES_CONTEXT_ACTIONS.TURN_BACKWARD, elementAction: false})
-        if(trackedElements[0].initiative > trackedElements[trackedElements.length - 1].initiative && roundCount > 1)
+        const updatedState = [...trackedElements]
+        if(!(roundCount === 1 && trackedElements[0].initiative > trackedElements[trackedElements.length - 1].initiative)){
+            const element = updatedState.pop()
+            if(element)
+                updatedState.unshift(element)
+        }
+        dispatchTrackedElementsAction({type: TRACKED_CREATURES_CONTEXT_ACTIONS.SET_ELEMENTS, elements: updatedState})
+
+        if(trackedElements[0].initiative > trackedElements[trackedElements.length - 1].initiative && roundCount > 1){
             setRoundCount(roundCount-1)
-        
+        }
     }
 
     return (

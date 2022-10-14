@@ -5,7 +5,7 @@ import { TrackedElementsContext } from "../contexts/TrackedElementsContext";
 import { TRACKED_CREATURES_CONTEXT_ACTIONS } from "../reducers/TrackedElementsContextReducer";
 
 const HealthCounter = (props : {creature : ICreature, updateCreature : (valueType: string, value: string | number) => ICreature}) => {
-    const {dispatchTrackedElementsAction: dispatchTrackedCreaturesAction} = useContext(TrackedElementsContext)
+    const {dispatchTrackedElementsAction: dispatchTrackedElementsAction} = useContext(TrackedElementsContext)
 
     const [hitPoints, hitPointsMax, hitPointsTemp]  = [props.creature.hitPoints, props.creature.hitPointsMax, props.creature.hitPointsTemp];
     const updateCreature = props.updateCreature
@@ -14,7 +14,7 @@ const HealthCounter = (props : {creature : ICreature, updateCreature : (valueTyp
         const value = isNaN(e.target.valueAsNumber) ? "" : e.target.valueAsNumber
 
         const updatedCreature = updateCreature(valueType, value)
-        dispatchTrackedCreaturesAction({type: TRACKED_CREATURES_CONTEXT_ACTIONS.UPDATE_CREATURE, elementAction: true, element: updatedCreature});
+        dispatchTrackedElementsAction({type: TRACKED_CREATURES_CONTEXT_ACTIONS.UPDATE_CREATURE, elements: [updatedCreature]});
     }
 
     const onSetHpMaximum = (e : React.ChangeEvent<HTMLInputElement>) => {
@@ -25,7 +25,7 @@ const HealthCounter = (props : {creature : ICreature, updateCreature : (valueTyp
         }
         const updatedCreature = updateCreature(CREATURE_ACTIONS.SET_HP_MAX, value);
 
-        dispatchTrackedCreaturesAction({type: TRACKED_CREATURES_CONTEXT_ACTIONS.UPDATE_CREATURE, elementAction: true, element: updatedCreature});
+        dispatchTrackedElementsAction({type: TRACKED_CREATURES_CONTEXT_ACTIONS.UPDATE_CREATURE, elements: [updatedCreature]});
     }
 
     const setHitpoints = (valueType : string, e : React.KeyboardEvent<HTMLInputElement>,) => {
@@ -62,7 +62,7 @@ const HealthCounter = (props : {creature : ICreature, updateCreature : (valueTyp
                 break;
                 default: throw Error("Invalid change to hitpoints");
             }
-            dispatchTrackedCreaturesAction({type: TRACKED_CREATURES_CONTEXT_ACTIONS.UPDATE_CREATURE, elementAction: true, element: updatedCreature});
+            dispatchTrackedElementsAction({type: TRACKED_CREATURES_CONTEXT_ACTIONS.UPDATE_CREATURE, elements: [updatedCreature]});
             input.value = "";
         }
         

@@ -11,7 +11,8 @@ export const TRACKED_CREATURES_CONTEXT_ACTIONS = {
     UPDATE_CREATURE: "UPDATE_CREATURE",
     SELECT_CREATURE: "SELECT_CREATURE",
     TURN_FORWARD: "TURN_FORWARD",
-    TURN_BACKWARD: "TURN_BACKWARD"
+    TURN_BACKWARD: "TURN_BACKWARD",
+    SET_ELEMENTS: "SET_ELEMENTS"
 }
 
 const creatureMap = new Map()
@@ -19,7 +20,7 @@ const creatureMap = new Map()
 const findIndex = (state : IElement[], action : ITrackedElementsContextDispatch) : number => {
     return state.findIndex(creature => {
         if(isCreature(creature))
-            return creature.id === action.element?.id
+            return creature.id === action.elements[0].id
         else return false
         
     })
@@ -63,11 +64,10 @@ const markDuplicates = (name : string, updatedState : IElement[]) => {
 }
 
 export const TrackedElementsContextReducer : React.Reducer<IElement[], ITrackedElementsContextDispatch> = (state, action) : IElement[] => {
-    if(action.elementAction && action.element){
         switch(action.type){
             case TRACKED_CREATURES_CONTEXT_ACTIONS.ADD_CREATURE:{
                 let updatedState = [...state]
-                let newCreature = action.element
+                let newCreature = action.elements[0]
                 newCreature.name = markDuplicates(newCreature.name, updatedState)
                 updatedState.push(newCreature)
                 sort(updatedState)
@@ -82,7 +82,7 @@ export const TrackedElementsContextReducer : React.Reducer<IElement[], ITrackedE
             case TRACKED_CREATURES_CONTEXT_ACTIONS.UPDATE_CREATURE:{
                 const creatureIndex = findIndex(state, action)
                 const updatedState = [...state]
-                updatedState.splice(creatureIndex, 1, action.element)
+                updatedState.splice(creatureIndex, 1, action.elements[0])
                 sort(updatedState)
                 return updatedState
             }
@@ -99,33 +99,10 @@ export const TrackedElementsContextReducer : React.Reducer<IElement[], ITrackedE
                 updatedState[creatureIndex].classList.push("selected")
                 return updatedState
             }
-            default: throw Error("Invalid creature action type!")
-        }
-    }
-    else{
-        //roundcount keičiasi po du skaičius su strict mode.
-        switch(action.type){
-            case TRACKED_CREATURES_CONTEXT_ACTIONS.TURN_FORWARD:{
-                const updatedState = [...state]
-
-                const element = updatedState.shift() 
-
-                if(element)
-                    updatedState.push(element)
-                
+            case TRACKED_CREATURES_CONTEXT_ACTIONS.SET_ELEMENTS:{
+                const updatedState = [...action.elements]
                 return updatedState
             }
-            case TRACKED_CREATURES_CONTEXT_ACTIONS.TURN_BACKWARD:{
-                const updatedState = [...state]
-
-                const element = updatedState.pop()
-
-                if(element)
-                    updatedState.unshift(element)
-
-                return updatedState
-            }
-            default: throw Error("Invadlid creatureless action type!")
+            default: throw Error("Invadlid action type!")
         }
-    }
 }

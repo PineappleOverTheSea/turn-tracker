@@ -15,7 +15,7 @@ const Creature = (props : ICreature) => {
     const {dispatchTrackedElementsAction: dispatchTrackedCreaturesAction} = useContext(TrackedElementsContext)
 
     const die = () => {
-        dispatchTrackedCreaturesAction({type: TRACKED_CREATURES_CONTEXT_ACTIONS.REMOVE_CREATURE, elementAction: true, element: creature})
+        dispatchTrackedCreaturesAction({type: TRACKED_CREATURES_CONTEXT_ACTIONS.REMOVE_CREATURE, elements: [creature]})
     }
 
     //PALIKTI KAIP YRA, TURI BŪTI IMPLEMENTUOTA KAIP FUNKCIJA KITAIP ATSIRANDA REDUCER CHAINING

@@ -50,7 +50,7 @@ export const Roller = () =>{
         const updatedCreature = {...element,
             initiative: randomInit + initMod
         }
-        dispatchTrackedCreaturesAction({type: TRACKED_CREATURES_CONTEXT_ACTIONS.UPDATE_CREATURE, elementAction: true, element: updatedCreature})
+        dispatchTrackedCreaturesAction({type: TRACKED_CREATURES_CONTEXT_ACTIONS.UPDATE_CREATURE, elements: [updatedCreature]})
     }
     const rollPlayers = () =>{
 
