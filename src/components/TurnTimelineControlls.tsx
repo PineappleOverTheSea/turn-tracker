@@ -13,7 +13,7 @@ const TurnTimelineControlls = () => {
             updatedState.push(element)
 
         dispatchTrackedElementsAction({type: TRACKED_CREATURES_CONTEXT_ACTIONS.SET_ELEMENTS, elements: updatedState})
-        if(trackedElements[0].initiative < trackedElements[1].initiative)
+        if(updatedState.length < 2 || trackedElements[0].initiative < trackedElements[1].initiative)
             setRoundCount(roundCount+1)
     }
 
@@ -26,7 +26,7 @@ const TurnTimelineControlls = () => {
         }
         dispatchTrackedElementsAction({type: TRACKED_CREATURES_CONTEXT_ACTIONS.SET_ELEMENTS, elements: updatedState})
 
-        if(trackedElements[0].initiative > trackedElements[trackedElements.length - 1].initiative && roundCount > 1){
+        if((updatedState.length < 2 || trackedElements[0].initiative > trackedElements[trackedElements.length - 1].initiative) && roundCount > 1){
             setRoundCount(roundCount-1)
         }
     }
