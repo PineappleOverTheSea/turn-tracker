@@ -63,7 +63,7 @@ const AddCreatureModal = () => {
 
     return (
         <div className="add-creature">
-            <div className="title-add-creature">Add new creature:</div>
+            <div className="title">Add new creature:</div>
             <div className="panel-add-creature">
                 <div className="panel-add-creature-name">
                     <div className="stat">

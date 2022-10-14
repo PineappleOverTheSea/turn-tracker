@@ -51,11 +51,11 @@ const TurnTimeline = () => {
 
     return(
         <div className="turn-timeline">
-            <div className="title-active-creature">Currently active:</div>
+            <div className="title">Currently active:</div>
             <div className="active-creature-holder">
                 {trackedCreatures.length ? <Creature {...minifiedElements[0].props} /> : <Creature placeholder={true} /> }
             </div>
-            <div className="title-timeline">Coming up:</div>
+            <div className="title">Coming up:</div>
             <div className="minified-creatures">
                 {minifiedElements.length > 1 ? minifiedElements.slice(1) : minifiedElements}
             </div>

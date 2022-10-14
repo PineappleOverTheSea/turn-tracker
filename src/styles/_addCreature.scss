@@ -1,10 +1,6 @@
 .add-creature{
     display: grid;
     gap: var(--gap-medium);
-    .title-add-creature{
-        font-size: 2rem;
-        font-family: "Ringbearer";
-    }
     .panel-add-creature{
         width: max-content;
         padding: 10px;

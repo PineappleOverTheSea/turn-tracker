@@ -1,0 +1,42 @@
+.roller{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-medium);s
+    >*{
+        width: 100%;
+    }
+    fieldset{
+        padding: 10px;
+        margin: 0;
+        border: 2px solid black;
+        border-radius: var(--round-corners);
+
+        display: flex;
+        flex-direction: column;
+        gap: var(--gap-small);
+        >div{
+            padding: 5px;
+            font-family: Breathe Fire;
+            font-size: 1.5rem;
+            text-align: center;
+            border: 2px solid black;
+            border-radius: var(--round-corners);
+            cursor: pointer;
+        }
+        .active{
+            background-color: rgb(100, 100, 255);
+            color: white;
+        }
+        
+    }
+    button{
+        padding: 10px;
+        border: 2px solid black;
+        border-radius: var(--round-corners);
+
+        font-family: Breathe Fire;
+        font-size: 1.75rem;
+        margin-top: 0;
+    }
+}

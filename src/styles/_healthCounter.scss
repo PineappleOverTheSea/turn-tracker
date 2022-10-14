@@ -1,9 +1,9 @@
 .health-counter{
     border: 2px solid black;
-    border-radius: 10px;
+    border-radius: var(--round-corners);
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
+    gap: var(--gap-medium);
 
     li{
         display: grid;

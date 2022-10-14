@@ -14,7 +14,7 @@ const EditCreature = () =>{
 
     return(
         <div className="edit-creature">
-            <div className="title-edit-creature">Edit existing creature:</div>                   
+            <div className="title">Edit existing creature:</div>                   
             {creatureToDisplay ? <Creature 
                 key={(creatureToDisplay as ICreature).id}
                 id={(creatureToDisplay as ICreature).id}

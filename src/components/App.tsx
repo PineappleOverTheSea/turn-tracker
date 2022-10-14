@@ -3,6 +3,7 @@ import AddCreature from "./AddCreature"
 import { TrackedCreaturesProvider } from "./contexts/TrackedCreaturesContext"
 import Creature from "./Creature/Creature"
 import EditCreature from "./EditCreature"
+import { Roller } from "./Roller"
 import RoundCounter from "./RoundCounter/RoundCounter"
 import Sidebar from "./Sidebar/Sidebar"
 import TurnTimeline from "./TurnTimeline"
@@ -16,6 +17,7 @@ const App = () => {
                     <RoundCounter />
                     <AddCreature />   
                     <EditCreature />
+                    <Roller />
                 </main>
                 <Sidebar />
             </TrackedCreaturesProvider>

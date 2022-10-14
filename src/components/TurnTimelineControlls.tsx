@@ -1,6 +1,5 @@
 import { useContext } from "react"
 import { TrackedCreaturesContext } from "./contexts/TrackedCreaturesContext"
-import Creature from "./Creature/Creature"
 import { TRACKED_CREATURES_CONTEXT_ACTIONS } from "./reducers/TrackedCreaturesContextReducer"
 
 const TurnTimelineControlls = () => {
