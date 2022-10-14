@@ -1,17 +1,21 @@
 import { useContext } from "react"
-import { TrackedCreaturesContext } from "./contexts/TrackedCreaturesContext"
-import { TRACKED_CREATURES_CONTEXT_ACTIONS } from "./reducers/TrackedCreaturesContextReducer"
+import { TrackedElementsContext } from "./contexts/TrackedElementsContext"
+import { TRACKED_CREATURES_CONTEXT_ACTIONS } from "./reducers/TrackedElementsContextReducer"
 
 const TurnTimelineControlls = () => {
 
-    const {dispatchTrackedCreaturesAction} = useContext(TrackedCreaturesContext)
+    const {trackedElements, dispatchTrackedElementsAction, roundCount, setRoundCount} = useContext(TrackedElementsContext)
 
     const nextTurn = () => {
-        dispatchTrackedCreaturesAction({type: TRACKED_CREATURES_CONTEXT_ACTIONS.TURN_FORWARD, creatureAction: false})
+        dispatchTrackedElementsAction({type: TRACKED_CREATURES_CONTEXT_ACTIONS.TURN_FORWARD, elementAction: false})
+        if(trackedElements[0].initiative < trackedElements[1].initiative)
+            setRoundCount(roundCount+1)
     }
 
     const previousTurn = () => {
-        dispatchTrackedCreaturesAction({type: TRACKED_CREATURES_CONTEXT_ACTIONS.TURN_BACKWARD, creatureAction: false})
+        dispatchTrackedElementsAction({type: TRACKED_CREATURES_CONTEXT_ACTIONS.TURN_BACKWARD, elementAction: false})
+        if(trackedElements[0].initiative > trackedElements[trackedElements.length - 1].initiative && roundCount > 1)
+            setRoundCount(roundCount-1)
         
     }
 

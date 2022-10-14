@@ -1,13 +1,20 @@
+import { IElement } from "./IElement";
 import { stats } from "./IStatTypes";
 import { health } from "./IStatTypes";
 import { combatStats } from "./IStatTypes";
 
-export interface ICreature{
-    id?: number,
+export interface ICreature extends IElement{
     placeholder?: boolean,
-    classList : Array<string>
-    name: string,
-    stats: stats,
-    health: health,
-    combatStats: combatStats,
+    strength: number,
+    dexterity: number, 
+    constitution: number, 
+    inteligence: number,
+    wisdom: number, 
+    charisma: number
+    hitPoints: number,
+    hitPointsMax: number,
+    hitPointsTemp: number
+    initiative: number,
+    armorClass: number,
+    speed: number
 }

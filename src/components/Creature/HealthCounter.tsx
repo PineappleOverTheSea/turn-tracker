@@ -1,31 +1,31 @@
 import { useContext } from "react";
 import { ICreature } from "../../interfaces/ICreature";
 import { CREATURE_ACTIONS } from "../reducers/CreatureReducer";
-import { TrackedCreaturesContext } from "../contexts/TrackedCreaturesContext";
-import { TRACKED_CREATURES_CONTEXT_ACTIONS } from "../reducers/TrackedCreaturesContextReducer";
+import { TrackedElementsContext } from "../contexts/TrackedElementsContext";
+import { TRACKED_CREATURES_CONTEXT_ACTIONS } from "../reducers/TrackedElementsContextReducer";
 
 const HealthCounter = (props : {creature : ICreature, updateCreature : (valueType: string, value: string | number) => ICreature}) => {
-    const {dispatchTrackedCreaturesAction} = useContext(TrackedCreaturesContext)
+    const {dispatchTrackedElementsAction: dispatchTrackedCreaturesAction} = useContext(TrackedElementsContext)
 
-    const health = props.creature.health;
+    const [hitPoints, hitPointsMax, hitPointsTemp]  = [props.creature.hitPoints, props.creature.hitPointsMax, props.creature.hitPointsTemp];
     const updateCreature = props.updateCreature
 
     const onValueChanged = (valueType : string, e : React.ChangeEvent<HTMLInputElement>) => {
         const value = isNaN(e.target.valueAsNumber) ? "" : e.target.valueAsNumber
 
         const updatedCreature = updateCreature(valueType, value)
-        dispatchTrackedCreaturesAction({type: TRACKED_CREATURES_CONTEXT_ACTIONS.UPDATE_CREATURE, creatureAction: true, creature: updatedCreature});
+        dispatchTrackedCreaturesAction({type: TRACKED_CREATURES_CONTEXT_ACTIONS.UPDATE_CREATURE, elementAction: true, element: updatedCreature});
     }
 
     const onSetHpMaximum = (e : React.ChangeEvent<HTMLInputElement>) => {
         const value = isNaN(e.target.valueAsNumber) ? "" : e.target.valueAsNumber
 
-        if(value < health.hitPoints){
+        if(value < hitPoints){
             updateCreature(CREATURE_ACTIONS.SET_HP, value);
         }
         const updatedCreature = updateCreature(CREATURE_ACTIONS.SET_HP_MAX, value);
 
-        dispatchTrackedCreaturesAction({type: TRACKED_CREATURES_CONTEXT_ACTIONS.UPDATE_CREATURE, creatureAction: true, creature: updatedCreature});
+        dispatchTrackedCreaturesAction({type: TRACKED_CREATURES_CONTEXT_ACTIONS.UPDATE_CREATURE, elementAction: true, element: updatedCreature});
     }
 
     const setHitpoints = (valueType : string, e : React.KeyboardEvent<HTMLInputElement>,) => {
@@ -39,14 +39,14 @@ const HealthCounter = (props : {creature : ICreature, updateCreature : (valueTyp
 
             switch (valueType) {
                 case "heal": {
-                    if(health.hitPoints + inputValue > health.hitPointsMax)
-                        updatedCreature = updateCreature(CREATURE_ACTIONS.SET_HP, health.hitPointsMax);
+                    if(hitPoints + inputValue > hitPointsMax)
+                        updatedCreature = updateCreature(CREATURE_ACTIONS.SET_HP, hitPointsMax);
                     else
-                        updatedCreature = updateCreature(CREATURE_ACTIONS.SET_HP, health.hitPoints + inputValue);
+                        updatedCreature = updateCreature(CREATURE_ACTIONS.SET_HP, hitPoints + inputValue);
                 }
                 break;
                 case "hurt": {
-                    inputValue -= health.hitPointsTemp;
+                    inputValue -= hitPointsTemp;
                     if(inputValue >= 0){
                         updatedCreature = updateCreature(CREATURE_ACTIONS.SET_HP_TEMP, 0);
                     }
@@ -54,15 +54,15 @@ const HealthCounter = (props : {creature : ICreature, updateCreature : (valueTyp
                         updatedCreature = updateCreature(CREATURE_ACTIONS.SET_HP_TEMP, Math.abs(inputValue));
                         inputValue = 0;
                     }
-                    if(health.hitPoints - inputValue < 0)
+                    if(hitPoints - inputValue < 0)
                         updatedCreature = updateCreature(CREATURE_ACTIONS.SET_HP, 0);
                     else 
-                        updatedCreature = updateCreature(CREATURE_ACTIONS.SET_HP, health.hitPoints - inputValue);
+                        updatedCreature = updateCreature(CREATURE_ACTIONS.SET_HP, hitPoints - inputValue);
                 }
                 break;
                 default: throw Error("Invalid change to hitpoints");
             }
-            dispatchTrackedCreaturesAction({type: TRACKED_CREATURES_CONTEXT_ACTIONS.UPDATE_CREATURE, creatureAction: true, creature: updatedCreature});
+            dispatchTrackedCreaturesAction({type: TRACKED_CREATURES_CONTEXT_ACTIONS.UPDATE_CREATURE, elementAction: true, element: updatedCreature});
             input.value = "";
         }
         
@@ -72,15 +72,15 @@ const HealthCounter = (props : {creature : ICreature, updateCreature : (valueTyp
         <ul className="health-counter">
             <li className="wrap-hp-max">
                 <label htmlFor="hp-max">Max HP</label> 
-                <input type="number" id="hp-max" value={health.hitPointsMax} min={1} max={9999} onChange={e => onSetHpMaximum(e)}/>
+                <input type="number" id="hp-max" value={hitPointsMax} min={1} max={9999} onChange={e => onSetHpMaximum(e)}/>
             </li>
             <li className="wrap-hp-temp">
                 <label htmlFor="hp-temp">Temp HP</label>
-                <input type="number" id="hp-temp" value={health.hitPointsTemp} min={0} max={9999} onChange={e => onValueChanged(CREATURE_ACTIONS.SET_HP_TEMP, e)}/>
+                <input type="number" id="hp-temp" value={hitPointsTemp} min={0} max={9999} onChange={e => onValueChanged(CREATURE_ACTIONS.SET_HP_TEMP, e)}/>
             </li>
             <li className="wrap-hp-current">
                 <label htmlFor="">Current HP</label>
-                <input type="number" id="hp" value={health.hitPoints} min={0} max={health.hitPointsMax} onChange={e => onValueChanged(CREATURE_ACTIONS.SET_HP, e)}/>
+                <input type="number" id="hp" value={hitPoints} min={0} max={hitPointsMax} onChange={e => onValueChanged(CREATURE_ACTIONS.SET_HP, e)}/>
             </li>
             <li className="wrap-hurt">
                 <label htmlFor="">Hurt</label>

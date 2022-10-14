@@ -1,9 +1,9 @@
-import { ICreature } from "../../interfaces/ICreature";
-import { IRoundCounterFlag } from "../../interfaces/IRoundCounterFlag";
-import { ITrackedCreaturesContextDispatch } from "../../interfaces/ITrackedCreaturesContextDispatch";
+import { useContext } from "react";
+import { IElement } from "../../interfaces/IElement";
+import { ITrackedElementsContextDispatch } from "../../interfaces/ITrackedElementsContextDispatch";
+import { TrackedElementsContext } from "../contexts/TrackedElementsContext";
 import RoundCounterFlag from "../RoundCounter/RoundCounterFlag";
 import { isCreature, isRoundFlag } from "../utils/typeCheckers";
-import { generateRandomId } from "../utils/utils";
 
 export const TRACKED_CREATURES_CONTEXT_ACTIONS = {
     ADD_CREATURE: "ADD_CREATURE",
@@ -16,21 +16,21 @@ export const TRACKED_CREATURES_CONTEXT_ACTIONS = {
 
 const creatureMap = new Map()
 
-const findIndex = (state : (ICreature | IRoundCounterFlag)[], action : ITrackedCreaturesContextDispatch) : number => {
+const findIndex = (state : IElement[], action : ITrackedElementsContextDispatch) : number => {
     return state.findIndex(creature => {
         if(isCreature(creature))
-            return creature.id === action.creature?.id
+            return creature.id === action.element?.id
         else return false
         
     })
 }
 
-const sort = (updatedState : (ICreature | IRoundCounterFlag)[]) =>{
+const sort = (updatedState : IElement[]) =>{
     updatedState.sort((c1, c2) => {
         if(isRoundFlag(c1) || isRoundFlag(c2)) 
             return 0
         else {
-            const diff = c2.combatStats.initiative - c1.combatStats.initiative
+            const diff = c2.initiative - c1.initiative
             if(diff !== 0)
                 return diff
             const nameDiff = c2.name.localeCompare(c1.name)
@@ -39,7 +39,7 @@ const sort = (updatedState : (ICreature | IRoundCounterFlag)[]) =>{
     })
 }
 
-const markDuplicates = (name : string, updatedState : (ICreature | IRoundCounterFlag)[]) => {
+const markDuplicates = (name : string, updatedState : IElement[]) => {
     if(creatureMap.has(name)){
         const creatureExists = updatedState.some(elem => {
                 if(isCreature(elem)){
@@ -62,41 +62,15 @@ const markDuplicates = (name : string, updatedState : (ICreature | IRoundCounter
     return name
 }
 
-export const TrackedCreaturesContextReducer : React.Reducer<(ICreature | IRoundCounterFlag)[], ITrackedCreaturesContextDispatch> = (state, action) : (ICreature | IRoundCounterFlag)[] => {
-    if(action.creatureAction && action.creature){
+export const TrackedElementsContextReducer : React.Reducer<IElement[], ITrackedElementsContextDispatch> = (state, action) : IElement[] => {
+    if(action.elementAction && action.element){
         switch(action.type){
             case TRACKED_CREATURES_CONTEXT_ACTIONS.ADD_CREATURE:{
                 let updatedState = [...state]
-                let newCreature = action.creature
-                
-                //jei naujo padaro iniciatyva yra didesne nei dabartinio aktyvaus jis dedamas i sekanti raunda
-                // if(isCreature(updatedState[0]) && !updatedState[0].classList.includes("placeholder")){
-                //     if(action.creature.combatStats.initiative < updatedState[0].combatStats.initiative){
-                //         updatedState.unshift(action.creature)
-                //     }
-                //     else{
-                //         updatedState.push(action.creature)
-                //     }
-                // }
-                // else
-
+                let newCreature = action.element
                 newCreature.name = markDuplicates(newCreature.name, updatedState)
                 updatedState.push(newCreature)
-
-                //jei pirmas raundas veliava bus nustumiama i gala
-                const roundFlagIndex = updatedState.findIndex(el => isRoundFlag(el))
-                if(roundFlagIndex !== -1){
-                    if((updatedState[roundFlagIndex] as IRoundCounterFlag).roundCount === 2){
-                        const oldFlag = updatedState.splice(roundFlagIndex, 1)[0]
-                        updatedState.push({id: oldFlag.id, roundCount: 2})
-                    }
-                }
-                //jei veliavos nera ji sukuriama
-                else if(roundFlagIndex === -1){
-                    updatedState.push({id: generateRandomId(), roundCount: 2})
-                }
                 sort(updatedState)
-                
                 return updatedState
             }
             case TRACKED_CREATURES_CONTEXT_ACTIONS.REMOVE_CREATURE:{
@@ -108,7 +82,7 @@ export const TrackedCreaturesContextReducer : React.Reducer<(ICreature | IRoundC
             case TRACKED_CREATURES_CONTEXT_ACTIONS.UPDATE_CREATURE:{
                 const creatureIndex = findIndex(state, action)
                 const updatedState = [...state]
-                updatedState.splice(creatureIndex, 1, action.creature)
+                updatedState.splice(creatureIndex, 1, action.element)
                 sort(updatedState)
                 return updatedState
             }
@@ -118,11 +92,11 @@ export const TrackedCreaturesContextReducer : React.Reducer<(ICreature | IRoundC
                 for(const creature of updatedState){
                     if(creature instanceof RoundCounterFlag)
                         continue
-                    const filteredClasses = (creature as ICreature).classList?.filter(className => className !== "selected")
+                    const filteredClasses = creature.classList?.filter(className => className !== "selected")
                     if(filteredClasses)
-                        (creature as ICreature).classList = filteredClasses
+                        creature.classList = filteredClasses
                 }
-                (updatedState[creatureIndex] as ICreature).classList.push("selected")
+                updatedState[creatureIndex].classList.push("selected")
                 return updatedState
             }
             default: throw Error("Invalid creature action type!")
@@ -133,33 +107,20 @@ export const TrackedCreaturesContextReducer : React.Reducer<(ICreature | IRoundC
         switch(action.type){
             case TRACKED_CREATURES_CONTEXT_ACTIONS.TURN_FORWARD:{
                 const updatedState = [...state]
+
                 const element = updatedState.shift() 
-                if(isRoundFlag(updatedState[0])){
-                    const flag = updatedState.shift()
-                    if(isRoundFlag(flag))
-                        flag.roundCount++
-                    if(element && flag)
-                        updatedState.push(element, flag)
-                }
-                else if(element)
+
+                if(element)
                     updatedState.push(element)
                 
                 return updatedState
             }
             case TRACKED_CREATURES_CONTEXT_ACTIONS.TURN_BACKWARD:{
                 const updatedState = [...state]
+
                 const element = updatedState.pop()
 
-                if(isRoundFlag(element)){
-                    if(element.roundCount === 2){
-                        return state
-                    }
-                    element.roundCount--
-                    const creature = updatedState.pop()
-                    if(element && creature)
-                        updatedState.unshift(creature, element)
-                }
-                else if(element)
+                if(element)
                     updatedState.unshift(element)
 
                 return updatedState

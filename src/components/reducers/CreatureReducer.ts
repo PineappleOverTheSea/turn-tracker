@@ -30,120 +30,84 @@ export const creatureReducer : React.Reducer<ICreature, ICreatureDispatch> = (st
         case CREATURE_ACTIONS.SET_HP: {
             return {
                 ...state,
-                health: {
-                    ...state.health,
-                    hitPoints: action.value as number
-                }
+                hitPoints: action.value as number
             }
 
         }
         case CREATURE_ACTIONS.SET_HP_MAX: {
             return {
                 ...state,
-                health: {
-                    ...state.health,
-                    hitPointsMax: action.value as number
-                }
+                hitPointsMax: action.value as number                
             }
 
         }
         case CREATURE_ACTIONS.SET_HP_TEMP: {
             return {
                 ...state,
-                health: {
-                    ...state.health,
-                    hitPointsTemp: action.value as number
-                }
+                hitPointsTemp: action.value as number                
             }
 
         }
         case CREATURE_ACTIONS.SET_INIT: {
             return {
                 ...state,
-                combatStats:{
-                    ...state.combatStats,
-                    initiative: action.value as number
-                }
+                initiative: action.value as number                
             }
 
         }
         case CREATURE_ACTIONS.SET_AC: {
             return {
                 ...state,
-                combatStats:{
-                    ...state.combatStats,
-                    armorClass: action.value as number
-                }
+                armorClass: action.value as number                
             }
 
         }
         case CREATURE_ACTIONS.SET_SPD: {
             return {
                 ...state,
-                combatStats:{
-                    ...state.combatStats,
-                    speed: action.value as number
-                }
+                speed: action.value as number                
             }
 
         }
         case CREATURE_ACTIONS.SET_STR: {
             return {
                 ...state,
-                stats:{
-                    ...state.stats,
-                    strength: action.value as number
-                }
+                strength: action.value as number                
             }
 
         }
         case CREATURE_ACTIONS.SET_DEX: {
             return {
                 ...state,
-                stats:{
-                    ...state.stats,
-                    dexterity: action.value as number
-                }
+                dexterity: action.value as number                
             }
 
         }
         case CREATURE_ACTIONS.SET_CON: {
             return {
                 ...state,
-                stats:{
-                    ...state.stats,
-                    constitution: action.value as number
-                }
+                constitution: action.value as number                
             }
 
         }
         case CREATURE_ACTIONS.SET_INT: {
             return {
                 ...state,
-                stats:{
-                    ...state.stats,
-                    inteligence: action.value as number
-                }
+                inteligence: action.value as number                
             }
 
         }
         case CREATURE_ACTIONS.SET_WIS: {
             return {
                 ...state,
-                stats:{
-                    ...state.stats,
-                    wisdom: action.value as number
-                }
+                wisdom: action.value as number                
             }
 
         }
         case CREATURE_ACTIONS.SET_CHA: {
             return {
                 ...state,
-                stats:{
-                    ...state.stats,
-                    charisma: action.value as number
-                }
+                charisma: action.value as number                
             }
 
         }

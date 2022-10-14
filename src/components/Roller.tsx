@@ -1,13 +1,13 @@
 import { useContext, useState } from "react"
 import { ICreature } from "../interfaces/ICreature"
-import { TrackedCreaturesContext } from "./contexts/TrackedCreaturesContext"
-import { TRACKED_CREATURES_CONTEXT_ACTIONS } from "./reducers/TrackedCreaturesContextReducer"
+import { TrackedElementsContext } from "./contexts/TrackedElementsContext"
+import { TRACKED_CREATURES_CONTEXT_ACTIONS } from "./reducers/TrackedElementsContextReducer"
 import { d20 } from "./utils/dice"
 import { isCreature } from "./utils/typeCheckers"
 
 
 export const Roller = () =>{
-    const {trackedCreatures, dispatchTrackedCreaturesAction} = useContext(TrackedCreaturesContext)
+    const {trackedElements, dispatchTrackedElementsAction: dispatchTrackedCreaturesAction} = useContext(TrackedElementsContext)
 
     const [activeId, setActiveId] = useState<string>("roll-creatures");
 
@@ -19,7 +19,7 @@ export const Roller = () =>{
     const rollInitiative = () =>{
             switch(activeId){
                 case "roll-creatures":{
-                    for(const element of trackedCreatures){
+                    for(const element of trackedElements){
                         if(!isCreature(element))
                             continue
                         rollCreatures(element)
@@ -32,7 +32,7 @@ export const Roller = () =>{
                 }
                 break;
                 case "roll-both":{
-                    for(const element of trackedCreatures){
+                    for(const element of trackedElements){
                         if(!isCreature(element))
                             continue
                         rollCreatures(element)
@@ -46,12 +46,11 @@ export const Roller = () =>{
 
     const rollCreatures = (element : ICreature) =>{
         const randomInit = d20()
-        const initMod = Math.floor((element.stats.dexterity - 10) / 2);
-        const updatedCreature = {...element, combatStats:{ 
-        ...element.combatStats,
-        initiative: randomInit + initMod
-        }}
-        dispatchTrackedCreaturesAction({type: TRACKED_CREATURES_CONTEXT_ACTIONS.UPDATE_CREATURE, creatureAction: true, creature: updatedCreature})
+        const initMod = Math.floor((element.dexterity - 10) / 2);
+        const updatedCreature = {...element,
+            initiative: randomInit + initMod
+        }
+        dispatchTrackedCreaturesAction({type: TRACKED_CREATURES_CONTEXT_ACTIONS.UPDATE_CREATURE, elementAction: true, element: updatedCreature})
     }
     const rollPlayers = () =>{
 

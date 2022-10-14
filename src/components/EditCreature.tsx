@@ -1,16 +1,16 @@
 import { useContext } from "react";
 import { ICreature } from "../interfaces/ICreature";
-import { TrackedCreaturesContext } from "./contexts/TrackedCreaturesContext";
+import { TrackedElementsContext } from "./contexts/TrackedElementsContext";
 import Creature from "./Creature/Creature";
 
 const EditCreature = () =>{
-    const {trackedCreatures} = useContext(TrackedCreaturesContext);
+    const {trackedElements} = useContext(TrackedElementsContext);
     let creatureToDisplay
 
-    const selectedCreature = trackedCreatures.find(creature => (creature as ICreature).classList?.includes("selected"))
+    const selectedCreature = trackedElements.find(creature => (creature as ICreature).classList?.includes("selected"))
 
     if(selectedCreature)
-        creatureToDisplay = trackedCreatures[trackedCreatures.indexOf(selectedCreature)];
+        creatureToDisplay = trackedElements[trackedElements.indexOf(selectedCreature)];
 
     return(
         <div className="edit-creature">
@@ -20,10 +20,10 @@ const EditCreature = () =>{
                 id={(creatureToDisplay as ICreature).id}
                 classList={(creatureToDisplay as ICreature).classList}
                 name={(creatureToDisplay as ICreature).name}
-                stats={(creatureToDisplay as ICreature).stats}
-                health={(creatureToDisplay as ICreature).health}
-                combatStats={(creatureToDisplay as ICreature).combatStats}
-            /> : <Creature placeholder={true} /> }
+                
+                
+                
+            /> : <Creature id={-1} placeholder={true} /> }
         </div>
     )
 }

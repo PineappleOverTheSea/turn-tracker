@@ -1,20 +1,21 @@
 import React, { useContext, useReducer } from "react";
 import { ICreature } from "../interfaces/ICreature";
-import { TrackedCreaturesContext } from "./contexts/TrackedCreaturesContext";
-import { TRACKED_CREATURES_CONTEXT_ACTIONS } from "./reducers/TrackedCreaturesContextReducer";
+import { TrackedElementsContext } from "./contexts/TrackedElementsContext";
+import { TRACKED_CREATURES_CONTEXT_ACTIONS } from "./reducers/TrackedElementsContextReducer";
+import { generateRandomId } from "./utils/utils";
 
 const CreatureMinified = (props : ICreature) => {
     const creature = {...props}
 
-    const {dispatchTrackedCreaturesAction} = useContext(TrackedCreaturesContext);
+    const {dispatchTrackedElementsAction: dispatchTrackedCreaturesAction} = useContext(TrackedElementsContext);
 
     const die = () => {
-        dispatchTrackedCreaturesAction({type: TRACKED_CREATURES_CONTEXT_ACTIONS.REMOVE_CREATURE, creatureAction: true, creature: creature})
+        dispatchTrackedCreaturesAction({type: TRACKED_CREATURES_CONTEXT_ACTIONS.REMOVE_CREATURE, elementAction: true, element: creature})
     }
 
     const select = (e : React.MouseEvent) => {
         if(!(e.target instanceof HTMLButtonElement))
-            dispatchTrackedCreaturesAction({type: TRACKED_CREATURES_CONTEXT_ACTIONS.SELECT_CREATURE, creatureAction: true, creature: creature})
+            dispatchTrackedCreaturesAction({type: TRACKED_CREATURES_CONTEXT_ACTIONS.SELECT_CREATURE, elementAction: true, element: creature})
     }
 
     const setClassNames = () => {
@@ -28,7 +29,7 @@ const CreatureMinified = (props : ICreature) => {
     }
 
     return(
-        <div className={`creature-minified${creature.placeholder === true ? " placeholder" : ""}${creature.health.hitPoints === 0 ? " dead" : ""}${setClassNames()}`} onClick={e => select(e)}>
+        <div className={`creature-minified${creature.placeholder === true ? " placeholder" : ""}${creature.hitPoints === 0 ? " dead" : ""}${setClassNames()}`} onClick={e => select(e)}>
             <div className="creature-nameline">
                 <div className="creature-minified-name">{props.name}</div>
                 <button onClick={die}>Kill</button>
@@ -36,15 +37,15 @@ const CreatureMinified = (props : ICreature) => {
             <ul>
                 <li>
                     <div>Init</div>
-                    <div>{props.combatStats.initiative}</div>
+                    <div>{props.initiative}</div>
                 </li>
                 <li>
                     <div>HP</div>
-                    <div>{props.health.hitPoints}</div>
+                    <div>{props.hitPoints}</div>
                 </li>
                 <li>
                     <div>AC</div>
-                    <div>{props.combatStats.armorClass}</div>
+                    <div>{props.armorClass}</div>
                 </li>
             </ul>
         </div>
@@ -55,25 +56,20 @@ const CreatureMinified = (props : ICreature) => {
 
 CreatureMinified.defaultProps = {
     classList: [],
+    id: generateRandomId(),
     name: "Creature",
-    stats: {
-        strength: 10,
-        dexterity: 10, 
-        constitution: 10, 
-        inteligence: 10,
-        wisdom: 10, 
-        charisma: 10
-    },
-    health: {
-        hitPoints: 10,
-        hitPointsMax: 10,
-        hitPointsTemp: 0
-    },
-    combatStats:{
-        initiative: 0,
-        armorClass: 10,
-        speed: 30
-    }
+    strength: 10,
+    dexterity: 10, 
+    constitution: 10, 
+    inteligence: 10,
+    wisdom: 10, 
+    charisma: 10,
+    hitPoints: 10,
+    hitPointsMax: 10,
+    hitPointsTemp: 0,
+    initiative: 0,
+    armorClass: 10,
+    speed: 30
 }
 
 export default CreatureMinified

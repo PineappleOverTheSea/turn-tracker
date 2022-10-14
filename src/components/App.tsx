@@ -1,6 +1,6 @@
 import { StrictMode } from "react"
 import AddCreature from "./AddCreature"
-import { TrackedCreaturesProvider } from "./contexts/TrackedCreaturesContext"
+import { TrackedCreaturesProvider } from "./contexts/TrackedElementsContext"
 import Creature from "./Creature/Creature"
 import EditCreature from "./EditCreature"
 import { Roller } from "./Roller"

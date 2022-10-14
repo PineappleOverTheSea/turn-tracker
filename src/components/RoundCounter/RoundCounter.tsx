@@ -1,18 +1,17 @@
 import { useContext } from "react"
 import { IRoundCounterFlag } from "../../interfaces/IRoundCounterFlag"
-import { TrackedCreaturesContext } from "../contexts/TrackedCreaturesContext"
+import { TrackedElementsContext } from "../contexts/TrackedElementsContext"
 import { isRoundFlag } from "../utils/typeCheckers"
 
 const RoundCounter = (props : any) =>{
-    const {trackedCreatures} = useContext(TrackedCreaturesContext)
-    const roundFlag = trackedCreatures.find(element => isRoundFlag(element)) as IRoundCounterFlag
+    const {trackedElements, roundCount} = useContext(TrackedElementsContext)
     return(
         <div className="round-counter">
             <div>
                 Current round:
             </div>
             <div className="round-number">
-                {roundFlag?.roundCount - 1 || 1}
+                {roundCount}
             </div>
         </div>
     )
