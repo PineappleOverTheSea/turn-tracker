@@ -1,21 +1,21 @@
 import React, { useContext, useReducer } from "react";
-import { ICreature } from "../interfaces/ICreature";
-import { TrackedElementsContext } from "./contexts/TrackedElementsContext";
-import { TRACKED_CREATURES_CONTEXT_ACTIONS } from "./reducers/TrackedElementsContextReducer";
-import { generateRandomId } from "./utils/utils";
+import { ICreature } from "../../interfaces/ICreature";
+import { TrackedElementsContext } from "../contexts/TrackedElementsContext";
+import { TRACKED_CREATURES_CONTEXT_ACTIONS } from "../reducers/TrackedElementsContextReducer";
+import { generateRandomId } from "../utils/utils";
 
 const CreatureMinified = (props : ICreature) => {
     const creature = {...props}
 
-    const {dispatchTrackedElementsAction: dispatchTrackedCreaturesAction} = useContext(TrackedElementsContext);
+    const {trackedElements, dispatchTrackedElementsAction, setRoundCount} = useContext(TrackedElementsContext);
 
     const die = () => {
-        dispatchTrackedCreaturesAction({type: TRACKED_CREATURES_CONTEXT_ACTIONS.REMOVE_CREATURE, elements: [creature]})
+        dispatchTrackedElementsAction({type: TRACKED_CREATURES_CONTEXT_ACTIONS.REMOVE_CREATURE, elements: [creature]})
     }
 
     const select = (e : React.MouseEvent) => {
         if(!(e.target instanceof HTMLButtonElement))
-            dispatchTrackedCreaturesAction({type: TRACKED_CREATURES_CONTEXT_ACTIONS.SELECT_CREATURE, elements: [creature]})
+        dispatchTrackedElementsAction({type: TRACKED_CREATURES_CONTEXT_ACTIONS.SELECT_CREATURE, elements: [creature]})
     }
 
     const setClassNames = () => {

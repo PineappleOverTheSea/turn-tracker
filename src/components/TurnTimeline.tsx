@@ -3,7 +3,7 @@ import { ICreature } from "../interfaces/ICreature";
 import {isCreature, isRoundFlag} from "./utils/typeCheckers"
 import { TrackedElementsContext } from "./contexts/TrackedElementsContext"
 import Creature from "./Creature/Creature";
-import CreatureMinified from "./CreatureMinified";
+import CreatureMinified from "./Creature/CreatureMinified";
 import RoundCounterFlag from "./RoundCounter/RoundCounterFlag";
 import TurnTimelineControlls from "./TurnTimelineControlls";
 import { generateRandomId } from "./utils/utils";
