@@ -9,3 +9,5 @@ Make sure your NPM installation is up to date. Open a terminal in the project fo
 * Edit creature inside the "Currently active" field or by clicking on it in the "Coming up" line. Selected creature will appear below in the "Edit existing creature" area.
 * Heal / Hurt values are applied upon pressing enter.
 * Round marking flag in the timeline shows the start of the next round.
+* Too lazy to type? Creatures sharing the same name will be auto numbered.
+* Too lazy to roll real dice? Use integrated initiative roller.
