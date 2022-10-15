@@ -63,7 +63,6 @@ const TurnTimeline = () => {
         }
         else{
             minifiedElements.splice(elemIndex + 1, 0, flag)
-            console.log("test")
         }
     }
 

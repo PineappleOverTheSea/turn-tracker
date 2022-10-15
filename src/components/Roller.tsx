@@ -7,9 +7,9 @@ import { isCreature } from "./utils/typeCheckers"
 
 
 export const Roller = () =>{
-    const {trackedElements, dispatchTrackedElementsAction: dispatchTrackedCreaturesAction} = useContext(TrackedElementsContext)
-
+    const {trackedElements, dispatchTrackedElementsAction} = useContext(TrackedElementsContext)
     const [activeId, setActiveId] = useState<string>("roll-creatures");
+    const elements = [...trackedElements]
 
     const setActive = (e : React.MouseEvent<HTMLDivElement, MouseEvent>) => {
         const id = e.currentTarget.id
@@ -17,31 +17,39 @@ export const Roller = () =>{
     }
 
     const rollInitiative = () =>{
-            switch(activeId){
-                case "roll-creatures":{
-                    for(const element of trackedElements){
-                        if(!isCreature(element))
-                            continue
-                        rollCreatures(element)
-                    }
 
+        const lastElement = elements.find(el => el.classList.includes("last"))
+        if(lastElement){
+            const lastIndex = lastElement.classList.findIndex(el => el === "last")
+            lastElement.classList.splice(lastIndex, 1)
+            dispatchTrackedElementsAction({type: TRACKED_ELEMENTS_CONTEXT_ACTIONS.UPDATE_ELEMENT, elements: [lastElement]})
+        }
+
+        switch(activeId){
+            case "roll-creatures":{
+                for(const element of elements){
+                    if(!isCreature(element))
+                        continue
+                    rollCreatures(element)
                 }
-                break;
-                case "roll-players":{
-                    
-                }
-                break;
-                case "roll-both":{
-                    for(const element of trackedElements){
-                        if(!isCreature(element))
-                            continue
-                        rollCreatures(element)
-                    }
-                }
-                break;
-                default: throw Error("No active ID!")
+
             }
-           
+            break;
+            case "roll-players":{
+                
+            }
+            break;
+            case "roll-both":{
+                for(const element of elements){
+                    if(!isCreature(element))
+                        continue
+                    rollCreatures(element)
+                }
+            }
+            break;
+            default: throw Error("No active ID!")
+        }
+        
     }
 
     const rollCreatures = (element : ICreature) =>{
@@ -50,7 +58,7 @@ export const Roller = () =>{
         const updatedCreature = {...element,
             initiative: randomInit + initMod
         }
-        dispatchTrackedCreaturesAction({type: TRACKED_ELEMENTS_CONTEXT_ACTIONS.UPDATE_ELEMENT, elements: [updatedCreature]})
+        dispatchTrackedElementsAction({type: TRACKED_ELEMENTS_CONTEXT_ACTIONS.UPDATE_ELEMENT, elements: [updatedCreature]})
     }
     const rollPlayers = () =>{
 
