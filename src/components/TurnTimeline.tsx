@@ -16,9 +16,10 @@ const TurnTimeline = () => {
     const minifiedElements : JSX.Element[] = []
     const initiatives : number[] = []
     const inverseElements : IElement[] = []
+    const elements = [...trackedElements]
 
     const fillMinifiedElements = () =>{
-        for(const element of trackedElements){
+        for(const element of elements){
             if(isCreature(element)){
                 minifiedElements.push(
                     <CreatureMinified
@@ -48,32 +49,58 @@ const TurnTimeline = () => {
 
     const insertFlag = () =>{
         const flag = <RoundCounterFlag key={"flag"} roundCount={roundCount + 1}/>
-        const elements = [...trackedElements]
-        let elemIndex = elements.findIndex(el => el.classList.includes("last"))
-        if(elemIndex === -1){
+        let firstElemIndex = elements.findIndex(el => el.classList.includes("first"))
+        let lastElemIndex = elements.findIndex(el => el.classList.includes("last"))
 
-            const lowestInit = Math.min.apply(Math, initiatives)
-            elemIndex = inverseElements.findIndex(el => el.initiative === lowestInit)
-            elemIndex = inverseElements.length - 1 - elemIndex
-            minifiedElements.splice(elemIndex + 1, 0, flag)
+        if(firstElemIndex === -1){
+            if(lastElemIndex !== -1){
+                if(lastElemIndex !== 0)
+                    firstElemIndex = lastElemIndex -1
+                else firstElemIndex = elements.length - 1
+            }
+            else{
+                const maxInit = Math.max.apply(Math, initiatives)
+                firstElemIndex = inverseElements.findIndex(el => el.initiative === maxInit)
+                firstElemIndex = elements.length - 1 - firstElemIndex
+            }
+            const markedElement = elements[firstElemIndex]
+            markedElement.classList = [...markedElement.classList, "first"]
+            dispatchTrackedElementsAction({type: TRACKED_ELEMENTS_CONTEXT_ACTIONS.UPDATE_ELEMENT, elements: [markedElement]})
+        }
+        if(lastElemIndex === -1 && trackedElements.length > 1){
+            if(firstElemIndex !== -1){
+                if(firstElemIndex !== 0)
+                    lastElemIndex = firstElemIndex - 1
+                else lastElemIndex = elements.length -1
+            }
+            else{
+                const minInit = Math.min.apply(Math, initiatives)
+                lastElemIndex = inverseElements.findIndex(el => el.initiative === minInit)
+                lastElemIndex = inverseElements.length - 1 - lastElemIndex
+            }
 
-            const markedElement = elements[elemIndex]
+            const markedElement = elements[lastElemIndex]
+
             markedElement.classList = [...markedElement.classList, "last"]
             dispatchTrackedElementsAction({type: TRACKED_ELEMENTS_CONTEXT_ACTIONS.UPDATE_ELEMENT, elements: [markedElement]})
         }
-        else{
-            minifiedElements.splice(elemIndex + 1, 0, flag)
+        if(firstElemIndex !== -1 && lastElemIndex !== -1){
+            minifiedElements.splice(lastElemIndex + 1, 0, flag)
         }
+        else{
+            minifiedElements.splice(firstElemIndex + 1, 0, flag)
+        }
+
     }
 
     const adjustMinifiedElements = () =>{
         if(trackedElements.length > 1){
             fillMinifiedElements()
-            insertFlag()
+            // insertFlag()
         }
         else if(trackedElements.length > 0){
             fillMinifiedElements()
-            insertFlag()
+            // insertFlag()
             minifiedElements.push(<CreatureMinified key={"placeholder-small"} placeholder={true} />)
         }
     }

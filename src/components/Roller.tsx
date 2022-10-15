@@ -17,13 +17,18 @@ export const Roller = () =>{
     }
 
     const rollInitiative = () =>{
-
-        const lastElement = elements.find(el => el.classList.includes("last"))
-        if(lastElement){
-            const lastIndex = lastElement.classList.findIndex(el => el === "last")
-            lastElement.classList.splice(lastIndex, 1)
-            dispatchTrackedElementsAction({type: TRACKED_ELEMENTS_CONTEXT_ACTIONS.UPDATE_ELEMENT, elements: [lastElement]})
-        }
+        // const firstElement = elements.find(el => el.classList.includes("first"))
+        // const lastElement = elements.find(el => el.classList.includes("last"))
+        // if(firstElement){
+        //     const firstIndex = firstElement.classList.findIndex(el => el === "fist")
+        //     firstElement.classList.splice(firstIndex, 1)
+        //     dispatchTrackedElementsAction({type: TRACKED_ELEMENTS_CONTEXT_ACTIONS.UPDATE_ELEMENT, elements: [firstElement]})
+        // }
+        // if(lastElement){
+        //     const lastIndex = lastElement.classList.findIndex(el => el === "last")
+        //     lastElement.classList.splice(lastIndex, 1)
+        //     dispatchTrackedElementsAction({type: TRACKED_ELEMENTS_CONTEXT_ACTIONS.UPDATE_ELEMENT, elements: [lastElement]})
+        // }
 
         switch(activeId){
             case "roll-creatures":{
