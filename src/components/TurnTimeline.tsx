@@ -48,7 +48,8 @@ const TurnTimeline = () => {
 
     const insertFlag = () =>{
         const flag = <RoundCounterFlag key={"flag"} roundCount={roundCount + 1}/>
-        let elemIndex = trackedElements.findIndex(el => el.classList.includes("last"))
+        const elements = [...trackedElements]
+        let elemIndex = elements.findIndex(el => el.classList.includes("last"))
         if(elemIndex === -1){
 
             const lowestInit = Math.min.apply(Math, initiatives)
@@ -56,12 +57,13 @@ const TurnTimeline = () => {
             elemIndex = inverseElements.length - 1 - elemIndex
             minifiedElements.splice(elemIndex + 1, 0, flag)
 
-            const markedElement = trackedElements[elemIndex]
+            const markedElement = elements[elemIndex]
             markedElement.classList = [...markedElement.classList, "last"]
             dispatchTrackedElementsAction({type: TRACKED_ELEMENTS_CONTEXT_ACTIONS.UPDATE_ELEMENT, elements: [markedElement]})
         }
         else{
             minifiedElements.splice(elemIndex + 1, 0, flag)
+            console.log("test")
         }
     }
 
