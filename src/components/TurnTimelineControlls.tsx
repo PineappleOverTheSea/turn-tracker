@@ -1,32 +1,34 @@
 import { useContext } from "react"
 import { TrackedElementsContext } from "./contexts/TrackedElementsContext"
-import { TRACKED_CREATURES_CONTEXT_ACTIONS } from "./reducers/TrackedElementsContextReducer"
+import { TRACKED_ELEMENTS_CONTEXT_ACTIONS } from "./reducers/TrackedElementsContextReducer"
 
 const TurnTimelineControlls = () => {
 
     const {trackedElements, dispatchTrackedElementsAction, roundCount, setRoundCount} = useContext(TrackedElementsContext)
 
+    const updatedState = [...trackedElements]
+        const lastIsFirst = trackedElements[0]?.classList.includes("last")
+        const lastIsLast = trackedElements[trackedElements.length-1]?.classList.includes("last")
+
     const nextTurn = () => {
-        const updatedState = [...trackedElements]
         const element = updatedState.shift() 
         if(element)
             updatedState.push(element)
 
-        dispatchTrackedElementsAction({type: TRACKED_CREATURES_CONTEXT_ACTIONS.SET_ELEMENTS, elements: updatedState})
-        if(updatedState.length < 2 || trackedElements[0].initiative < trackedElements[1].initiative)
+        dispatchTrackedElementsAction({type: TRACKED_ELEMENTS_CONTEXT_ACTIONS.SET_ELEMENTS, elements: updatedState})
+        if(updatedState.length < 2 || lastIsFirst)
             setRoundCount(roundCount+1)
     }
 
     const previousTurn = () => {
-        const updatedState = [...trackedElements]
-        if(!(roundCount === 1 && trackedElements[0].initiative > trackedElements[trackedElements.length - 1].initiative)){
+        if(!(roundCount === 1 && lastIsLast)){
             const element = updatedState.pop()
             if(element)
                 updatedState.unshift(element)
         }
-        dispatchTrackedElementsAction({type: TRACKED_CREATURES_CONTEXT_ACTIONS.SET_ELEMENTS, elements: updatedState})
+        dispatchTrackedElementsAction({type: TRACKED_ELEMENTS_CONTEXT_ACTIONS.SET_ELEMENTS, elements: updatedState})
 
-        if((updatedState.length < 2 || trackedElements[0].initiative > trackedElements[trackedElements.length - 1].initiative) && roundCount > 1){
+        if((updatedState.length < 2 || lastIsLast) && roundCount > 1){
             setRoundCount(roundCount-1)
         }
     }

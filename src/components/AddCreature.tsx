@@ -1,7 +1,7 @@
 import { useContext, useReducer, useState } from "react";
 import { creatureReducer, CREATURE_ACTIONS } from "./reducers/CreatureReducer";
 import { TrackedElementsContext } from "./contexts/TrackedElementsContext";
-import { TRACKED_CREATURES_CONTEXT_ACTIONS } from "./reducers/TrackedElementsContextReducer";
+import { TRACKED_ELEMENTS_CONTEXT_ACTIONS } from "./reducers/TrackedElementsContextReducer";
 import Creature from "./Creature/Creature";
 import { generateRandomId } from "./utils/utils";
 
@@ -17,7 +17,7 @@ const AddCreatureModal = () => {
             onEmptyName()
             return
         }
-        dispatchTrackedCreaturesAction({type: TRACKED_CREATURES_CONTEXT_ACTIONS.ADD_CREATURE, elements: [{
+        dispatchTrackedCreaturesAction({type: TRACKED_ELEMENTS_CONTEXT_ACTIONS.ADD_ELEMENT, elements: [{
                 ...newCreature,
                 id: generateRandomId(),
                 initiative: newCreature.initiative + initMod

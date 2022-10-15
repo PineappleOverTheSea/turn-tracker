@@ -1,7 +1,4 @@
 import { IElement } from "./IElement";
-import { stats } from "./IStatTypes";
-import { health } from "./IStatTypes";
-import { combatStats } from "./IStatTypes";
 
 export interface ICreature extends IElement{
     placeholder?: boolean,

@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { ICreature } from "../../interfaces/ICreature";
 import { TrackedElementsContext } from "../contexts/TrackedElementsContext";
 import { CREATURE_ACTIONS } from "../reducers/CreatureReducer";
-import { TRACKED_CREATURES_CONTEXT_ACTIONS } from "../reducers/TrackedElementsContextReducer";
+import { TRACKED_ELEMENTS_CONTEXT_ACTIONS } from "../reducers/TrackedElementsContextReducer";
 
 const CombatStatTable = (props : {creature : ICreature, updateCreature : (valueType: string, value: string | number) => ICreature}) => {
     const {dispatchTrackedElementsAction: dispatchTrackedCreaturesAction} = useContext(TrackedElementsContext)
@@ -15,7 +15,7 @@ const CombatStatTable = (props : {creature : ICreature, updateCreature : (valueT
         const value = isNaN(e.target.valueAsNumber) ? "" : e.target.valueAsNumber
 
         const updatedCreature = updateCreature(valueType, value)
-        dispatchTrackedCreaturesAction({type: TRACKED_CREATURES_CONTEXT_ACTIONS.UPDATE_CREATURE, elements: [updatedCreature]});
+        dispatchTrackedCreaturesAction({type: TRACKED_ELEMENTS_CONTEXT_ACTIONS.UPDATE_ELEMENT, elements: [updatedCreature]});
     }
     
     return(

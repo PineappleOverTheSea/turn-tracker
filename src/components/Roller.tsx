@@ -1,7 +1,7 @@
 import { useContext, useState } from "react"
 import { ICreature } from "../interfaces/ICreature"
 import { TrackedElementsContext } from "./contexts/TrackedElementsContext"
-import { TRACKED_CREATURES_CONTEXT_ACTIONS } from "./reducers/TrackedElementsContextReducer"
+import { TRACKED_ELEMENTS_CONTEXT_ACTIONS } from "./reducers/TrackedElementsContextReducer"
 import { d20 } from "./utils/dice"
 import { isCreature } from "./utils/typeCheckers"
 
@@ -50,7 +50,7 @@ export const Roller = () =>{
         const updatedCreature = {...element,
             initiative: randomInit + initMod
         }
-        dispatchTrackedCreaturesAction({type: TRACKED_CREATURES_CONTEXT_ACTIONS.UPDATE_CREATURE, elements: [updatedCreature]})
+        dispatchTrackedCreaturesAction({type: TRACKED_ELEMENTS_CONTEXT_ACTIONS.UPDATE_ELEMENT, elements: [updatedCreature]})
     }
     const rollPlayers = () =>{
 

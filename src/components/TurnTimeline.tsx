@@ -8,11 +8,14 @@ import RoundCounterFlag from "./RoundCounter/RoundCounterFlag";
 import TurnTimelineControlls from "./TurnTimelineControlls";
 import { generateRandomId } from "./utils/utils";
 import { IRoundCounterFlag } from "../interfaces/IRoundCounterFlag";
+import { IElement } from "../interfaces/IElement";
+import { TRACKED_ELEMENTS_CONTEXT_ACTIONS } from "./reducers/TrackedElementsContextReducer";
 
 const TurnTimeline = () => {
-    const {trackedElements, roundCount} = useContext(TrackedElementsContext);
+    const {trackedElements, dispatchTrackedElementsAction, roundCount} = useContext(TrackedElementsContext);
     const minifiedElements : JSX.Element[] = []
     const initiatives : number[] = []
+    const inverseElements : IElement[] = []
 
     const fillMinifiedElements = () =>{
         for(const element of trackedElements){
@@ -39,20 +42,27 @@ const TurnTimeline = () => {
                 )
             }
             initiatives.push(element.initiative)
+            inverseElements.unshift(element)
         }
     }
 
     const insertFlag = () =>{
-        const lowestInit = Math.min.apply(Math, initiatives)
         const flag = <RoundCounterFlag key={"flag"} roundCount={roundCount + 1}/>
-        let initIndex = trackedElements.findIndex(elem => elem.initiative === lowestInit)
-        const arr = trackedElements.filter(el => {
-            if(el.initiative === lowestInit)
-                return true
-            else return false
-        })
-        initIndex = trackedElements.findIndex(elem => elem.id === arr[arr.length - 1].id)
-        minifiedElements.splice(initIndex + 1, 0, flag)
+        let elemIndex = trackedElements.findIndex(el => el.classList.includes("last"))
+        if(elemIndex === -1){
+
+            const lowestInit = Math.min.apply(Math, initiatives)
+            elemIndex = inverseElements.findIndex(el => el.initiative === lowestInit)
+            elemIndex = inverseElements.length - 1 - elemIndex
+            minifiedElements.splice(elemIndex + 1, 0, flag)
+
+            const markedElement = trackedElements[elemIndex]
+            markedElement.classList = [...markedElement.classList, "last"]
+            dispatchTrackedElementsAction({type: TRACKED_ELEMENTS_CONTEXT_ACTIONS.UPDATE_ELEMENT, elements: [markedElement]})
+        }
+        else{
+            minifiedElements.splice(elemIndex + 1, 0, flag)
+        }
     }
 
     const adjustMinifiedElements = () =>{
