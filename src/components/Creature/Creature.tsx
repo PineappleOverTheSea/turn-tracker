@@ -12,12 +12,16 @@ import { generateRandomId } from "../utils/utils";
 const Creature = (props : ICreature) => {
     let creature = {...props}
 
-    const {trackedElements, dispatchTrackedElementsAction, setRoundCount} = useContext(TrackedElementsContext)
+    const {trackedElements, dispatchTrackedElementsAction, roundCount, setRoundCount} = useContext(TrackedElementsContext)
 
     const die = () => {
         dispatchTrackedElementsAction({type: TRACKED_ELEMENTS_CONTEXT_ACTIONS.REMOVE_ELEMENT, elements: [creature]})
-        if(trackedElements.length === 1)
+        if(trackedElements[1].id === -100){
+            setRoundCount(roundCount + 1)
+        }
+        if(trackedElements.length === 2)
             setRoundCount(1)
+        
     }
 
     //PALIKTI KAIP YRA, TURI BŪTI IMPLEMENTUOTA KAIP FUNKCIJA KITAIP ATSIRANDA REDUCER CHAINING

@@ -1,22 +1,17 @@
-import { useContext, useState } from "react"
-import { ICreature } from "../interfaces/ICreature";
-import {isCreature, isRoundFlag} from "./utils/typeCheckers"
+import { useContext} from "react"
+import {isCreature, isFlag, isPlayer} from "./utils/typeCheckers"
 import { TrackedElementsContext } from "./contexts/TrackedElementsContext"
 import Creature from "./Creature/Creature";
 import CreatureMinified from "./Creature/CreatureMinified";
 import RoundCounterFlag from "./RoundCounter/RoundCounterFlag";
 import TurnTimelineControlls from "./TurnTimelineControlls";
-import { generateRandomId } from "./utils/utils";
-import { IRoundCounterFlag } from "../interfaces/IRoundCounterFlag";
-import { IElement } from "../interfaces/IElement";
-import { TRACKED_ELEMENTS_CONTEXT_ACTIONS } from "./reducers/TrackedElementsContextReducer";
+
 
 const TurnTimeline = () => {
-    const {trackedElements, dispatchTrackedElementsAction, roundCount} = useContext(TrackedElementsContext);
+    const {trackedElements, roundCount} = useContext(TrackedElementsContext);
     const minifiedElements : JSX.Element[] = []
-    const initiatives : number[] = []
-    const inverseElements : IElement[] = []
     const elements = [...trackedElements]
+    let flagIndex : number
 
     const fillMinifiedElements = () =>{
         for(const element of elements){
@@ -42,65 +37,41 @@ const TurnTimeline = () => {
                     />
                 )
             }
-            initiatives.push(element.initiative)
-            inverseElements.unshift(element)
+            // else if(isPlayer(element)){
+
+            // }
+            else if(isFlag(element)){
+                if(minifiedElements.length === 0)
+                    flagIndex = 0
+                minifiedElements.push(
+                    <RoundCounterFlag 
+                        key={element.id}
+                        id={element.id}
+                        name={element.name}
+                        initiative={element.initiative}
+                        roundCount={roundCount + 1}
+                    />
+                )
+            }
         }
     }
 
-    const insertFlag = () =>{
-        const flag = <RoundCounterFlag key={"flag"} roundCount={roundCount + 1}/>
-        let firstElemIndex = elements.findIndex(el => el.classList.includes("first"))
-        let lastElemIndex = elements.findIndex(el => el.classList.includes("last"))
-
-        if(firstElemIndex === -1){
-            if(lastElemIndex !== -1){
-                if(lastElemIndex !== 0)
-                    firstElemIndex = lastElemIndex -1
-                else firstElemIndex = elements.length - 1
-            }
-            else{
-                const maxInit = Math.max.apply(Math, initiatives)
-                firstElemIndex = inverseElements.findIndex(el => el.initiative === maxInit)
-                firstElemIndex = elements.length - 1 - firstElemIndex
-            }
-            const markedElement = elements[firstElemIndex]
-            markedElement.classList = [...markedElement.classList, "first"]
-            dispatchTrackedElementsAction({type: TRACKED_ELEMENTS_CONTEXT_ACTIONS.UPDATE_ELEMENT, elements: [markedElement]})
+    const moveFlag = () =>{
+        if(flagIndex === 0){
+            let flag = minifiedElements.shift()
+            if(flag)
+                minifiedElements.push(flag)
         }
-        if(lastElemIndex === -1 && trackedElements.length > 1){
-            if(firstElemIndex !== -1){
-                if(firstElemIndex !== 0)
-                    lastElemIndex = firstElemIndex - 1
-                else lastElemIndex = elements.length -1
-            }
-            else{
-                const minInit = Math.min.apply(Math, initiatives)
-                lastElemIndex = inverseElements.findIndex(el => el.initiative === minInit)
-                lastElemIndex = inverseElements.length - 1 - lastElemIndex
-            }
-
-            const markedElement = elements[lastElemIndex]
-
-            markedElement.classList = [...markedElement.classList, "last"]
-            dispatchTrackedElementsAction({type: TRACKED_ELEMENTS_CONTEXT_ACTIONS.UPDATE_ELEMENT, elements: [markedElement]})
-        }
-        if(firstElemIndex !== -1 && lastElemIndex !== -1){
-            minifiedElements.splice(lastElemIndex + 1, 0, flag)
-        }
-        else{
-            minifiedElements.splice(firstElemIndex + 1, 0, flag)
-        }
-
     }
 
     const adjustMinifiedElements = () =>{
-        if(trackedElements.length > 1){
+        if(trackedElements.length > 2){
             fillMinifiedElements()
-            // insertFlag()
+            moveFlag()
         }
-        else if(trackedElements.length > 0){
+        else if(trackedElements.length > 1){
             fillMinifiedElements()
-            // insertFlag()
+            moveFlag()
             minifiedElements.push(<CreatureMinified key={"placeholder-small"} placeholder={true} />)
         }
     }
@@ -115,7 +86,7 @@ const TurnTimeline = () => {
             </div>
             <div className="title">Coming up:</div>
             <div className="minified-creatures">
-                {minifiedElements.length > 0 ? minifiedElements.slice(1) : <CreatureMinified key={"placeholder-small"} placeholder={true} />}
+                {minifiedElements.length > 1 ? minifiedElements.slice(1) : <CreatureMinified key={"placeholder-small"} placeholder={true} />}
             </div>
             <TurnTimelineControlls />
         </div>

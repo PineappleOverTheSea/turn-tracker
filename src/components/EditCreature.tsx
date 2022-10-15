@@ -31,7 +31,7 @@ const EditCreature = () =>{
                 hitPointsTemp={elementToDisplay.hitPointsTemp}
                 initiative={elementToDisplay.initiative}
                 armorClass={elementToDisplay.armorClass}
-                speed={elementToDisplay.speed}/> : <Creature id={-1} placeholder={true} /> }
+                speed={elementToDisplay.speed}/> : <Creature placeholder={true} /> }
         </div>
     )
 }

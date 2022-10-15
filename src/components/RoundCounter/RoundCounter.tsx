@@ -1,7 +1,5 @@
 import { useContext } from "react"
-import { IRoundCounterFlag } from "../../interfaces/IRoundCounterFlag"
 import { TrackedElementsContext } from "../contexts/TrackedElementsContext"
-import { isRoundFlag } from "../utils/typeCheckers"
 
 const RoundCounter = (props : any) =>{
     const {trackedElements, roundCount} = useContext(TrackedElementsContext)

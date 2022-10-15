@@ -6,11 +6,11 @@ import Creature from "../Creature/Creature"
 //Type checking'as kad būtų galima patikrint koks elementas ištrauktas iš masyvo
 export const isCreature = (obj : Object) : obj is ICreature => {
     obj.isPrototypeOf(Creature)
-    return obj && "name" in obj
+    return obj && "speed" in obj
 }
 export const isPlayer = (obj: any) : obj is IPlayer =>{
-    return obj && "type"
+    return false
 }
-export const isRoundFlag = (obj : any) : obj is IRoundCounterFlag => {
+export const isFlag = (obj : any) : obj is IRoundCounterFlag => {
     return obj && "roundCount" in obj
 }

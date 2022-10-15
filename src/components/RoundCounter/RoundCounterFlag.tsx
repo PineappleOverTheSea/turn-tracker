@@ -1,5 +1,6 @@
 import { ICreature } from "../../interfaces/ICreature"
 import { IRoundCounterFlag } from "../../interfaces/IRoundCounterFlag"
+import { generateRandomId } from "../utils/utils"
 
 const RoundCounterFlag = (props : IRoundCounterFlag) =>{
     const roundCount = props.roundCount
@@ -20,6 +21,14 @@ const RoundCounterFlag = (props : IRoundCounterFlag) =>{
             {`${roundCount}${suffix} round`}
         </div>
     )
+}
+
+RoundCounterFlag.defaultProps = {
+    id: -100,
+    classList: ["round-counter-flag"],
+    name: "RoundFlag",
+    initiative: -1,
+    roundCount: 2
 }
 
 export default RoundCounterFlag

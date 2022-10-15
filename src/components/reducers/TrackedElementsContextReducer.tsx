@@ -1,5 +1,6 @@
 import { IElement } from "../../interfaces/IElement";
 import { ITrackedElementsContextDispatch } from "../../interfaces/ITrackedElementsContextDispatch";
+import RoundCounterFlag from "../RoundCounter/RoundCounterFlag";
 
 export const TRACKED_ELEMENTS_CONTEXT_ACTIONS = {
     ADD_ELEMENT: "ADD_ELEMENT",
@@ -49,44 +50,55 @@ const markDuplicates = (name : string, updatedState : IElement[]) => {
     return name
 }
 
+const insertFlag = (updatedElements : IElement[]) =>{
+    if(updatedElements.findIndex(el => el.id === -100) !== -1)
+        return 0
+    const flag = RoundCounterFlag.defaultProps
+    updatedElements.push(flag)
+}
+
 export const TrackedElementsContextReducer : React.Reducer<IElement[], ITrackedElementsContextDispatch> = (state, action) : IElement[] => {
-        switch(action.type){
-            case TRACKED_ELEMENTS_CONTEXT_ACTIONS.ADD_ELEMENT:{
-                let updatedState = [...state]
-                let newCreature = action.elements[0]
-                newCreature.name = markDuplicates(newCreature.name, updatedState)
-                updatedState.push(newCreature)
-                sort(updatedState)
-                return updatedState
-            }
-            case TRACKED_ELEMENTS_CONTEXT_ACTIONS.REMOVE_ELEMENT:{
-                const creatureIndex = findIndex(state, action)
-                const updatedState = [...state]
-                updatedState.splice(creatureIndex, 1)
-                return updatedState
-            }
-            case TRACKED_ELEMENTS_CONTEXT_ACTIONS.UPDATE_ELEMENT:{
-                const creatureIndex = findIndex(state, action)
-                const updatedState = [...state]
-                updatedState.splice(creatureIndex, 1, action.elements[0])
-                sort(updatedState)
-                return updatedState
-            }
-            case TRACKED_ELEMENTS_CONTEXT_ACTIONS.SELECT_ELEMENT:{
-                const updatedState = [...state]
-                const creatureIndex = findIndex(state, action)
-                for(const creature of updatedState){
-                    const filteredClasses = creature.classList.filter(className => className !== "selected")
-                    if(filteredClasses)
-                        creature.classList = filteredClasses
-                }
-                updatedState[creatureIndex].classList.push("selected")
-                return updatedState
-            }
-            case TRACKED_ELEMENTS_CONTEXT_ACTIONS.SET_ELEMENTS:{
-                const updatedState = [...action.elements]
-                return updatedState
-            }
-            default: throw Error("Invadlid action type!")
+    let updatedState = [...state]
+    switch(action.type){
+        case TRACKED_ELEMENTS_CONTEXT_ACTIONS.ADD_ELEMENT:{
+            
+            let newCreature = action.elements[0]
+            newCreature.name = markDuplicates(newCreature.name, updatedState)
+            updatedState.push(newCreature)
+            insertFlag(updatedState)
+            sort(updatedState)
+            return updatedState
         }
+        case TRACKED_ELEMENTS_CONTEXT_ACTIONS.REMOVE_ELEMENT:{
+            const creatureIndex = findIndex(state, action)
+            updatedState.splice(creatureIndex, 1)
+            if(updatedState[0].id === -100){
+                const flag = updatedState.shift()
+                if(flag && updatedState.length !== 0)
+                    updatedState.push(flag)
+            }
+            return updatedState
+        }
+        case TRACKED_ELEMENTS_CONTEXT_ACTIONS.UPDATE_ELEMENT:{
+            const creatureIndex = findIndex(state, action)
+            updatedState.splice(creatureIndex, 1, action.elements[0])
+            sort(updatedState)
+            return updatedState
+        }
+        case TRACKED_ELEMENTS_CONTEXT_ACTIONS.SELECT_ELEMENT:{
+            const creatureIndex = findIndex(state, action)
+            for(const creature of updatedState){
+                const filteredClasses = creature.classList.filter(className => className !== "selected")
+                if(filteredClasses)
+                    creature.classList = filteredClasses
+            }
+            updatedState[creatureIndex].classList.push("selected")
+            return updatedState
+        }
+        case TRACKED_ELEMENTS_CONTEXT_ACTIONS.SET_ELEMENTS:{
+            const updatedState = [...action.elements]
+            return updatedState
+        }
+        default: throw Error("Invadlid action type!")
+    }
 }

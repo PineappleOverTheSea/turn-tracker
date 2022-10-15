@@ -7,7 +7,7 @@ import { generateRandomId } from "../utils/utils";
 const CreatureMinified = (props : ICreature) => {
     const creature = {...props}
 
-    const {trackedElements, dispatchTrackedElementsAction, setRoundCount} = useContext(TrackedElementsContext);
+    const {dispatchTrackedElementsAction} = useContext(TrackedElementsContext);
 
     const die = () => {
         dispatchTrackedElementsAction({type: TRACKED_ELEMENTS_CONTEXT_ACTIONS.REMOVE_ELEMENT, elements: [creature]})

@@ -6,31 +6,35 @@ const TurnTimelineControlls = () => {
 
     const {trackedElements, dispatchTrackedElementsAction, roundCount, setRoundCount} = useContext(TrackedElementsContext)
 
-    const updatedState = [...trackedElements]
-        const lastIsFirst = trackedElements[0]?.classList.includes("last")
-        const lastIsLast = trackedElements[trackedElements.length-1]?.classList.includes("last")
+    const elements = [...trackedElements]
 
     const nextTurn = () => {
-        const element = updatedState.shift() 
-        if(element)
-            updatedState.push(element)
-
-        dispatchTrackedElementsAction({type: TRACKED_ELEMENTS_CONTEXT_ACTIONS.SET_ELEMENTS, elements: updatedState})
-        if(updatedState.length < 2 || lastIsFirst)
+        let el = elements.shift()
+        if(el)
+            elements.push(el)
+        if(elements[0].id === -100){
+            el = elements.shift()
+            if(el)
+                elements.push(el)
             setRoundCount(roundCount+1)
+        }
+        dispatchTrackedElementsAction({type: TRACKED_ELEMENTS_CONTEXT_ACTIONS.SET_ELEMENTS, elements: elements})
     }
 
     const previousTurn = () => {
-        if(!(roundCount === 1 && lastIsLast)){
-            const element = updatedState.pop()
-            if(element)
-                updatedState.unshift(element)
-        }
-        dispatchTrackedElementsAction({type: TRACKED_ELEMENTS_CONTEXT_ACTIONS.SET_ELEMENTS, elements: updatedState})
-
-        if((updatedState.length < 2 || lastIsLast) && roundCount > 1){
+        if(elements[elements.length - 1].id === -100 && roundCount === 1)
+            return 0
+            
+        let el = elements.pop()
+        if(el)
+            elements.unshift(el)
+        if(elements[0].id === -100){
+            el = elements.pop()
+            if(el)
+                elements.unshift(el)
             setRoundCount(roundCount-1)
         }
+        dispatchTrackedElementsAction({type: TRACKED_ELEMENTS_CONTEXT_ACTIONS.SET_ELEMENTS, elements: elements})
     }
 
     return (
