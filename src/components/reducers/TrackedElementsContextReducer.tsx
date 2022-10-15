@@ -1,6 +1,7 @@
 import { IElement } from "../../interfaces/IElement";
 import { ITrackedElementsContextDispatch } from "../../interfaces/ITrackedElementsContextDispatch";
 import RoundCounterFlag from "../RoundCounter/RoundCounterFlag";
+import { isFlag } from "../utils/typeCheckers";
 
 export const TRACKED_ELEMENTS_CONTEXT_ACTIONS = {
     ADD_ELEMENT: "ADD_ELEMENT",
@@ -22,6 +23,8 @@ const findIndex = (state : IElement[], action : ITrackedElementsContextDispatch)
 
 const sort = (updatedState : IElement[]) =>{
     updatedState.sort((c1, c2) => {
+        if(isFlag(c1) || isFlag(c2))
+            return 0
         const diff = c2.initiative - c1.initiative
         if(diff !== 0)
             return diff
@@ -51,8 +54,6 @@ const markDuplicates = (name : string, updatedState : IElement[]) => {
 }
 
 const insertFlag = (updatedElements : IElement[]) =>{
-    if(updatedElements.findIndex(el => el.id === -100) !== -1)
-        return 0
     const flag = RoundCounterFlag.defaultProps
     updatedElements.push(flag)
 }
@@ -61,18 +62,23 @@ export const TrackedElementsContextReducer : React.Reducer<IElement[], ITrackedE
     let updatedState = [...state]
     switch(action.type){
         case TRACKED_ELEMENTS_CONTEXT_ACTIONS.ADD_ELEMENT:{
-            
             let newCreature = action.elements[0]
             newCreature.name = markDuplicates(newCreature.name, updatedState)
-            updatedState.push(newCreature)
-            insertFlag(updatedState)
+
+            if(updatedState.length === 0 || newCreature.initiative > updatedState[0].initiative)
+                updatedState.push(newCreature)
+            else updatedState.unshift(newCreature)
+
+            
+            if(updatedState.findIndex(el => isFlag(el)) === -1)
+                insertFlag(updatedState)
             sort(updatedState)
             return updatedState
         }
         case TRACKED_ELEMENTS_CONTEXT_ACTIONS.REMOVE_ELEMENT:{
             const creatureIndex = findIndex(state, action)
             updatedState.splice(creatureIndex, 1)
-            if(updatedState[0].id === -100){
+            if(isFlag(updatedState[0])){
                 const flag = updatedState.shift()
                 if(flag && updatedState.length !== 0)
                     updatedState.push(flag)
