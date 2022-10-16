@@ -10,4 +10,4 @@ Make sure your NPM installation is up to date. Open a terminal in the project fo
 * Heal / Hurt values are applied upon pressing enter.
 * Round marking flag in the timeline shows the start of the next round.
 * Too lazy to type? Creatures sharing the same name will be auto numbered.
-* Too lazy to roll real dice? Use integrated initiative roller.
+* Too lazy to roll real dice? Use integrated initiative roller. Warning: rolling will reset the current round
