@@ -1,6 +1,7 @@
 import { useContext } from "react"
 import { TrackedElementsContext } from "./contexts/TrackedElementsContext"
 import { TRACKED_ELEMENTS_CONTEXT_ACTIONS } from "./reducers/TrackedElementsContextReducer"
+import { isFlag } from "./utils/typeCheckers"
 
 const TurnTimelineControlls = () => {
 
@@ -12,7 +13,7 @@ const TurnTimelineControlls = () => {
         let el = elements.shift()
         if(el)
             elements.push(el)
-        if(elements[0].id === -100){
+        if(isFlag(elements[0])){
             el = elements.shift()
             if(el)
                 elements.push(el)
@@ -22,13 +23,13 @@ const TurnTimelineControlls = () => {
     }
 
     const previousTurn = () => {
-        if(elements[elements.length - 1].id === -100 && roundCount === 1)
+        if(isFlag(elements[elements.length - 1]) && roundCount === 1)
             return 0
             
         let el = elements.pop()
         if(el)
             elements.unshift(el)
-        if(elements[0].id === -100){
+        if(isFlag(elements[0])){
             el = elements.pop()
             if(el)
                 elements.unshift(el)

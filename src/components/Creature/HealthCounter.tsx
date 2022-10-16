@@ -29,42 +29,43 @@ const HealthCounter = (props : {creature : ICreature, updateCreature : (valueTyp
     }
 
     const setHitpoints = (valueType : string, e : React.KeyboardEvent<HTMLInputElement>,) => {
-        if (e.key === "Enter"){
-            const input = e.target as HTMLInputElement;
-            let inputValue = Number.parseInt(input.value);
-            let updatedCreature;
+        if (e.key !== "Enter")
+            return 0
 
-            if(Number.isNaN(inputValue))
-                return 0
+        const input = e.target as HTMLInputElement;
+        let inputValue = Number.parseInt(input.value);
+        let updatedCreature;
 
-            switch (valueType) {
-                case "heal": {
-                    if(hitPoints + inputValue > hitPointsMax)
-                        updatedCreature = updateCreature(CREATURE_ACTIONS.SET_HP, hitPointsMax);
-                    else
-                        updatedCreature = updateCreature(CREATURE_ACTIONS.SET_HP, hitPoints + inputValue);
-                }
-                break;
-                case "hurt": {
-                    inputValue -= hitPointsTemp;
-                    if(inputValue >= 0){
-                        updatedCreature = updateCreature(CREATURE_ACTIONS.SET_HP_TEMP, 0);
-                    }
-                    else {
-                        updatedCreature = updateCreature(CREATURE_ACTIONS.SET_HP_TEMP, Math.abs(inputValue));
-                        inputValue = 0;
-                    }
-                    if(hitPoints - inputValue < 0)
-                        updatedCreature = updateCreature(CREATURE_ACTIONS.SET_HP, 0);
-                    else 
-                        updatedCreature = updateCreature(CREATURE_ACTIONS.SET_HP, hitPoints - inputValue);
-                }
-                break;
-                default: throw Error("Invalid change to hitpoints");
+        if(Number.isNaN(inputValue))
+            return 0
+
+        switch (valueType) {
+            case "heal": {
+                if(hitPoints + inputValue > hitPointsMax)
+                    updatedCreature = updateCreature(CREATURE_ACTIONS.SET_HP, hitPointsMax);
+                else
+                    updatedCreature = updateCreature(CREATURE_ACTIONS.SET_HP, hitPoints + inputValue);
             }
-            dispatchTrackedElementsAction({type: TRACKED_ELEMENTS_CONTEXT_ACTIONS.UPDATE_ELEMENT, elements: [updatedCreature]});
-            input.value = "";
+            break;
+            case "hurt": {
+                inputValue -= hitPointsTemp;
+                if(inputValue >= 0){
+                    updatedCreature = updateCreature(CREATURE_ACTIONS.SET_HP_TEMP, 0);
+                }
+                else {
+                    updatedCreature = updateCreature(CREATURE_ACTIONS.SET_HP_TEMP, Math.abs(inputValue));
+                    inputValue = 0;
+                }
+                if(hitPoints - inputValue < 0)
+                    updatedCreature = updateCreature(CREATURE_ACTIONS.SET_HP, 0);
+                else 
+                    updatedCreature = updateCreature(CREATURE_ACTIONS.SET_HP, hitPoints - inputValue);
+            }
+            break;
+            default: throw Error("Invalid change to hitpoints");
         }
+        dispatchTrackedElementsAction({type: TRACKED_ELEMENTS_CONTEXT_ACTIONS.UPDATE_ELEMENT, elements: [updatedCreature]});
+        input.value = "";
         
     }
 
@@ -84,11 +85,11 @@ const HealthCounter = (props : {creature : ICreature, updateCreature : (valueTyp
             </li>
             <li className="wrap-hurt">
                 <label htmlFor="">Hurt</label>
-                <input type="number" name="" id="" min={0} max={9999} onKeyPress={e => setHitpoints("hurt", e)}/>
+                <input type="number" name="" id="" min={0} max={9999} onKeyDown={e => setHitpoints("hurt", e)}/>
             </li>
             <li className="wrap-heal">
                 <label htmlFor="">Heal</label>
-                <input type="number" name="" id="" min={0} max={9999} onKeyPress={e => setHitpoints("heal", e)}/>
+                <input type="number" name="" id="" min={0} max={9999} onKeyDown={e => setHitpoints("heal", e)}/>
             </li>
         </ul>
     )
