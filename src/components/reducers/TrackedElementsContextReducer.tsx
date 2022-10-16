@@ -1,4 +1,5 @@
 import { IElement } from "../../interfaces/IElement";
+import { IRoundCounterFlag } from "../../interfaces/IRoundCounterFlag";
 import { ITrackedElementsContextDispatch } from "../../interfaces/ITrackedElementsContextDispatch";
 import RoundCounterFlag from "../RoundCounter/RoundCounterFlag";
 import { isFlag } from "../utils/typeCheckers";
@@ -22,15 +23,38 @@ const findIndex = (state : IElement[], action : ITrackedElementsContextDispatch)
 }
 
 const sort = (updatedState : IElement[]) =>{
-    updatedState.sort((c1, c2) => {
-        if(isFlag(c1) || isFlag(c2))
-            return 0
-        const diff = c2.initiative - c1.initiative
-        if(diff !== 0)
-            return diff
-        const nameDiff = c2.name.localeCompare(c1.name)
-        return nameDiff
-    })
+    const beforeFlag : IElement[] = []
+    const afterFlag : IElement[] = []
+
+    let index = 0
+    let el = updatedState[index]
+    while(!isFlag(el)){
+        beforeFlag.push(el)
+        index++
+        el = updatedState[index]
+    }
+    const flag = updatedState[index]
+    index++
+    el = updatedState[index]
+    while(el){
+        afterFlag.push(el)
+        index++
+        el = updatedState[index]
+    }
+
+    const sorter = (arr : IElement[]) => {
+        arr.sort((c1, c2) => {
+            const diff = c2.initiative - c1.initiative
+            if(diff !== 0)
+                return diff
+            const nameDiff = c2.name.localeCompare(c1.name)
+            return nameDiff
+        })
+    }
+
+    sorter(beforeFlag)
+    sorter(afterFlag)
+    return [...beforeFlag, flag, ...afterFlag]
 }
 
 const markDuplicates = (name : string, updatedState : IElement[]) => {
@@ -63,16 +87,17 @@ export const TrackedElementsContextReducer : React.Reducer<IElement[], ITrackedE
     switch(action.type){
         case TRACKED_ELEMENTS_CONTEXT_ACTIONS.ADD_ELEMENT:{
             let newCreature = action.elements[0]
+            let flag = updatedState.find(el => isFlag(el)) as IRoundCounterFlag
             newCreature.name = markDuplicates(newCreature.name, updatedState)
 
-            if(updatedState.length === 0 || newCreature.initiative > updatedState[0].initiative)
+            if(updatedState.length === 0 || newCreature.initiative > updatedState[0].initiative && flag?.roundCount > 2)
                 updatedState.push(newCreature)
             else updatedState.unshift(newCreature)
 
             
-            if(updatedState.findIndex(el => isFlag(el)) === -1)
+            if(!flag)
                 insertFlag(updatedState)
-            sort(updatedState)
+            updatedState = sort(updatedState)
             return updatedState
         }
         case TRACKED_ELEMENTS_CONTEXT_ACTIONS.REMOVE_ELEMENT:{
@@ -88,7 +113,7 @@ export const TrackedElementsContextReducer : React.Reducer<IElement[], ITrackedE
         case TRACKED_ELEMENTS_CONTEXT_ACTIONS.UPDATE_ELEMENT:{
             const creatureIndex = findIndex(state, action)
             updatedState.splice(creatureIndex, 1, action.elements[0])
-            sort(updatedState)
+            updatedState = sort(updatedState)
             return updatedState
         }
         case TRACKED_ELEMENTS_CONTEXT_ACTIONS.SELECT_ELEMENT:{
@@ -102,7 +127,8 @@ export const TrackedElementsContextReducer : React.Reducer<IElement[], ITrackedE
             return updatedState
         }
         case TRACKED_ELEMENTS_CONTEXT_ACTIONS.SET_ELEMENTS:{
-            const updatedState = [...action.elements]
+            updatedState = [...action.elements]
+            updatedState = sort(updatedState)
             return updatedState
         }
         default: throw Error("Invadlid action type!")

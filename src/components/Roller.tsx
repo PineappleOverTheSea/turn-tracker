@@ -3,7 +3,7 @@ import { ICreature } from "../interfaces/ICreature"
 import { TrackedElementsContext } from "./contexts/TrackedElementsContext"
 import { TRACKED_ELEMENTS_CONTEXT_ACTIONS } from "./reducers/TrackedElementsContextReducer"
 import { d20 } from "./utils/dice"
-import { isCreature } from "./utils/typeCheckers"
+import { isCreature, isFlag } from "./utils/typeCheckers"
 
 
 export const Roller = () =>{
@@ -17,25 +17,20 @@ export const Roller = () =>{
     }
 
     const rollInitiative = () =>{
-        // const firstElement = elements.find(el => el.classList.includes("first"))
-        // const lastElement = elements.find(el => el.classList.includes("last"))
-        // if(firstElement){
-        //     const firstIndex = firstElement.classList.findIndex(el => el === "fist")
-        //     firstElement.classList.splice(firstIndex, 1)
-        //     dispatchTrackedElementsAction({type: TRACKED_ELEMENTS_CONTEXT_ACTIONS.UPDATE_ELEMENT, elements: [firstElement]})
-        // }
-        // if(lastElement){
-        //     const lastIndex = lastElement.classList.findIndex(el => el === "last")
-        //     lastElement.classList.splice(lastIndex, 1)
-        //     dispatchTrackedElementsAction({type: TRACKED_ELEMENTS_CONTEXT_ACTIONS.UPDATE_ELEMENT, elements: [lastElement]})
-        // }
+        //resetinina vėliavos poziciją
+        const updatedElements = []
+        const flagIndex = elements.findIndex(el => isFlag(el))
+        let flag
+        if(flagIndex !== -1)
+            flag = elements.splice(flagIndex, 1)[0]
 
         switch(activeId){
             case "roll-creatures":{
                 for(const element of elements){
-                    if(!isCreature(element))
-                        continue
-                    rollCreatures(element)
+                    if(!isCreature(element)){
+                        updatedElements.push(element)
+                    }
+                    else updatedElements.push(rollCreatures(element))
                 }
 
             }
@@ -46,14 +41,20 @@ export const Roller = () =>{
             break;
             case "roll-both":{
                 for(const element of elements){
-                    if(!isCreature(element))
-                        continue
-                    rollCreatures(element)
+                    if(!isCreature(element)){
+                        updatedElements.push(element)
+                    }
+                    else rollCreatures(element)
                 }
             }
             break;
             default: throw Error("No active ID!")
         }
+
+        if(flag)
+            updatedElements.push(flag)
+
+        dispatchTrackedElementsAction({type: TRACKED_ELEMENTS_CONTEXT_ACTIONS.SET_ELEMENTS, elements: updatedElements})
         
     }
 
@@ -63,7 +64,8 @@ export const Roller = () =>{
         const updatedCreature = {...element,
             initiative: randomInit + initMod
         }
-        dispatchTrackedElementsAction({type: TRACKED_ELEMENTS_CONTEXT_ACTIONS.UPDATE_ELEMENT, elements: [updatedCreature]})
+        return updatedCreature
+        // dispatchTrackedElementsAction({type: TRACKED_ELEMENTS_CONTEXT_ACTIONS.UPDATE_ELEMENT, elements: [updatedCreature]})
     }
     const rollPlayers = () =>{
 
