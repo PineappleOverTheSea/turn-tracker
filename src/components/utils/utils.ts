@@ -9,5 +9,5 @@ export const inputCleaner = (input: string) =>{
     //     }
     //     case
     // }
-    console.log("test3")
+    console.log("test2")
 }
